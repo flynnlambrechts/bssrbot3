@@ -71,10 +71,12 @@ def get_bot_response(message_text):
     return response
 
 def checkIfGreeting(message):
-    possibleGreetings = ["hello", "hi ", "help", "hey "]
-    for el in possibleGreetings:
-        if el in message:
-            return True        
+    possibleGreetings = ["hello", "hi", "help", "hey"]
+    message_elements = message.split(' ')
+    for word in message_elements
+        for el in possibleGreetings:
+            if el in word:
+                return True        
     return False
 
 #uses PyMessenger to send response to user
