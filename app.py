@@ -132,7 +132,7 @@ def checkForDino(message):
             response = response + (f"For dinner {day} is:")
             #response = response + (str(todayMenu.dinner))
         else: 
-            response + "No more meals today :)"
+            response = response + "No more meals today :)"
     elif value == "breakfast":
         response = response + (f"For breakfast {day} is:")
         #response = response + (todayMenu.breakfast)
