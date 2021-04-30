@@ -28,6 +28,7 @@ def receive_message():
        for event in output['entry']:
           messaging = event['messaging']
           for message in messaging:
+            text = message['message'].get('text')
             if message.get('message'):
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
@@ -56,7 +57,7 @@ def verify_fb_token(token_sent):
 def get_message():
     sample_responses = ["ben is a cockboy","molly farted","crispy is a simp","mitchy is thick","hugo is sick"]
     # return selected item to the user
-    return message['message'].get('text')
+    return text
 
 #uses PyMessenger to send response to user
 def send_message(recipient_id, response):
