@@ -130,15 +130,15 @@ def checkForDino(message):
         if time < 19:
             response + (f"For dinner {day} is:")
             #response + (str(todayMenu.dinner))
-        if not response: 
+        else: 
             response + "No more meals today :)"
-    elif value == breakfast:
+    elif value == "breakfast":
         response + (f"For breakfast {day} is:")
         #response + (todayMenu.breakfast)
-    elif value == lunch:
+    elif value == "lunch":
         response + (f"For lunch {day} is:")
         #response + (str(todayMenu.lunch))
-    elif value == dinner:
+    elif value == "dinner":
         response + (f"For dinner {day} is:")
         #response + (str(todayMenu.dinner))
     return response
