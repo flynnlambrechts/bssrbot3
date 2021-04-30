@@ -31,12 +31,11 @@ def receive_message():
             if message.get('message'):
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
-                #define text
                 
                 #if it has text
                 if message['message'].get('text'):
                     message_text = message['message']['text']
-                    response_sent_text = get_bot_response(message)
+                    response_sent_text = get_bot_response(message_text)
                     send_message(recipient_id, response_sent_text)
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
@@ -57,7 +56,7 @@ def verify_fb_token(token_sent):
 
 
 #chooses a message to send to the user
-def get_bot_response(message):
+def get_bot_response(message_text):
     message = message_text.lower()
     response = []
     if checkIfGreeting(message) or message == "hi" or message == "hey":
