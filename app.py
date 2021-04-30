@@ -7,7 +7,7 @@ import random
 from flask import Flask, request
 from pymessenger.bot import Bot
 
-from util import wit_response
+from utils import wit_response
 
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
