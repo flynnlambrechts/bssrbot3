@@ -13,6 +13,7 @@ app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot(ACCESS_TOKEN)
+flynn_id = m_bTL21NIhMZzHHCSOYymKdklxKBtona4_wMjcO42dp0FzeQZu367t8TLnsdDkusnEFT5-LjUTcxLpNjXbfkgQ_Q
 
 #We will receive messages that Facebook sends our bot at this endpoint 
 @app.route("/", methods=['GET', 'POST'])
@@ -66,11 +67,10 @@ def get_bot_response(message_text):
     response = ""
     entity, value = wit_response(message) #prev message_text
     if entity == 'mealtype:mealtype':
-        response = response + "meal found" #"Ok i will tell you what {} is".format(str(value))
-    elif checkIfGreeting(message):# or message == "hi" or message == "hey":
-        #response.append("Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs.")
+        response = "Ok i will tell you what {} is".format(str(value))
+    elif checkIfGreeting(message):
         response = response + "Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs."
-        #response.append(f"Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. What's the calendar for this week? \n4. What's happening on Thursday? \n5. Is shopen?")
+        response = response + (f"Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. What's the calendar for this week? \n4. What's happening on Thursday? \n5. Is shopen?")
     elif message == "random":
         sample_responses = ["ben is a cockboy","molly farted","crispy is a simp","mitchy is thick","hugo is sick"]
         # return selected item to the user
@@ -78,7 +78,7 @@ def get_bot_response(message_text):
     elif message == "updog":
         response = response + "What is updog?"
     else:
-        response = response + "Sorry I'm too dumb to understand what that means."
+        response = response + "Sorry, I don't understand"
     return response
 
 '''
