@@ -59,7 +59,7 @@ def verify_fb_token(token_sent):
 
 
 #chooses a message to send to the user
-'''
+
 def get_bot_response(message_text):
     message = message_text.lower()
     global response
@@ -78,10 +78,10 @@ def get_bot_response(message_text):
     elif message == "updog":
         response = response + "What is updog?"
     else: #if response == "":
-        reponse = response + message_text #"Sorry I'm too dumb to understand what that means."
+        reponse = response + message #"Sorry I'm too dumb to understand what that means."
     return response
-'''
 
+'''
 def get_bot_response(message_text):
     message = message_text.lower()
     global response
@@ -102,7 +102,7 @@ def get_bot_response(message_text):
     if response == None:
         reponse = message_text #"Sorry I'm too dumb to understand what that means."
     return response
-
+'''
 def checkIfGreeting(message):
     possibleGreetings = ["hello", "hi", "help", "hey"]
     message_elements = message.split()
