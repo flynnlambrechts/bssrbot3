@@ -36,7 +36,7 @@ def receive_message():
                 #if it has text
                 if message['message'].get('text'):
                     message_text = message['message']['text']
-                    response_sent_text = message_text #get_message()
+                    response_sent_text = get_bot_response(message)
                     send_message(recipient_id, response_sent_text)
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
@@ -56,11 +56,26 @@ def verify_fb_token(token_sent):
     return 'Invalid verification token'
 
 
-#chooses a random message to send to the user
-def get_message():
-    sample_responses = ["ben is a cockboy","molly farted","crispy is a simp","mitchy is thick","hugo is sick"]
+#chooses a message to send to the user
+def get_bot_response(message):
+    message = message_text.lower()
+    response = []
+    if checkIfGreeting(message) or message == "hi" or message == "hey":
+        response.append("Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs.")
+        #response.append(f"Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. What's the calendar for this week? \n4. What's happening on Thursday? \n5. Is shopen?")
+        
+    #sample_responses = ["ben is a cockboy","molly farted","crispy is a simp","mitchy is thick","hugo is sick"]
     # return selected item to the user
-    return text
+    else:
+        response.append(message)
+    return response
+
+def checkIfGreeting(message):
+    possibleGreetings = ["hello", "hi ", "help", "hey "]
+    for el in possibleGreetings:
+        if el in message:
+            return True        
+    return False
 
 #uses PyMessenger to send response to user
 def send_message(recipient_id, response):
