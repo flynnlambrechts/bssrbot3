@@ -7,6 +7,8 @@ import random
 from flask import Flask, request
 from pymessenger.bot import Bot
 
+from util import wit_response
+
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
@@ -41,6 +43,11 @@ def receive_message():
                 if message['message'].get('attachments'):
                     response_sent_nontext = get_message()
                     send_message(recipient_id, response_sent_nontext)
+                '''wit shit
+                entity, value = wit_response(message_text)
+                if entity == 'mealtype':
+                    
+                '''
     return "Message Processed"
 
 def log(message):
@@ -70,7 +77,11 @@ def get_bot_response(message_text):
     elif message == "updog":
         response = response + "What is updog?"
     else:
-        response = response + message_text
+        entity, value = wit_response(message_text)
+        if entity == 'mealtype':
+            response = response + "Ok i will tell you what {} is".format(str(value))
+        elif response == "":
+            reponse = response + "Sorry i'm too dumb to understand what that means."
     return response
 
 def checkIfGreeting(message):
