@@ -71,6 +71,7 @@ def get_bot_response(message_text):
     message = message_text.lower()
     global response
     response = ""
+    global value, entity
     entity, value = wit_response(message) #prev message_text
     if entity == 'mealtype:mealtype':
         response = "Ok i will tell you what {} is".format(str(value))
