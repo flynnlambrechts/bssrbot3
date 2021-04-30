@@ -75,8 +75,8 @@ def get_bot_response(message_text):
         response = response + random.choice(sample_responses)
     elif message == "updog":
         response = response + "What is updog?"
-    else: #if response == "":
-        reponse = response + "Sorry i'm too dumb to understand what that means."
+    elif response == "": #if response == "":
+        reponse = response + "Sorry I'm too dumb to understand what that means."
     return response
 
 def checkIfGreeting(message):
