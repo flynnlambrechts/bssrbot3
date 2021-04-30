@@ -58,15 +58,16 @@ def verify_fb_token(token_sent):
 #chooses a message to send to the user
 def get_bot_response(message_text):
     #message = message_text.lower()
-    response = []
+    response = ""
     if checkIfGreeting(message_text):# or message == "hi" or message == "hey":
-        response.append("Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs.")
+        #response.append("Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs.")
+        response = response + "Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs."
         #response.append(f"Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. What's the calendar for this week? \n4. What's happening on Thursday? \n5. Is shopen?")
         
     #sample_responses = ["ben is a cockboy","molly farted","crispy is a simp","mitchy is thick","hugo is sick"]
     # return selected item to the user
     else:
-        response.append(message)
+        response = response + message_text
     return response
 
 def checkIfGreeting(message):
