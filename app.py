@@ -73,10 +73,10 @@ def get_bot_response(message_text):
     elif message == "updog":
         response = response + "What is updog?"
     else:
-        entity, value = wit_response(message_text)
+        entity, value = wit_response(message) #prev message_text
         if entity == 'mealtype':
             response = response + "meal found" #"Ok i will tell you what {} is".format(str(value))
-        if response == "":
+        else: #if response == "":
             reponse = response + "Sorry i'm too dumb to understand what that means."
     return response
 

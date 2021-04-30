@@ -11,8 +11,8 @@ client = Wit(access_token = wit_access_token)
 
 #collects what the entity is e.g. mealtype
 # and its value e.g. breakfast, lunch or dinner
-def wit_response(message_text):
-	resp = client.message(message_text)
+def wit_response(message): #prev message_text
+	resp = client.message(message) #prev message_text
 	
 	entity = None
 	value = None
