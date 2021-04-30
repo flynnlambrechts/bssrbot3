@@ -63,10 +63,11 @@ def get_bot_response(message_text):
         #response.append("Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs.")
         response = response + "Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs."
         #response.append(f"Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. What's the calendar for this week? \n4. What's happening on Thursday? \n5. Is shopen?")
-        
-    #sample_responses = ["ben is a cockboy","molly farted","crispy is a simp","mitchy is thick","hugo is sick"]
-    # return selected item to the user
-    if message == "updog":
+    elif message == "random"
+        sample_responses = ["ben is a cockboy","molly farted","crispy is a simp","mitchy is thick","hugo is sick"]
+        # return selected item to the user
+        response = response + random.choice(sample_responses)
+    elif message == "updog":
         response = response + "What is updog?"
     else:
         response = response + message_text
