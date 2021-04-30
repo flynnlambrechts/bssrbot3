@@ -106,14 +106,14 @@ def checkForDino(message):
     response = ""
     current_day = datetime.now(TIMEZONE).weekday()
     time = datetime.now(TIMEZONE).time().hour
-    day = "today"
+    day = "Today"
     
     #See if user is asking about tomorrow
     if "tomorrow" in message:
-        day = "tomorrow"
+        day = "Tomorrow"
         current_day+=1
         time = 0
-        reponse = response + "tomorrow"
+        reponse = response + "Tomorrow"
         if current_day==7:
             response = response + "Sorry, do not have the menu for next week yet!"
             return response
@@ -123,24 +123,24 @@ def checkForDino(message):
     #handling if meal is non-specified
     if value == "dino": #or "cooking good looking" in message:
         if time < 10:
-            response = response + (f"For breakfast {day} is:")
+            response = response + (f"{day} breakfast is:")
             #response = response + (todayMenu.breakfast)
         if time < 14:
-            response = response + (f"For lunch {day} is:")
+            response = response + (f"{day} lunch is:")
             #response = response + (str(todayMenu.lunch))
         if time < 19:
-            response = response + (f"For dinner {day} is:")
+            response = response + (f"{day} dinner is:")
             #response = response + (str(todayMenu.dinner))
         else: 
             response = response + "No more meals today :)"
     elif value == "breakfast":
-        response = response + (f"For breakfast {day} is:")
+        response = response + (f"{day} breakfast is:")
         #response = response + (todayMenu.breakfast)
     elif value == "lunch":
-        response = response + (f"For lunch {day} is:")
+        response = response + (f"{day} lunch is:")
         #response = response + (str(todayMenu.lunch))
     elif value == "dinner":
-        response = response + (f"For dinner {day} is:")
+        response = response + (f"{day} dinner is:")
         #response = response + (str(todayMenu.dinner))
     return response
     
