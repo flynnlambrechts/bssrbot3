@@ -80,7 +80,8 @@ def get_bot_response(message_text):
         elif message == "updog":
             response = response + "What is updog?"
         else:
-            reponse = response + "hello" #"Sorry I'm too dumb to understand what that means."
+            print("HELLLLOOO")
+            #reponse = response + "hello" #"Sorry I'm too dumb to understand what that means."
     return response
 
 '''
