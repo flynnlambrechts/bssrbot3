@@ -67,21 +67,18 @@ def get_bot_response(message_text):
     entity, value = wit_response(message) #prev message_text
     if entity == 'mealtype:mealtype':
         response = response + "meal found" #"Ok i will tell you what {} is".format(str(value))
-    else: #if response == "":
-            #
-        if checkIfGreeting(message):# or message == "hi" or message == "hey":
-            #response.append("Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs.")
-            response = response + "Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs."
-            #response.append(f"Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. What's the calendar for this week? \n4. What's happening on Thursday? \n5. Is shopen?")
-        elif message == "random":
-            sample_responses = ["ben is a cockboy","molly farted","crispy is a simp","mitchy is thick","hugo is sick"]
-            # return selected item to the user
-            response = response + random.choice(sample_responses)
-        elif message == "updog":
-            response = response + "What is updog?"
-        else:
-            print("HELLLLOOO")
-            #reponse = response + "hello" #"Sorry I'm too dumb to understand what that means."
+    elif checkIfGreeting(message):# or message == "hi" or message == "hey":
+        #response.append("Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs.")
+        response = response + "Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs."
+        #response.append(f"Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. What's the calendar for this week? \n4. What's happening on Thursday? \n5. Is shopen?")
+    elif message == "random":
+        sample_responses = ["ben is a cockboy","molly farted","crispy is a simp","mitchy is thick","hugo is sick"]
+        # return selected item to the user
+        response = response + random.choice(sample_responses)
+    elif message == "updog":
+        response = response + "What is updog?"
+    else:
+        response = response + "Sorry I'm too dumb to understand what that means."
     return response
 
 '''
@@ -92,18 +89,18 @@ def get_bot_response(message_text):
     entity, value = wit_response(message) #prev message_text
     if entity == 'mealtype:mealtype':
         response = "meal found" #"Ok i will tell you what {} is".format(str(value))
-    if checkIfGreeting(message):# or message == "hi" or message == "hey":
+    elif checkIfGreeting(message):# or message == "hi" or message == "hey":
         #response.append("Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs.")
         response = "Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs."
         #response.append(f"Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. What's the calendar for this week? \n4. What's happening on Thursday? \n5. Is shopen?")
-    if message == "random":
+    elif message == "random":
         sample_responses = ["ben is a cockboy","molly farted","crispy is a simp","mitchy is thick","hugo is sick"]
         # return selected item to the user
         response = random.choice(sample_responses)
     elif message == "updog":
         response = "What is updog?"
     if response == None:
-        reponse = message_text #"Sorry I'm too dumb to understand what that means."
+        response = message_text #"Sorry I'm too dumb to understand what that means."
     return response
 '''
 def checkIfGreeting(message):
