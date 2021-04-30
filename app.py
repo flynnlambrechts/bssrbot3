@@ -68,9 +68,12 @@ def get_bot_response(message_text):
     entity, value = wit_response(message) #prev message_text
     if entity == 'mealtype:mealtype':
         response = "Ok i will tell you what {} is".format(str(value))
+        response = response + checkForDino(message)
     elif checkIfGreeting(message):
         response = response + "Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs."
-        response = response + (f"Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. What's the calendar for this week? \n4. What's happening on Thursday? \n5. Is shopen?")
+        response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. What's the calendar for this week? \n4. What's happening on Thursday? \n5. Is shopen?")
+    elif message == "thx" or message == "thanks" or message == "thank you":
+        response.append("You're welcome!")
     elif message == "random":
         sample_responses = ["ben is a cockboy","molly farted","crispy is a simp","mitchy is thick","hugo is sick"]
         # return selected item to the user
@@ -81,28 +84,7 @@ def get_bot_response(message_text):
         response = response + "Sorry, I don't understand"
     return response
 
-'''
-def get_bot_response(message_text):
-    message = message_text.lower()
-    global response
-    response = None
-    entity, value = wit_response(message) #prev message_text
-    if entity == 'mealtype:mealtype':
-        response = "meal found" #"Ok i will tell you what {} is".format(str(value))
-    elif checkIfGreeting(message):# or message == "hi" or message == "hey":
-        #response.append("Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs.")
-        response = "Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs."
-        #response.append(f"Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. What's the calendar for this week? \n4. What's happening on Thursday? \n5. Is shopen?")
-    elif message == "random":
-        sample_responses = ["ben is a cockboy","molly farted","crispy is a simp","mitchy is thick","hugo is sick"]
-        # return selected item to the user
-        response = random.choice(sample_responses)
-    elif message == "updog":
-        response = "What is updog?"
-    if response == None:
-        response = message_text #"Sorry I'm too dumb to understand what that means."
-    return response
-'''
+
 def checkIfGreeting(message):
     possibleGreetings = ["hello", "hi", "help", "hey"]
     message_elements = message.split()
@@ -111,6 +93,50 @@ def checkIfGreeting(message):
             if el == word:
                 return True      
     return False
+
+def checkForDino(message):
+    response = ""
+    current_day = datetime.now(TIMEZONE).weekday()
+    time = datetime.now(TIMEZONE).time().hour
+    day = "today"
+    
+    #See if user is asking about tomorrow
+    if "tomorrow" in message:
+        day = "tomorrow"
+        current_day+=1
+        time = 0
+        reponse = response + "tomorrow"
+        if current_day==7:
+            response + "Sorry, do not have the menu for next week yet!"
+            return response
+        
+    #todayMenu = getDayMenu(current_day)
+    
+    #handling if meal is non-specified
+    if value == "dino" or "cooking good looking" in message:
+        if time < 10:
+            response + (f"For breakfast {day} is:")
+            #response + (todayMenu.breakfast)
+        if time < 14:
+            response + (f"For lunch {day} is:")
+            #response + (str(todayMenu.lunch))
+        if time < 19:
+            response + (f"For dinner {day} is:")
+            #response + (str(todayMenu.dinner))
+        if not response: 
+            response + "No more meals today :)"
+    elif value == breakfast:
+        response + (f"For breakfast {day} is:")
+        #response + (todayMenu.breakfast)
+    elif value == lunch:
+        response + (f"For lunch {day} is:")
+        #response + (str(todayMenu.lunch))
+    elif value == dinner:
+        response + (f"For dinner {day} is:")
+        #response + (str(todayMenu.dinner))
+    return response
+    
+
 
 #uses PyMessenger to send response to user
 def send_message(recipient_id, response):
