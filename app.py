@@ -61,11 +61,12 @@ def verify_fb_token(token_sent):
 #chooses a message to send to the user
 def get_bot_response(message_text):
     message = message_text.lower()
+    global response
     response = ""
     entity, value = wit_response(message) #prev message_text
     if entity == 'mealtype:mealtype':
         response = response + "meal found" #"Ok i will tell you what {} is".format(str(value))
-    if checkIfGreeting(message):# or message == "hi" or message == "hey":
+    elif checkIfGreeting(message):# or message == "hi" or message == "hey":
         #response.append("Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs.")
         response = response + "Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs."
         #response.append(f"Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. What's the calendar for this week? \n4. What's happening on Thursday? \n5. Is shopen?")
