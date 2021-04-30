@@ -43,11 +43,7 @@ def receive_message():
                 if message['message'].get('attachments'):
                     response_sent_nontext = get_message()
                     send_message(recipient_id, response_sent_nontext)
-                '''wit shit
-                entity, value = wit_response(message_text)
-                if entity == 'mealtype':
-                    
-                '''
+
     return "Message Processed"
 
 def log(message):
@@ -79,8 +75,8 @@ def get_bot_response(message_text):
     else:
         entity, value = wit_response(message_text)
         if entity == 'mealtype':
-            response = response + "Ok i will tell you what {} is".format(str(value))
-        elif response == "":
+            response = response + "meal found" #"Ok i will tell you what {} is".format(str(value))
+        if response == "":
             reponse = response + "Sorry i'm too dumb to understand what that means."
     return response
 
