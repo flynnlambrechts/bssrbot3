@@ -121,7 +121,7 @@ def checkForDino(message):
     #todayMenu = getDayMenu(current_day)
     
     #handling if meal is non-specified
-    if value == "dino" or "cooking good looking" in message:
+    if value == "dino": #or "cooking good looking" in message:
         if time < 10:
             response = response + (f"For breakfast {day} is:")
             #response = response + (todayMenu.breakfast)
