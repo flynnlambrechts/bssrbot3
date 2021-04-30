@@ -56,7 +56,7 @@ def verify_fb_token(token_sent):
 def get_message():
     sample_responses = ["ben is a cockboy","molly farted","crispy is a simp","mitchy is thick","hugo is sick"]
     # return selected item to the user
-    return random.choice(sample_responses)
+    return message['message'].get('text')
 
 #uses PyMessenger to send response to user
 def send_message(recipient_id, response):
