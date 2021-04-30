@@ -63,7 +63,7 @@ def get_bot_response(message_text):
     message = message_text.lower()
     response = ""
     entity, value = wit_response(message) #prev message_text
-    if entity == 'mealtype':
+    if entity == 'mealtype:mealtype':
         response = response + "meal found" #"Ok i will tell you what {} is".format(str(value))
     if checkIfGreeting(message):# or message == "hi" or message == "hey":
         #response.append("Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs.")
@@ -75,7 +75,6 @@ def get_bot_response(message_text):
         response = response + random.choice(sample_responses)
     elif message == "updog":
         response = response + "What is updog?"
-   
     else: #if response == "":
         reponse = response + "Sorry i'm too dumb to understand what that means."
     return response

@@ -27,6 +27,8 @@ def wit_response(message): #prev message_text
 
 #test for random question:
 
+'''
 print(wit_response("what is breakfast"))
 print(entity)
 print(value)
+'''
