@@ -73,7 +73,7 @@ def get_bot_response(message_text):
 def checkIfGreeting(message):
     possibleGreetings = ["hello", "hi", "help", "hey"]
     message_elements = message.split()
-    for word in message_elements
+    for word in message_elements:
         for el in possibleGreetings:
             if el == word:
                 return True      
