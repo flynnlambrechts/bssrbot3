@@ -33,7 +33,7 @@ def receive_message():
     else:
         # get whatever message a user sent the bot
        output = request.get_json()
-       log(output)
+       #log(output) entire output good for finding sender ids what message contains etc
        for event in output['entry']:
           messaging = event['messaging']
           for message in messaging:
@@ -44,6 +44,7 @@ def receive_message():
                 #if it has text
                 if message['message'].get('text'):
                     message_text = message['message']['text']
+                    print(message_text)
                     response_sent_text = get_bot_response(message_text)
                     send_message(recipient_id, response_sent_text)
                 #if user sends us a GIF, photo,video, or any other non-text item
@@ -74,7 +75,7 @@ def get_bot_response(message_text):
     global value, entity
     entity, value = wit_response(message) #prev message_text
     if entity == 'mealtype:mealtype':
-        response = "Ok i will tell you what {} is".format(str(value))
+        #response = "Ok i will tell you what {} is".format(str(value))
         response = response + checkForDino(message)
     elif checkIfGreeting(message):
         response = response + "Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs."
@@ -114,7 +115,7 @@ def checkForDino(message):
         time = 0
         reponse = response + "tomorrow"
         if current_day==7:
-            response + "Sorry, do not have the menu for next week yet!"
+            response = response + "Sorry, do not have the menu for next week yet!"
             return response
         
     #todayMenu = getDayMenu(current_day)
@@ -122,25 +123,25 @@ def checkForDino(message):
     #handling if meal is non-specified
     if value == "dino" or "cooking good looking" in message:
         if time < 10:
-            response + (f"For breakfast {day} is:")
-            #response + (todayMenu.breakfast)
+            response = response + (f"For breakfast {day} is:")
+            #response = response + (todayMenu.breakfast)
         if time < 14:
-            response + (f"For lunch {day} is:")
-            #response + (str(todayMenu.lunch))
+            response = response + (f"For lunch {day} is:")
+            #response = response + (str(todayMenu.lunch))
         if time < 19:
-            response + (f"For dinner {day} is:")
-            #response + (str(todayMenu.dinner))
+            response = response + (f"For dinner {day} is:")
+            #response = response + (str(todayMenu.dinner))
         else: 
             response + "No more meals today :)"
     elif value == "breakfast":
-        response + (f"For breakfast {day} is:")
-        #response + (todayMenu.breakfast)
+        response = response + (f"For breakfast {day} is:")
+        #response = response + (todayMenu.breakfast)
     elif value == "lunch":
-        response + (f"For lunch {day} is:")
-        #response + (str(todayMenu.lunch))
+        response = response + (f"For lunch {day} is:")
+        #response = response + (str(todayMenu.lunch))
     elif value == "dinner":
-        response + (f"For dinner {day} is:")
-        #response + (str(todayMenu.dinner))
+        response = response + (f"For dinner {day} is:")
+        #response = response + (str(todayMenu.dinner))
     return response
     
 
