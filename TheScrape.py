@@ -29,7 +29,7 @@ def get_PageDayMeal(value):
 '''
 
 def checkForDino(message):
-    
+    week = 1
     global entity, value
     entity, value = wit_response(message)
 
@@ -42,7 +42,6 @@ def checkForDino(message):
     
     #See if user is asking about tomorrow
     if "tomorrow" in message:
-        week = 1
         day = "Tomorrow"
         current_day+=1
         time = 0
