@@ -13,7 +13,7 @@ from utils import wit_response
 
 
 global week
-week = int(1) ### work out how to define the week
+week = 1 ### work out how to define the week
 
 global column, row
 row = 2

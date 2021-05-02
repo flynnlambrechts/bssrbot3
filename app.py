@@ -15,6 +15,9 @@ from pymessenger.bot import Bot
 from utils import wit_response
 from TheScrape import checkForDino
 
+global week
+week = 1 ### work out how to define the week
+
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
