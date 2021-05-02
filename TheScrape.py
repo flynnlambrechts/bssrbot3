@@ -81,7 +81,7 @@ def checkForDino(message):
         global column, row
         column = day_value
         row = 0
-        response = str(response) + "\n1" + str(getinfo())
+        response = str(response) + "\n" + str(getinfo())
     elif value == "lunch":
         response = response + (f"{day} lunch is:")
         #response = response + (str(todayMenu.lunch))
@@ -114,7 +114,7 @@ def getinfo():
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
-            info.append(str(td).replace('<td>', '').replace('</td>', '').replace('\n', '').replace('1', ''))   
+            info.append(str(td).replace('<td>', '').replace('</td>', '').replace('\n', ''))   
         else:
             print("none!")
     print(info[column])
