@@ -93,6 +93,7 @@ def checkForDino(message):
             column = 1
         else:
             column = day_value
+        response = response + breakfastmenu()
         print(str(column) + " column1")
         print(str(row) + " row1")
         response = str(response) + "\n" + str(getinfo(column))
@@ -119,6 +120,15 @@ def checkForDino(message):
     elif value == "dinner":
         response = response + (f"{day}'s dinner is:")
         #response = response + (str(todayMenu.dinner))
+    return response
+
+def breakfastmenu():
+    global row
+    response = ""
+    for i in range(0,4):
+        print(i)
+        row = i
+        response = response + RowHearders(i)[i] + getinfo(column)[i]
     return response
 
 
