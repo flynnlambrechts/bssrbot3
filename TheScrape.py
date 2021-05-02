@@ -83,7 +83,10 @@ def checkForDino(message):
         page = str((2*(week-1)+1))
         day_value = current_day + 1
         print(day_value)
-        column = day_value
+        if day_value == 8:
+            column = 1
+        else:
+            column = day_value
         row = 0
         response = str(response) + "\n" + str(getinfo())
     elif value == "lunch":
