@@ -56,6 +56,7 @@ def checkForDino(message):
                 return response
             else:
                 week = week + 1
+                print(week)
                 column = 1
             
     
