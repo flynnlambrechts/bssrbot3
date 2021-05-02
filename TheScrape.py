@@ -10,10 +10,8 @@ import requests
 
 #from utils import value
 from utils import wit_response
-from app import message
 
-global entity, value
-entity, value = wit_response(message) #prev message_text
+
 
 
 
@@ -32,6 +30,10 @@ def get_PageDayMeal(value):
 '''
 
 def checkForDino(message):
+    
+    global entity, value
+    entity, value = wit_response(message)
+    
     response = ""
     global current_day
     current_day = datetime.now(TIMEZONE).weekday()
