@@ -8,7 +8,7 @@ TIMEZONE = pytz.timezone('Australia/Sydney')
 from bs4 import BeautifulSoup
 import requests
 
-from app import value
+from app import *
 
 week = int(1) ### work out how to define the week
 
