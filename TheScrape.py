@@ -33,7 +33,8 @@ def checkForDino(message):
     
     global entity, value
     entity, value = wit_response(message)
-    
+
+    global response
     response = ""
     global current_day
     current_day = datetime.now(TIMEZONE).weekday()
