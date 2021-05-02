@@ -114,9 +114,7 @@ def getinfo():
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
-            # remove any newlines and extra spaces from left and right
-            #headings.append(td.b.text.replace('\n', ' ').strip())
-            info.append(td)
+            info.append(str(td).replace('<td>', '').replace('</td>', '').replace('\n', ''))   
         else:
             print("none!")
     print(info[column])
