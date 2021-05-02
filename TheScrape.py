@@ -19,6 +19,8 @@ week = 1 ### work out how to define the week
 global column
 column = 6
 
+global page
+page = str(7)
 
 '''
 def get_PageDayMeal(value):
@@ -103,8 +105,6 @@ def checkForDino(message):
         #response = response + (str(todayMenu.dinner))
     return response
 
-global page
-#page = str(7)
 
 # Opening the html file
 HTMLFile = open(str(page + ".html"), "r")
