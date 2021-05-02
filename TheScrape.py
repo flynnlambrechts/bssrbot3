@@ -49,16 +49,20 @@ def checkForDino(message):
         reponse = response + "Tomorrow"
         ## this will need to be changed to either go to next page or say that the menu hasnt been updated
         if current_day==7:
-            week = week + 1
-            #response = response + "Sorry, do not have the menu for next week yet!"
-            #return response
+            if week = 4:
+                response = response + "Sorry, I do not have the menu for next week yet!"
+                return response
+            else:
+                week = week + 1
+                column = 1
+            
         
     #todayMenu = getDayMenu(current_day)
     
     #handling if meal is non-specified
     if value == "dino": #or "cooking good looking" in message:
         if time < 10:
-            response = response + (f"{day} breakfast is:")
+            response = response + (f"{day}'s breakfast is:")
             '''
             page = str((2*(week-1)+1))
             column = current_day
@@ -67,15 +71,15 @@ def checkForDino(message):
             '''
             #response = response + (todayMenu.breakfast)
         elif time < 14:
-            response = response + (f"{day} lunch is:")
+            response = response + (f"{day}'s lunch is:")
             #response = response + (str(todayMenu.lunch))
         elif time < 19:
-            response = response + (f"{day} dinner is:")
+            response = response + (f"{day}'s dinner is:")
             #response = response + (str(todayMenu.dinner))
         else: 
             response = response + "No more meals today :)"
     elif value == "breakfast":
-        response = response + (f"{day} breakfast is:")
+        response = response + (f"{day}'s breakfast is:")
         page = str((2*(week-1)+1))
         day_value = current_day + 1
         print(day_value)
@@ -84,10 +88,10 @@ def checkForDino(message):
         row = 0
         response = str(response) + "\n" + str(getinfo())
     elif value == "lunch":
-        response = response + (f"{day} lunch is:")
+        response = response + (f"{day}'s lunch is:")
         #response = response + (str(todayMenu.lunch))
     elif value == "dinner":
-        response = response + (f"{day} dinner is:")
+        response = response + (f"{day}'s dinner is:")
         #response = response + (str(todayMenu.dinner))
     return response
 
