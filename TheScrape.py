@@ -76,9 +76,10 @@ def checkForDino(message):
     elif value == "breakfast":
         response = response + (f"{day} breakfast is:")
         page = str((2*(week-1)+1))
-        current_day-=1
-        print(current_day)
-        column = current_day
+        day_value = current_day + 1
+        print(day_value)
+        global column, row
+        column = day_value
         row = 0
         response = str(response) + "\n1" + str(getinfo())
     elif value == "lunch":
