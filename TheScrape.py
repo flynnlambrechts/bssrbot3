@@ -48,7 +48,8 @@ def checkForDino(message):
         time = 0
         reponse = response + "Tomorrow"
         ## this will need to be changed to either go to next page or say that the menu hasnt been updated
-        #if current_day==7:
+        if current_day==7:
+            week = week + 1
             #response = response + "Sorry, do not have the menu for next week yet!"
             #return response
         
@@ -114,7 +115,7 @@ def getinfo():
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
-            plain_text = str(td).replace(r" \n ","").replace(r", \n"," ").replace(r" \n",", ")
+            plain_text = str(td).replace(r" \n ","").replace(r", \n",", ").replace(r" \n",", ")
             info.append(plain_text.replace("<td>","").replace("</td>","").replace("amp;",""))
         else:
             print("none!")
