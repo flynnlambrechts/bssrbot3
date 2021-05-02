@@ -56,7 +56,7 @@ def checkForDino(message):
                 return response
             else:
                 week = week + 1
-                print(week)
+                print(str(week) + "week")
                 column = 1
             
     
@@ -83,12 +83,12 @@ def checkForDino(message):
         response = response + (f"{day}'s breakfast is:")
         page = str((2*(week-1)+1))
         day_value = current_day + 1
-        print(day_value)
+        print(str(day_value) + "day value")
         if day_value == 8:
             column = 1
         else:
             column = day_value
-        print(column)
+        print(str(column) + "column1")
         row = 0
         response = str(response) + "\n" + str(getinfo())
     elif value == "lunch":
@@ -127,6 +127,7 @@ def getinfo():
             info.append(plain_text.replace("<td>","").replace("</td>","").replace("amp;",""))
         else:
             print("none!")
+    print(str(row) + str(column) + "row column")
     print(info[column])
     return info[column]
 
