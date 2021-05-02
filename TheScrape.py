@@ -17,7 +17,7 @@ week = 1 ### work out how to define the week
 '''
 
 global column, row
-row = 2
+#row = 2
 column = 1
 page = str(3)
 
@@ -84,12 +84,13 @@ def checkForDino(message):
         page = str((2*(week-1)+1))
         day_value = current_day + 1
         print(str(day_value) + "day value")
+        row = 0
         if day_value == 8:
             column = 1
         else:
             column = day_value
-        print(str(column) + "column1")
-        row = 0
+        print(str(column) + " column1")
+        print(str(row) + " row1")
         response = str(response) + "\n" + str(getinfo())
     elif value == "lunch":
         response = response + (f"{day}'s lunch is:")
