@@ -13,7 +13,7 @@ from flask import Flask, request
 from pymessenger.bot import Bot
 
 from utils import wit_response
-from TheScrape import checkForDino
+from TheScrape2 import checkForDino
 
 global week
 week = 1 ### work out how to define the week

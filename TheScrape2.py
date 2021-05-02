@@ -33,7 +33,7 @@ def get_PageDayMeal(value):
 def checkForDino(message):
     global week
     week = 1
-    global column
+    #global column
     global row
     global page
     global entity, value
@@ -95,7 +95,7 @@ def checkForDino(message):
             column = day_value
         print(str(column) + " column1")
         print(str(row) + " row1")
-        response = str(response) + "\n" + str(getinfo())
+        response = str(response) + "\n" + str(getinfo(column))
     elif value == "lunch":
         response = response + (f"{day}'s lunch is:")
         page = str((2*(week-1)+1.5))
@@ -128,17 +128,17 @@ def lunchmenu():
     for i in range(0,4):
         print(i)
         row = i
-        response = response + getinfo()
+        response = response + RowHearders(i)[i] + getinfo(column)[i]
     return response
-'''
-def LunchRowHeaders(i):
+
+def RowHeaders(i):
     headers = []
     column=0
-    return headers[i]
-'''
+    headers.append(getinfo(column))
+    return headers
 
-def getinfo():
-    global column
+
+def getinfo(column):
     global page
     
     ################## # Opening the html file
@@ -169,6 +169,6 @@ def getinfo():
             print("none!")
     print(str(row) + str(column) + "row column")
     print(info[column])
-    return info[column]
+    return info
 
 
