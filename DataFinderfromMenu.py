@@ -35,7 +35,7 @@ menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
 info = []
 for td in menu_table_data[row].find_all("td"):
     if td is not None:
-        plain_text = str(td).text.replace('n\','').replace('</td>', '').replace('<td>', '').replace('amp', '').strip
+        plain_text = str(td).text.replace('n\','').replace('</td>', '').replace('<td>', '').replace('amp;', '').strip
         info.append(plain_text)
     else:
         print("none!")

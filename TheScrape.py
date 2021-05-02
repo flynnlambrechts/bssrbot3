@@ -114,7 +114,8 @@ def getinfo():
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
-            info.append(str(td).replace('<td>', '').replace('</td>', '').replace('\n', ''))   
+            plain_text = str(td).text.replace('n\','').replace('</td>', '').replace('<td>', '').replace('amp;', '').strip
+            info.append(plain_text)
         else:
             print("none!")
     print(info[column])
