@@ -15,6 +15,7 @@ from utils import wit_response
 global week
 week = int(1) ### work out how to define the week
 
+global column, row
 row = 2
 column = 1
 page = str(3)
@@ -81,7 +82,6 @@ def checkForDino(message):
         page = str((2*(week-1)+1))
         day_value = current_day + 1
         print(day_value)
-        global column, row
         column = day_value
         row = 0
         response = str(response) + "\n" + str(getinfo())
