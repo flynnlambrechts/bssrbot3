@@ -19,8 +19,6 @@ Werkzeug==1.0.1
 gunicorn==19.6.0
 wit == 6.0.0
 pytz==2019.1
-tabula==1.15.0
-tabulate==0.8.9
 camelot==1.15.0
 camelot-py==0.8.2
 pyPDF2==1.26.0
