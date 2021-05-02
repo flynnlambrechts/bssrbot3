@@ -58,10 +58,12 @@ def checkForDino(message):
     if value == "dino": #or "cooking good looking" in message:
         if time < 10:
             response = response + (f"{day} breakfast is:")
+            '''
             page = str((2*(week-1)+1))
             column = current_day
             row = 0
-            reponse = str(reponse) + "\n1" + str(getinfo())
+            response = str(response) + "\n1" + str(getinfo())
+            '''
             #response = response + (todayMenu.breakfast)
         elif time < 14:
             response = response + (f"{day} lunch is:")
@@ -76,7 +78,7 @@ def checkForDino(message):
         page = str((2*(week-1)+1))
         column = current_day
         row = 0
-        response = str(reponse) + "\n1" + str(getinfo())
+        response = str(response) + "\n1" + str(getinfo())
     elif value == "lunch":
         response = response + (f"{day} lunch is:")
         #response = response + (str(todayMenu.lunch))
