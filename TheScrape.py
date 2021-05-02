@@ -89,7 +89,6 @@ def checkForDino(message):
         global row
         row = 0
         if day_value == 8:
-            global column
             column = 4
         else:
             column = day_value
