@@ -101,6 +101,7 @@ def getinfo():
             info.append(td)
         else:
             print("none!")
+    print(info[column])
     return info[column]
 
-print(info[column])
+
