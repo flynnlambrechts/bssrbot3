@@ -17,7 +17,6 @@ week = 1 ### work out how to define the week
 '''
 
 global column
-#row = 2
 column = 6
 page = str(3)
 
@@ -38,6 +37,7 @@ def checkForDino(message):
 
     global response
     response = ""
+    
     global current_day
     current_day = datetime.now(TIMEZONE).weekday()
     time = datetime.now(TIMEZONE).time().hour
@@ -57,6 +57,7 @@ def checkForDino(message):
             else:
                 week = week + 1
                 print(str(week) + "week")
+                global column
                 column = 1
             
     
@@ -87,8 +88,10 @@ def checkForDino(message):
         global row
         row = 0
         if day_value == 8:
+            global column
             column = 4
         else:
+            global column
             column = day_value
         print(str(column) + " column1")
         print(str(row) + " row1")
@@ -125,10 +128,11 @@ def getinfo():
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
-            plain_text = str(td).replace(r" \n ","").replace(r", \n",", ").replace(r" \n",", ") + "."
+            plain_text = str(td).replace(r" \n ","").replace(r", \n",", ").replace(r" \n",", ").replace(r"\n",", ") + "."
             info.append(plain_text.replace("<td>","").replace("</td>","").replace("amp;",""))
         else:
             print("none!")
+    global column
     print(str(row) + str(column) + "row column")
     print(info[column])
     return info[column]
