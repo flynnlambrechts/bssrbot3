@@ -19,3 +19,4 @@ Werkzeug==1.0.1
 gunicorn==19.6.0
 wit == 6.0.0
 pytz==2019.1
+beautifulsoup4==4.9.3
