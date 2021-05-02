@@ -19,7 +19,7 @@ week = int(1) ### work out how to define the week
 
 row = 2
 column = 1
-page = str(1)
+page = str(3)
 
 '''
 def get_PageDayMeal(value):
@@ -114,7 +114,7 @@ def getinfo():
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
-            info.append(str(td).replace('<td>', '').replace('</td>', '').replace('\n', ''))   
+            info.append(str(td).replace('<td>', '').replace('</td>', '').replace('\n', '').replace('1', ''))   
         else:
             print("none!")
     print(info[column])
