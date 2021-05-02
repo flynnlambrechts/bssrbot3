@@ -19,9 +19,3 @@ Werkzeug==1.0.1
 gunicorn==19.6.0
 wit == 6.0.0
 pytz==2019.1
-camelot==1.15.0
-camelot-py==0.8.2
-pyPDF2==1.26.0
-ghostscript==9.53.3_1
-beautifulsoup4==4.9.3
-lxml==4.6.3
