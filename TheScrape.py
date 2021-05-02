@@ -72,7 +72,10 @@ def checkForDino(message):
             response = response + "No more meals today :)"
     elif value == "breakfast":
         response = response + (f"{day} breakfast is:")
-        #response = response + (todayMenu.breakfast)
+        page = str((2*(week-1)+1))
+        column = current_day
+        row = 0
+        reponse = reponse + "\n1" + getinfo()
     elif value == "lunch":
         response = response + (f"{day} lunch is:")
         #response = response + (str(todayMenu.lunch))
