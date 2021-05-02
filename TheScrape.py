@@ -17,8 +17,8 @@ from utils import wit_response
 
 week = int(1) ### work out how to define the week
 
-row = 0
-column = 0
+row = 2
+column = 1
 page = str(1)
 
 '''
@@ -77,6 +77,7 @@ def checkForDino(message):
         response = response + (f"{day} breakfast is:")
         page = str((2*(week-1)+1))
         current_day-=1
+        print(current_day)
         column = current_day
         row = 0
         response = str(response) + "\n1" + str(getinfo())
