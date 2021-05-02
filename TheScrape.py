@@ -31,6 +31,8 @@ def get_PageDayMeal(value):
 def checkForDino(message):
     global week
     week = 1
+
+    global column
     
     global entity, value
     entity, value = wit_response(message)
@@ -57,7 +59,6 @@ def checkForDino(message):
             else:
                 week = week + 1
                 print(str(week) + "week")
-                global column
                 column = 1
             
     
@@ -91,7 +92,6 @@ def checkForDino(message):
             global column
             column = 4
         else:
-            global column
             column = day_value
         print(str(column) + " column1")
         print(str(row) + " row1")
@@ -125,6 +125,7 @@ menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
 # Get all the headings of Lists
 
 def getinfo():
+    global column
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
@@ -132,7 +133,6 @@ def getinfo():
             info.append(plain_text.replace("<td>","").replace("</td>","").replace("amp;",""))
         else:
             print("none!")
-    global column
     print(str(row) + str(column) + "row column")
     print(info[column])
     return info[column]
