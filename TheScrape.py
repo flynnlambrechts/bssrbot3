@@ -47,7 +47,7 @@ def checkForDino(message):
         reponse = response + "Tomorrow"
         ## this will need to be changed to either go to next page or say that the menu hasnt been updated
         if current_day==7:
-            if week = 4:
+            if week == 4:
                 response = response + "Sorry, I do not have the menu for next week yet!"
                 return response
             else:
