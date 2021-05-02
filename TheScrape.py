@@ -18,7 +18,7 @@ from utils import wit_response
 week = int(1) ### work out how to define the week
 
 row = 0
-column = 1
+column = 0
 page = str(1)
 
 '''
@@ -48,9 +48,9 @@ def checkForDino(message):
         time = 0
         reponse = response + "Tomorrow"
         ## this will need to be changed to either go to next page or say that the menu hasnt been updated
-        if current_day==7:
-            response = response + "Sorry, do not have the menu for next week yet!"
-            return response
+        #if current_day==7:
+            #response = response + "Sorry, do not have the menu for next week yet!"
+            #return response
         
     #todayMenu = getDayMenu(current_day)
     
@@ -76,6 +76,7 @@ def checkForDino(message):
     elif value == "breakfast":
         response = response + (f"{day} breakfast is:")
         page = str((2*(week-1)+1))
+        current_day-=1
         column = current_day
         row = 0
         response = str(response) + "\n1" + str(getinfo())
