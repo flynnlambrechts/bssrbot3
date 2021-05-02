@@ -127,18 +127,24 @@ def breakfastmenu():
     response = ""
     for i in range(0,4):
         print(i)
-        row = i
-        response = response + str(RowHeaders(i)[i]) + str(getinfo(column)[i])
+        try: 
+            row = i
+            response = response + str(RowHeaders(i)[i]) + str(getinfo(column)[i])
+        except IndexError:
+            print('NOK')
     return response
 
 
 def lunchmenu():
     global row
     response = ""
-    for i in range(0,4):
-        print(i)
-        row = i
-        response = response + str(RowHeaders(i)[i]) + str(getinfo(column)[i])
+    for i in range(0,5):
+        try:
+            print(i)
+            row = i
+            response = response + str(RowHeaders(i)[i]) + str(getinfo(column)[i])
+        except IndexError:
+            print('NOK')
     return response
 
 def RowHeaders(i):
