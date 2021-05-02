@@ -35,7 +35,6 @@ def checkForDino(message):
     week = 1
     global column
     global page
-    page = str(5)
     global entity, value
     entity, value = wit_response(message)
     global response
