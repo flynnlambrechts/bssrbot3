@@ -88,7 +88,7 @@ def get_bot_response(message_text):
         sample_responses = ["ben is a cockboy","molly farted","crispy is a simp","mitchy is thick","hugo is sick"]
         # return selected item to the user
         response = response + random.choice(sample_responses)
-    elif message == "updog":
+    elif "updog" in message:
         response = response + "What is updog?"
     else:
         response = response + "Sorry, I don't understand"
