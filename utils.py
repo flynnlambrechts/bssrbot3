@@ -13,7 +13,8 @@ client = Wit(access_token = wit_access_token)
 # and its value e.g. breakfast, lunch or dinner
 def wit_response(message): #prev message_text
         resp = client.message(message) #prev message_text
-        global entity, value
+        global entity
+        global value
         entity = None
         value = None
 

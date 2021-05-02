@@ -13,6 +13,7 @@ from flask import Flask, request
 from pymessenger.bot import Bot
 
 from utils import wit_response
+from TheScrape import checkForDino
 
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
@@ -102,6 +103,7 @@ def checkIfGreeting(message):
                 return True      
     return False
 
+'''
 def checkForDino(message):
     response = ""
     current_day = datetime.now(TIMEZONE).weekday()
@@ -114,6 +116,7 @@ def checkForDino(message):
         current_day+=1
         time = 0
         reponse = response + "Tomorrow"
+        ## this may need be to changed depending on how big the menu is 
         if current_day==7:
             response = response + "Sorry, do not have the menu for next week yet!"
             return response
@@ -125,10 +128,10 @@ def checkForDino(message):
         if time < 10:
             response = response + (f"{day} breakfast is:")
             #response = response + (todayMenu.breakfast)
-        if time < 14:
+        elif time < 14:
             response = response + (f"{day} lunch is:")
             #response = response + (str(todayMenu.lunch))
-        if time < 19:
+        elif time < 19:
             response = response + (f"{day} dinner is:")
             #response = response + (str(todayMenu.dinner))
         else: 
@@ -143,7 +146,7 @@ def checkForDino(message):
         response = response + (f"{day} dinner is:")
         #response = response + (str(todayMenu.dinner))
     return response
-    
+'''
 
 
 #uses PyMessenger to send response to user
