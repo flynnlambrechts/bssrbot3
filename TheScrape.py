@@ -12,9 +12,7 @@ import requests
 from utils import wit_response
 
 
-
-
-
+global week
 week = int(1) ### work out how to define the week
 
 row = 2
