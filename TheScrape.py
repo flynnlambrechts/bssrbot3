@@ -124,11 +124,11 @@ def checkForDino(message):
 
 def lunchmenu():
     global row
+    response = ""
     for i in range(0,4):
         print(i)
         row = i
         response = response + getinfo()
-        
     return response
 
 
