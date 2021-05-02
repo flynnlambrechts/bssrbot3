@@ -87,6 +87,7 @@ def checkForDino(message):
             column = 1
         else:
             column = day_value
+        print(column)
         row = 0
         response = str(response) + "\n" + str(getinfo())
     elif value == "lunch":
