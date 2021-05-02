@@ -128,7 +128,7 @@ def breakfastmenu():
     for i in range(0,4):
         print(i)
         row = i
-        response = response + RowHearders(i)[i] + getinfo(column)[i]
+        response = response + RowHeaders(i)[i] + getinfo(column)[i]
     return response
 
 
