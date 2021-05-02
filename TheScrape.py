@@ -35,7 +35,7 @@ def checkForDino(message):
     week = 1
     global column
     global page
-    page = str(7)
+    page = str(5)
     global entity, value
     entity, value = wit_response(message)
     global response
@@ -107,7 +107,8 @@ def checkForDino(message):
 
 
 # Opening the html file
-HTMLFile = open(str(page + ".html"), "r")
+HTMLFile = open(str(page + ".html"), "r") #try putting in func.
+
   
 # Reading the file
 index = HTMLFile.read()
