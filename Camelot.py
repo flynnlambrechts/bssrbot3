@@ -34,11 +34,13 @@ week_4 =tables[0]
 #converts each page of menu in .html file
 for i in range(1,9):
     print(i)
-    tables = camelot.read_pdf(menu, pages='%d' %  i) #flavor='stream')
+    tables = camelot.read_pdf(menu, pages='%d' %  i) #table_regions=["95,36,660,1176"],)
     try:
         print (tabulate(tables[0].df))
         print(tables[0])
+        print(tables[1])
         tables[0].to_html(str(str(i) + ".html"))
+        tables[1].to_html(str(str(int(i)+0.5) + ".html"))
         #print (tabulate(tables[1].df))
     except IndexError:
         print('NOK')

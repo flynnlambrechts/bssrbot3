@@ -34,6 +34,7 @@ def checkForDino(message):
     global week
     week = 1
     global column
+    global row
     global page
     global entity, value
     entity, value = wit_response(message)
@@ -87,10 +88,9 @@ def checkForDino(message):
         print(page + " page")
         day_value = current_day + 1
         print(str(day_value) + "day value")
-        global row
         row = 0
         if day_value == 8:
-            column = 4
+            column = 1
         else:
             column = day_value
         print(str(column) + " column1")
@@ -98,12 +98,38 @@ def checkForDino(message):
         response = str(response) + "\n" + str(getinfo())
     elif value == "lunch":
         response = response + (f"{day}'s lunch is:")
-        #response = response + (str(todayMenu.lunch))
+        page = str((2*(week-1)+1.5))
+        print(page + " page")
+        day_value = current_day + 1
+        print(str(day_value) + "day value")
+        if day_value == 8:
+            column = 1
+        else:
+            column = day_value
+        response = response + lunchmenu()
+        '''
+        page = str(2*week)
+        print(page + " page")
+        day_value = current_day + 1
+        print(str(day_value) + "day value")
+        
+        row = 2
+        '''
+        
     elif value == "dinner":
         response = response + (f"{day}'s dinner is:")
         #response = response + (str(todayMenu.dinner))
     return response
 
+
+def lunchmenu():
+    global row
+    for i in range(0,4):
+        print(i)
+        row = i
+        response = response + getinfo()
+        
+    return response
 
 
 def getinfo():
@@ -132,7 +158,7 @@ def getinfo():
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
-            plain_text = str(td).replace(r"– \n", "- ").replace(r"\n–","-").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ") + "."
+            plain_text = str(td).replace(r" \n \n", ", ").replace(r"– \n", "- ").replace(r"\n–","-").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ") + "."
             info.append(plain_text.replace("<td>","").replace("</td>","").replace("amp;",""))
         else:
             print("none!")
