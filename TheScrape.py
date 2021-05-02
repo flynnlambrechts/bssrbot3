@@ -26,6 +26,7 @@ def get_PageDayMeal(value):
 
 def checkForDino(message):
     response = ""
+    global current_day
     current_day = datetime.now(TIMEZONE).weekday()
     time = datetime.now(TIMEZONE).time().hour
     day = "Today"
@@ -47,8 +48,7 @@ def checkForDino(message):
     if value == "dino": #or "cooking good looking" in message:
         if time < 10:
             response = response + (f"{day} breakfast is:")
-            page = str((2*(week-1)+1)
-            current_day+=1
+            page = str((2*(week-1)+1))
             column = current_day
             row = 0
             reponse = reponse + "\n1" + getinfo
