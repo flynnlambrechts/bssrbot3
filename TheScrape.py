@@ -46,7 +46,7 @@ def checkForDino(message):
         current_day+=1
         time = 0
         reponse = response + "Tomorrow"
-        ## this may need be to changed depending on how big the menu is 
+        ## this will need to be changed to either go to next page or say that the menu hasnt been updated
         if current_day==7:
             response = response + "Sorry, do not have the menu for next week yet!"
             return response
@@ -60,7 +60,7 @@ def checkForDino(message):
             page = str((2*(week-1)+1))
             column = current_day
             row = 0
-            reponse = reponse + "\n1" + getinfo
+            reponse = reponse + "\n1" + getinfo()
             #response = response + (todayMenu.breakfast)
         elif time < 14:
             response = response + (f"{day} lunch is:")
