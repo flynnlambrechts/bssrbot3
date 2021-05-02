@@ -61,7 +61,7 @@ def checkForDino(message):
             page = str((2*(week-1)+1))
             column = current_day
             row = 0
-            reponse = reponse + "\n1" + getinfo()
+            reponse = str(reponse + "\n1" + str(getinfo()))
             #response = response + (todayMenu.breakfast)
         elif time < 14:
             response = response + (f"{day} lunch is:")
