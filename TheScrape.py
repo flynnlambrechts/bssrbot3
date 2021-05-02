@@ -18,6 +18,7 @@ week = 1 ### work out how to define the week
 
 global column
 column = 6
+global page
 page = str(3)
 
 '''
@@ -31,12 +32,10 @@ def get_PageDayMeal(value):
 def checkForDino(message):
     global week
     week = 1
-
     global column
-    
+    global page
     global entity, value
     entity, value = wit_response(message)
-
     global response
     response = ""
     
@@ -84,12 +83,13 @@ def checkForDino(message):
     elif value == "breakfast":
         response = response + (f"{day}'s breakfast is:")
         page = str((2*(week-1)+1))
+        print(page + " page")
         day_value = current_day + 1
         print(str(day_value) + "day value")
         global row
         row = 0
         if day_value == 8:
-            column = 4
+            column = 1
         else:
             column = day_value
         print(str(column) + " column1")
