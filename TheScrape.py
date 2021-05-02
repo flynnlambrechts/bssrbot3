@@ -32,6 +32,7 @@ def get_PageDayMeal(value):
 def checkForDino(message):
     global week
     week = 1
+    
     global entity, value
     entity, value = wit_response(message)
 
@@ -57,8 +58,6 @@ def checkForDino(message):
                 week = week + 1
                 column = 1
             
-        
-    #todayMenu = getDayMenu(current_day)
     
     #handling if meal is non-specified
     if value == "dino": #or "cooking good looking" in message:
@@ -119,7 +118,7 @@ def getinfo():
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
-            plain_text = str(td).replace(r" \n ","").replace(r", \n",", ").replace(r" \n",", ")
+            plain_text = str(td).replace(r" \n ","").replace(r", \n",", ").replace(r" \n",", ") + "."
             info.append(plain_text.replace("<td>","").replace("</td>","").replace("amp;",""))
         else:
             print("none!")
