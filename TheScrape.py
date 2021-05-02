@@ -16,7 +16,7 @@ global week
 week = 1 ### work out how to define the week
 '''
 
-global column, row
+global column
 #row = 2
 column = 1
 page = str(3)
@@ -84,6 +84,7 @@ def checkForDino(message):
         page = str((2*(week-1)+1))
         day_value = current_day + 1
         print(str(day_value) + "day value")
+        global row
         row = 0
         if day_value == 8:
             column = 1
