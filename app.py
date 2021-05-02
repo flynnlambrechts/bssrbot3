@@ -70,6 +70,7 @@ def verify_fb_token(token_sent):
 #chooses a message to send to the user
 
 def get_bot_response(message_text):
+    global message
     message = message_text.lower()
     global response
     response = ""
