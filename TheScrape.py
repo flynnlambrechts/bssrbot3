@@ -103,7 +103,8 @@ def checkForDino(message):
     return response
 
 global page
-page = str(7)
+#page = str(7)
+
 # Opening the html file
 HTMLFile = open(str(page + ".html"), "r")
   
@@ -128,7 +129,7 @@ def getinfo():
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
-            plain_text = str(td).replace(r" \n ","").replace(r", \n",", ").replace(r" \n",", ").replace(r"\n",", ") + "."
+            plain_text = str(td).replace(r"– \n", "- ").replace(r"\n–","-").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ") + "."
             info.append(plain_text.replace("<td>","").replace("</td>","").replace("amp;",""))
         else:
             print("none!")
