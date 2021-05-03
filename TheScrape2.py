@@ -84,7 +84,7 @@ def checkForDino(message):
         else: 
             response = response + "No more meals today :)"
     elif value == "breakfast":
-        response = response + (f"{day}'s breakfast is: ")
+        response = response + (f"{day}'s breakfast is: \n")
         page = str((2*(week-1)+1))
         day_value = current_day + 1
         row = 0
@@ -131,7 +131,7 @@ def breakfastmenu():
             column = day_value
             content = content + columnlist()[i]
             if content != "":
-                response = response + str(header).title() + ": \n" + str(content) + "\n"
+                response = response + str(header).title() + ": " + str(content).capitalise() + "\n"
         except IndexError:
             print('NOK')
     return response

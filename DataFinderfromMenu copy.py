@@ -80,14 +80,17 @@ def breakfastmenu():
     global Range
     Range = int("2")
     response = ""
-    for i in range(0,Range):   
-        header = ""
-        column = 0
-        header = header + columnlist()[i]
-        content = ""
-        column = day_value
-        content = content + columnlist()[i]
-        response = response + str(header).title() + ": " + str(content) + "\n"
+    for i in range(0,Range):
+        try:
+            header = ""
+            column = 0
+            header = header + columnlist()[i]
+            content = ""
+            column = day_value
+            content = content + columnlist()[i]
+            response = response + str(header).title() + ": " + str(content) + "\n"
+        except IndexError:
+            print('NOK')
     return response
 
 def columnlist():
