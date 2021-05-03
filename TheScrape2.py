@@ -31,6 +31,7 @@ def get_PageDayMeal(value):
 '''
 
 def checkForDino(message):
+    global day_value
     global week
     week = 1
     #global column
@@ -123,13 +124,19 @@ def checkForDino(message):
     return response
 
 def breakfastmenu():
-    global row
+    global column
+    global Range
+    Range = int("2")
     response = ""
-    for i in range(0,2):
-        print(i)
-        try: 
-            row = i
-            response = response + str(RowHeaders(i)) + str(getinfo(column))
+    for i in range(0,Range):
+        try:
+            header = ""
+            column = 0
+            header = header + columnlist()[i]
+            content = ""
+            column = day_value
+            content = content + columnlist()[i]
+            response = response + str(header).title() + ": " + str(content) + "\n"
         except IndexError:
             print('NOK')
     return response
@@ -147,12 +154,16 @@ def lunchmenu():
             print('NOK')
     return response
 
-def RowHeaders(i):
-    headers = []
-    column=0
-    headers.append(getinfo(column))
-    return headers[i]
-
+def columnlist():
+    global row
+    global column
+    rowcontents = []
+    for i in range(0,Range):
+        print(i)
+        row = i
+        content = getinfo(column)
+        rowcontents.append(content)
+    return rowcontents
 
 def getinfo(column):
     global page
