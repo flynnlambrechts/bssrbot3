@@ -86,24 +86,18 @@ def checkForDino(message):
     elif value == "breakfast":
         response = response + (f"{day}'s breakfast is: ")
         page = str((2*(week-1)+1))
-        print(page + " page")
         day_value = current_day + 1
-        print(str(day_value) + "day value")
         row = 0
         if day_value == 8:
             column = 1
         else:
             column = day_value
         response = response + breakfastmenu()
-        print(str(column) + " column1")
-        print(str(row) + " row1")
         response = str(response) + "\n" + str(getinfo(column))
     elif value == "lunch":
         response = response + (f"{day}'s lunch is: ")
         page = str((2*(week-1)+1.5))
-        print(page + " page")
         day_value = current_day + 1
-        print(str(day_value) + "day value")
         if day_value == 8:
             column = 1
         else:
@@ -137,7 +131,7 @@ def breakfastmenu():
             column = day_value
             content = content + columnlist()[i]
             if content != "":
-                response = response + str(header).title() + ": " + str(content) + "\n"
+                response = response + str(header).title() + ": \n" + str(content) + "\n"
         except IndexError:
             print('NOK')
     return response
@@ -147,7 +141,6 @@ def lunchmenu():
     response = ""
     for i in range(0,5):
         try:
-            print(i)
             row = i
             response = response + str(RowHeaders(i)) + str(getinfo(column))
         except IndexError:
@@ -159,7 +152,6 @@ def columnlist():
     global column
     rowcontents = []
     for i in range(0,Range):
-        print(i)
         row = i
         content = getinfo(column)
         rowcontents.append(content)
@@ -194,8 +186,8 @@ def getinfo(column):
             info.append(plain_text.replace("<td>","").replace("</td>","").replace("amp;",""))
         else:
             print("none!")
-    print(str(row) + str(column) + "row column")
-    print(info[column])
+    #print(str(row) + str(column) + "row column")
+    #print(info[column])
     return info[column]
 
 
