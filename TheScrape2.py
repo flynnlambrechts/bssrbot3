@@ -88,22 +88,15 @@ def checkForDino(message):
         page = str((2*(week-1)+1))
         day_value = current_day + 1
         response = response + breakfastmenu()
+        
     elif value == "lunch":
-        response = response + (f"{day}'s lunch is: ")
+        response = response + (f"Lunch {day}: \n")
         page = str((2*(week-1)+1.5))
         day_value = current_day + 1
         response = response + lunchmenu()
-        '''
-        page = str(2*week)
-        print(page + " page")
-        day_value = current_day + 1
-        print(str(day_value) + "day value")
-        
-        row = 2
-        '''
-        
+
     elif value == "dinner":
-        response = response + (f"{day}'s dinner is: ")
+        response = response + (f"Dinner {day}: \n")
         #response = response + (str(todayMenu.dinner))
     return response
 
