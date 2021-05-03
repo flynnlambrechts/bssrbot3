@@ -7,7 +7,9 @@ import re
 
 week = int(1) ### work out how to define the week
 
+global column
 column = 1
+global row
 row = 2
 page = str(1)
 
@@ -31,13 +33,40 @@ menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
 
 # Get all the headings of Lists
 
-#def getinfo():
-info = []
-for td in menu_table_data[row].find_all("td"):
-    if td is not None:
-        plain_text = str(td).replace(r" \n",", ")
-        info.append(plain_text.replace("<td>","").replace("</td>","").replace("amp;",""))
-    else:
-        print("none!")
+def getinfo(column):
+    info = []
+    global menu_table_data
+    global row
+    for td in menu_table_data[row].find_all("td"):
+        if td is not None:
+            plain_text = str(td).replace(r" \n",", ")
+            info.append(plain_text.replace("<td>","").replace("</td>","").replace("amp;",""))
+        else:
+             print("none!")
+    return info[column]
+    #print(info[column])
 
-print(info[column])
+#global response
+#response = []
+def runLoop(response):
+    global row
+    for i in range(0,4):
+        #response = ["test"]
+        column = 0
+        print(i)
+        '''
+        if IndexError:
+            print('NOK')
+        else:
+        '''
+        row = i
+        print(getinfo(column))
+        info = getinfo(column)
+        response.append(info)
+        print(response)
+    return response 
+
+response = []
+response = runLoop(response)
+#print(getinfo(column))
+

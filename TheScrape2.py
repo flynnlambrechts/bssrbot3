@@ -156,7 +156,7 @@ def RowHeaders(i):
 
 def getinfo(column):
     global page
-    
+    global row
     ################## # Opening the html file
     HTMLFile = open(str(page + ".html"), "r") #try putting in func.
 
@@ -185,6 +185,6 @@ def getinfo(column):
             print("none!")
     print(str(row) + str(column) + "row column")
     print(info[column])
-    return info
+    return info[column]
 
 
