@@ -87,20 +87,11 @@ def checkForDino(message):
         response = response + (f"Breakfast {day}: \n")
         page = str((2*(week-1)+1))
         day_value = current_day + 1
-        row = 0
-        if day_value == 8:
-            column = 1
-        else:
-            column = day_value
         response = response + breakfastmenu()
     elif value == "lunch":
         response = response + (f"{day}'s lunch is: ")
         page = str((2*(week-1)+1.5))
         day_value = current_day + 1
-        if day_value == 8:
-            column = 1
-        else:
-            column = day_value
         response = response + lunchmenu()
         '''
         page = str(2*week)
@@ -117,6 +108,7 @@ def checkForDino(message):
     return response
 
 def breakfastmenu():
+    global day_value
     global column
     global Range
     Range = int("2")
@@ -127,7 +119,10 @@ def breakfastmenu():
             column = 0
             header = header + columnlist()[i]
             content = ""
-            column = day_value
+            if day_value == 8:
+                column = 1
+            else:
+                column = day_value
             content = content + columnlist()[i]
             if content != "":
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
@@ -136,12 +131,24 @@ def breakfastmenu():
     return response
 
 def lunchmenu():
-    global row
+    global day_value
+    global column
+    global Range
+    Range = int("2")
     response = ""
-    for i in range(0,5):
+    for i in range(0,Range):
         try:
-            row = i
-            response = response + str(RowHeaders(i)) + str(getinfo(column))
+            header = ""
+            column = 0
+            header = header + columnlist()[i]
+            content = ""
+            if day_value == 8:
+                column = 1
+            else:
+                column = day_value
+            content = content + columnlist()[i]
+            if content != "":
+                response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
         except IndexError:
             print('NOK')
     return response
