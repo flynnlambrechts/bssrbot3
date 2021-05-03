@@ -125,11 +125,11 @@ def checkForDino(message):
 def breakfastmenu():
     global row
     response = ""
-    for i in range(0,4):
+    for i in range(0,2):
         print(i)
         try: 
             row = i
-            response = response + str(RowHeaders(i)[i]) + str(getinfo(column)[i])
+            response = response + str(RowHeaders(i)) + str(getinfo(column))
         except IndexError:
             print('NOK')
     return response
