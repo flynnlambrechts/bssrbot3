@@ -93,7 +93,7 @@ def checkForDino(message):
         else:
             column = day_value
         response = response + breakfastmenu()
-        response = str(response) + "\n" + str(getinfo(column))
+        #response = str(response) + "\n" + str(getinfo(column))
     elif value == "lunch":
         response = response + (f"{day}'s lunch is: ")
         page = str((2*(week-1)+1.5))
