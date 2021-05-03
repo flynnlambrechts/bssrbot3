@@ -136,7 +136,7 @@ def breakfastmenu():
             content = ""
             column = day_value
             content = content + columnlist()[i]
-            if content is not ""
+            if content is not "":
                 response = response + str(header).title() + ": " + str(content) + "\n"
         except IndexError:
             print('NOK')
