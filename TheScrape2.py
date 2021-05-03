@@ -67,7 +67,7 @@ def checkForDino(message):
     #handling if meal is non-specified
     if value == "dino": #or "cooking good looking" in message:
         if time < 10:
-            response = response + (f"{day}'s breakfast is:")
+            response = response + (f"{day}'s breakfast is: ")
             '''
             page = str((2*(week-1)+1))
             column = current_day
@@ -76,15 +76,15 @@ def checkForDino(message):
             '''
             #response = response + (todayMenu.breakfast)
         elif time < 14:
-            response = response + (f"{day}'s lunch is:")
+            response = response + (f"{day}'s lunch is : ")
             #response = response + (str(todayMenu.lunch))
         elif time < 19:
-            response = response + (f"{day}'s dinner is:")
+            response = response + (f"{day}'s dinner is: ")
             #response = response + (str(todayMenu.dinner))
         else: 
             response = response + "No more meals today :)"
     elif value == "breakfast":
-        response = response + (f"{day}'s breakfast is:")
+        response = response + (f"{day}'s breakfast is: ")
         page = str((2*(week-1)+1))
         print(page + " page")
         day_value = current_day + 1
@@ -99,7 +99,7 @@ def checkForDino(message):
         print(str(row) + " row1")
         response = str(response) + "\n" + str(getinfo(column))
     elif value == "lunch":
-        response = response + (f"{day}'s lunch is:")
+        response = response + (f"{day}'s lunch is: ")
         page = str((2*(week-1)+1.5))
         print(page + " page")
         day_value = current_day + 1
@@ -119,7 +119,7 @@ def checkForDino(message):
         '''
         
     elif value == "dinner":
-        response = response + (f"{day}'s dinner is:")
+        response = response + (f"{day}'s dinner is: ")
         #response = response + (str(todayMenu.dinner))
     return response
 
@@ -136,11 +136,11 @@ def breakfastmenu():
             content = ""
             column = day_value
             content = content + columnlist()[i]
-            response = response + str(header).title() + ": " + str(content) + "\n"
+            if content is not ""
+                response = response + str(header).title() + ": " + str(content) + "\n"
         except IndexError:
             print('NOK')
     return response
-
 
 def lunchmenu():
     global row
@@ -190,7 +190,7 @@ def getinfo(column):
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
-            plain_text = str(td).replace(r" \n \n", ", ").replace(r"– \n", "- ").replace(r"\n–","-").replace(", \n",", ").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ") + "."
+            plain_text = str(td).replace(r" \n \n", ", ").replace(r"– \n", "- ").replace(r"\n–","-").replace(", \n",", ").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ")
             info.append(plain_text.replace("<td>","").replace("</td>","").replace("amp;",""))
         else:
             print("none!")
