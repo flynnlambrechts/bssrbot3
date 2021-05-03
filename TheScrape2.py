@@ -142,7 +142,7 @@ def lunchmenu():
         try:
             print(i)
             row = i
-            response = response + str(RowHeaders(i)[i]) + str(getinfo(column)[i])
+            response = response + str(RowHeaders(i)) + str(getinfo(column))
         except IndexError:
             print('NOK')
     return response
@@ -151,7 +151,7 @@ def RowHeaders(i):
     headers = []
     column=0
     headers.append(getinfo(column))
-    return headers
+    return headers[i]
 
 
 def getinfo(column):
