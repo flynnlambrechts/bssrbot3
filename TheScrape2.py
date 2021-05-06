@@ -67,37 +67,31 @@ def checkForDino(message):
     #handling if meal is non-specified
     if value == "dino": #or "cooking good looking" in message:
         if time < 10:
-            response = response + (f"{day}'s breakfast is: ")
-            '''
-            page = str((2*(week-1)+1))
-            column = current_day
-            row = 0
-            response = str(response) + "\n1" + str(getinfo())
-            '''
-            #response = response + (todayMenu.breakfast)
+            response = response + (f"Breakfast {day}: \n")
+            day_value = current_day + 1
+            response = response + breakfastmenu()
         elif time < 14:
-            response = response + (f"{day}'s lunch is : ")
-            #response = response + (str(todayMenu.lunch))
+            response = response + (f"Lunch {day}: \n")
+            day_value = current_day + 1
+            response = response + lunchmenu()
         elif time < 19:
-            response = response + (f"{day}'s dinner is: ")
-            #response = response + (str(todayMenu.dinner))
+            response = response + (f"Dinner {day}: \n")
+            day_value = current_day + 1
+            response = response + dinnermenu()
         else: 
             response = response + "No more meals today :)"
     elif value == "breakfast":
         response = response + (f"Breakfast {day}: \n")
-        page = str((2*(week-1)+1))
         day_value = current_day + 1
         response = response + breakfastmenu()
         
     elif value == "lunch":
         response = response + (f"Lunch {day}: \n")
-        page = str((2*(week-1)+1.5))
         day_value = current_day + 1
         response = response + lunchmenu()
 
     elif value == "dinner":
         response = response + (f"Dinner {day}: \n")
-        page = str((2*(week-1)+2))
         day_value = current_day + 1
         response = response + dinnermenu()
     return response
@@ -106,6 +100,8 @@ def breakfastmenu():
     global day_value
     global column
     global Range
+    global page
+    page = str((2*(week-1)+1))
     Range = int("2")
     response = ""
     for i in range(0,Range):
@@ -129,6 +125,8 @@ def lunchmenu():
     global day_value
     global column
     global Range
+    global page
+    page = str((2*(week-1)+1.5))
     Range = int("2")
     response = ""
     for i in range(0,Range):
@@ -152,6 +150,8 @@ def dinnermenu():
     global day_value
     global column
     global Range
+    global page
+    page = str((2*(week-1)+2))
     Range = int("7")
     response = ""
     for i in range(1,Range):
