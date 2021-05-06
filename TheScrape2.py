@@ -97,7 +97,9 @@ def checkForDino(message):
 
     elif value == "dinner":
         response = response + (f"Dinner {day}: \n")
-        #response = response + (str(todayMenu.dinner))
+        page = str((2*(week-1)))
+        day_value = current_day + 1
+        response = response + dinnermenu()
     return response
 
 def breakfastmenu():
@@ -145,6 +147,30 @@ def lunchmenu():
         except IndexError:
             print('NOK')
     return response
+
+def dinnermenu():
+    global day_value
+    global column
+    global Range
+    Range = int("2")
+    response = ""
+    for i in range(2,7):
+        try:
+            header = ""
+            column = 0
+            header = header + columnlist()[i]
+            content = ""
+            if day_value == 8:
+                column = 1
+            else:
+                column = day_value
+            content = content + columnlist()[i]
+            if content != "":
+                response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
+        except IndexError:
+            print('NOK')
+    return response
+
 
 def columnlist():
     global row
