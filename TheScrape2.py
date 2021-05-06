@@ -97,7 +97,7 @@ def checkForDino(message):
 
     elif value == "dinner":
         response = response + (f"Dinner {day}: \n")
-        page = str((2*(week-1)))
+        page = str((2*(week-1)+2))
         day_value = current_day + 1
         response = response + dinnermenu()
     return response
