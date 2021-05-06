@@ -28,7 +28,7 @@ def checkForEasterEggs(message):
     elif "goldstein" in message:
         response  = response  + "Basser is better."
     elif "baxtabot" in message:
-        response =  response + "Did you mean: 'inferior bot'?
+        response =  response + "Did you mean: 'inferior bot'?"
     elif "room points" in message:
         response  = response  + "Room points are a lie!"
     elif "floor 1" in message or "floor one" in message:
