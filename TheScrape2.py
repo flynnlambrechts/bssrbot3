@@ -62,7 +62,7 @@ def checkForDino(message):
             
     
     #handling if meal is non-specified
-    if value == "dino": #or "cooking good looking" in message:
+    if value == "dino" or "cooking good looking" in message:
         if time < 10:
             response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 1
@@ -183,7 +183,7 @@ def columnlist():
 def getinfo(column):
     global page
     global row
-    ################## # Opening the html file
+    #-----------------------Opening the HTML file--------------------------#
     HTMLFile = open(str(page + ".html"), "r") #try putting in func.
 
     # Reading the file
@@ -199,7 +199,7 @@ def getinfo(column):
 
     menu_table = soup.find("table", attrs={"class": "dataframe"})
     menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
-    ##################
+    #---------------------------------------------------------------------#
 
     
     info = []
