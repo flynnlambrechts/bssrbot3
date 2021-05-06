@@ -14,6 +14,7 @@ from pymessenger.bot import Bot
 
 from utils import wit_response
 from TheScrape2 import checkForDino
+from EasterEggs import checkForEasterEggs
 
 global week
 week = 1 ### work out how to define the week
@@ -93,6 +94,8 @@ def get_bot_response(message_text):
         response = response + random.choice(sample_responses)
     elif "updog" in message:
         response = response + "What is updog?"
+    elif checkForEasterEggs(message):
+        response = response + checkForEasterEggs(message)
     else:
         response = response + "Sorry, I don't understand"
     return response
