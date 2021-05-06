@@ -88,14 +88,8 @@ def get_bot_response(message_text):
         response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. What's the calendar for this week? \n4. What's happening on Thursday? \n5. Is shopen?")
     elif message == "thx" or message == "thanks" or message == "thank you":
         response.append("You're welcome!")
-    elif message == "random":
-        sample_responses = ["ben is a cockboy","molly farted","crispy is a simp","mitchy is thick","hugo is sick"]
-        # return selected item to the user
-        response = response + random.choice(sample_responses)
-    elif "updog" in message:
-        response = response + "What is updog?"
     elif checkForEasterEggs(message):
-        response = response + str(checkForEasterEggs(message))
+        response = response + checkForEasterEggs(message)
     else:
         response = response + "Sorry, I don't understand"
     return response
