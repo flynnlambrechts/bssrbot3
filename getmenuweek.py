@@ -15,7 +15,7 @@ def getmenuweek():
     global week
     menuweek = 0
     for i in numbers:
-            print(i)
+            #print(i)
             if week > i:
                     menuweek = week - i
                     #print(str(menuweek) + "week")

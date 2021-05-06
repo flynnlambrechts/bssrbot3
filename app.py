@@ -95,7 +95,7 @@ def get_bot_response(message_text):
     elif "updog" in message:
         response = response + "What is updog?"
     elif checkForEasterEggs(message):
-        response = response + checkForEasterEggs(message)
+        response = response + str(checkForEasterEggs(message))
     else:
         response = response + "Sorry, I don't understand"
     return response
