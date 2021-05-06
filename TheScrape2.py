@@ -10,7 +10,7 @@ import requests
 
 #from utils import value
 from utils import wit_response
-
+from getmenuweek import getmenuweek
 '''
 global week
 week = 1 ### work out how to define the week
@@ -22,18 +22,12 @@ column = 6
 global page
 page = str(7)
 
-'''
-def get_PageDayMeal(value):
-    if value == "breakfast":
-        page = str((2*(week-1)+1)
-    elif value == "lunch" or "dinner":
-        page = str(week + 1)
-'''
+global week
+week = getmenuweek()
 
 def checkForDino(message):
     global day_value
     global week
-    week = 1
     #global column
     global row
     global page
@@ -56,8 +50,11 @@ def checkForDino(message):
         ## this will need to be changed to either go to next page or say that the menu hasnt been updated
         if current_day==7:
             if week==4:
-                response = response + "Sorry, I do not have the menu for next week yet!"
+                #response = response + "Sorry, I do not have the menu for next week yet!"
                 return response
+                week = 1
+                print(str(week) + "week")
+                column = 1
             else:
                 week = week + 1
                 print(str(week) + "week")
@@ -181,6 +178,7 @@ def columnlist():
         content = getinfo(column)
         rowcontents.append(content)
     return rowcontents
+
 
 def getinfo(column):
     global page

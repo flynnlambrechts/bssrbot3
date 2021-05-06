@@ -107,51 +107,6 @@ def checkIfGreeting(message):
                 return True      
     return False
 
-'''
-def checkForDino(message):
-    response = ""
-    current_day = datetime.now(TIMEZONE).weekday()
-    time = datetime.now(TIMEZONE).time().hour
-    day = "Today"
-    
-    #See if user is asking about tomorrow
-    if "tomorrow" in message:
-        day = "Tomorrow"
-        current_day+=1
-        time = 0
-        reponse = response + "Tomorrow"
-        ## this may need be to changed depending on how big the menu is 
-        if current_day==7:
-            response = response + "Sorry, do not have the menu for next week yet!"
-            return response
-        
-    #todayMenu = getDayMenu(current_day)
-    
-    #handling if meal is non-specified
-    if value == "dino": #or "cooking good looking" in message:
-        if time < 10:
-            response = response + (f"{day} breakfast is:")
-            #response = response + (todayMenu.breakfast)
-        elif time < 14:
-            response = response + (f"{day} lunch is:")
-            #response = response + (str(todayMenu.lunch))
-        elif time < 19:
-            response = response + (f"{day} dinner is:")
-            #response = response + (str(todayMenu.dinner))
-        else: 
-            response = response + "No more meals today :)"
-    elif value == "breakfast":
-        response = response + (f"{day} breakfast is:")
-        #response = response + (todayMenu.breakfast)
-    elif value == "lunch":
-        response = response + (f"{day} lunch is:")
-        #response = response + (str(todayMenu.lunch))
-    elif value == "dinner":
-        response = response + (f"{day} dinner is:")
-        #response = response + (str(todayMenu.dinner))
-    return response
-'''
-
 
 #uses PyMessenger to send response to user
 def send_message(recipient_id, response):
