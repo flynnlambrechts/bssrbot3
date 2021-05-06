@@ -152,9 +152,9 @@ def dinnermenu():
     global day_value
     global column
     global Range
-    Range = int("2")
+    Range = int("7")
     response = ""
-    for i in range(2,7):
+    for i in range(0,Range):
         try:
             header = ""
             column = 0
