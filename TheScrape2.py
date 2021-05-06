@@ -154,7 +154,7 @@ def dinnermenu():
     global Range
     Range = int("7")
     response = ""
-    for i in range(0,Range):
+    for i in range(1,Range):
         try:
             header = ""
             column = 0
@@ -207,7 +207,7 @@ def getinfo(column):
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
-            plain_text = str(td).replace(r" \n \n", ", ").replace(r"– \n", "- ").replace(r"\n–","-").replace(", \n",", ").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ")
+            plain_text = str(td).replace(r"– \n \n","- ").replace(r" \n \n", ", ").replace(r"– \n", "- ").replace(r"\n–","-").replace(", \n",", ").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ")
             info.append(plain_text.replace("<td>","").replace("</td>","").replace("amp;",""))
         else:
             print("none!")
