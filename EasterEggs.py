@@ -35,6 +35,6 @@ def checkForEasterEggs(message):
         response  = response  + "The dungeon..."
     elif "floor 5" in message or "floor five" in message:
         response  = response  + "Penthouse baby!!"
-    lif "joe" in message:
+    elif "joe" in message:
         response  = response  + "Who's Joe?"
     return response
