@@ -85,7 +85,7 @@ def get_bot_response(message_text):
         response = response + checkForDino(message)
     elif checkIfGreeting(message):
         response = response + "Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs."
-        response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. What's the calendar for this week? \n4. What's happening on Thursday? \n5. Is shopen?")
+        response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today?" #\n3. What's the calendar for this week? \n4. What's happening on Thursday? \n5. Is shopen?")
     elif message == "thx" or message == "thanks" or message == "thank you":
         response.append("You're welcome!")
     elif checkForEasterEggs(message):
