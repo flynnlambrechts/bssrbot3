@@ -20,7 +20,9 @@ def checkForEasterEggs(message):
     elif "mitch" in message or "mitch kerrison" in message or "mitchy" in message:
         response = response + "Did you mean: 'Booty Mitch'?"
     elif "flynn" in message or "flynn lambrechts" in message:
-        response = response + "Sick Lad"    
+        response = response + "Sick Lad"
+    elif "sidd" in message:
+        response = response + "Best med student."    
     elif "mackenzie" in message or "mackenzie travers" in message or "kenz" in message:
         response = response + "Hey gang member..."
     elif "dumptruck" in message or "dumpy" in message:
