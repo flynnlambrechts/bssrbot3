@@ -42,7 +42,7 @@ def checkForDino(message):
     day = "Today"
     
     #See if user is asking about tomorrow
-    if "tomorrow" in message:
+    if "tomorrow" in message or "tmrw" in message or "tomoz" in message:
         day = "Tomorrow"
         current_day+=1
         time = 0

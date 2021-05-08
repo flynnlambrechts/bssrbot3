@@ -26,9 +26,11 @@ def checkForEasterEggs(message):
     elif "mackenzie" in message or "mackenzie travers" in message or "kenz" in message:
         response = response + "Hey gang member..."
     elif "dumptruck" in message or "dumpy" in message:
-        response = response + "Did you mean 'Mitch Kerrison'?"
+        response = response + "Did you mean: 'Mitch Kerrison'?"
     elif "507" in message:
         response = response + "The best fresher box in town."
+    elif "525" in message:
+        response = response + "Did you mean: 'the hallway'?"
     elif "baxter" in message:
         response  = response  + "Get rekt Baxter."
     elif "goldstein" in message:
