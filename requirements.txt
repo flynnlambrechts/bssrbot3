@@ -21,3 +21,4 @@ wit == 6.0.0
 pytz==2019.1
 beautifulsoup4==4.9.3
 lxml==4.6.3
+psycopg2==2.8.6

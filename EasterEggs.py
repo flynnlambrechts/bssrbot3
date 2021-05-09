@@ -49,6 +49,6 @@ def checkForEasterEggs(message):
         response  = response  + "Okay Benny G with the smooth moves."
     elif "em col" in message:
         response  = response  + "Hold my bball?"
-    elif "floor 4" in message or "floor five" in message:
+    elif "floor 4" in message or "floor four" in message:
         response  = response  + "the second best floor"
     return response

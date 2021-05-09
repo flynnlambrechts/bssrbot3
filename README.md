@@ -2,10 +2,16 @@
 
 > Basser's Dino menu Shop and Calendar Assistant
 
-## Uses
+## Requirements
 
-Wit.ai
-Heroku
-	NewRelic https://elements.heroku.com/addons/newrelic
-Database: Restdb.io https://restdb.io/account/databases/
-Github
+Wit.ai - Language process
+Heroku - Hosting code
+NewRelic https://elements.heroku.com/addons/newrelic - Prevents code from idling
+Database: postgresql - stores information input by users
+
+## To Do
+Wildcat of the week nominations
+Shopen
+Calendar
+
+Github# bssrbot-dev
