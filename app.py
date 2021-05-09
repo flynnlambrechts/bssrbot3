@@ -45,17 +45,17 @@ def receive_message():
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
     else:
         # get whatever message a user sent the bot
-       output = request.get_json()
-       try: 
-           #log(output) #entire output good for finding sender ids what message contains etc
-           for event in output['entry']:
-              messaging = event['messaging']
-              for message in messaging:
-                if message.get('message'):
+        output = request.get_json()
+        try:
+            #log(output) #entire output good for finding sender ids what message contains etc
+            for event in output['entry']:
+                messaging = event['messaging']
+                for message in messaging:
+                  if message.get('message'):
                     #Facebook Messenger ID for user so we know where to send response back to
                     global recipient_id
                     recipient_id = message['sender']['id']
-                    
+
                     #if it has text
                     if message['message'].get('text'):
                         message_text = message['message']['text']
@@ -68,7 +68,6 @@ def receive_message():
                         send_message(recipient_id, response_sent_nontext)
         except TypeError:
             print('PING!')
-            
     return "Message Processed"
 
 def log(message):
