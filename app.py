@@ -46,26 +46,29 @@ def receive_message():
     else:
         # get whatever message a user sent the bot
        output = request.get_json()
-       #log(output) #entire output good for finding sender ids what message contains etc
-       for event in output['entry']:
-          messaging = event['messaging']
-          for message in messaging:
-            if message.get('message'):
-                #Facebook Messenger ID for user so we know where to send response back to
-                global recipient_id
-                recipient_id = message['sender']['id']
-                
-                #if it has text
-                if message['message'].get('text'):
-                    message_text = message['message']['text']
-                    print(message_text)
-                    response_sent_text = get_bot_response(message_text)
-                    send_message(recipient_id, response_sent_text)
-                #if user sends us a GIF, photo,video, or any other non-text item
-                if message['message'].get('attachments'):
-                    response_sent_nontext = "Nice pic!"
-                    send_message(recipient_id, response_sent_nontext)
-
+       try: 
+           #log(output) #entire output good for finding sender ids what message contains etc
+           for event in output['entry']:
+              messaging = event['messaging']
+              for message in messaging:
+                if message.get('message'):
+                    #Facebook Messenger ID for user so we know where to send response back to
+                    global recipient_id
+                    recipient_id = message['sender']['id']
+                    
+                    #if it has text
+                    if message['message'].get('text'):
+                        message_text = message['message']['text']
+                        print(message_text)
+                        response_sent_text = get_bot_response(message_text)
+                        send_message(recipient_id, response_sent_text)
+                    #if user sends us a GIF, photo,video, or any other non-text item
+                    if message['message'].get('attachments'):
+                        response_sent_nontext = "Nice pic!"
+                        send_message(recipient_id, response_sent_nontext)
+        except TypeError:
+            print('PING!')
+            
     return "Message Processed"
 
 def log(message):
