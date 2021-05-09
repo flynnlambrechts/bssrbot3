@@ -141,10 +141,10 @@ def checkForShopen(message):
     name = getname(message)
     response = ""
 ##only use once----------------------------------
-    if "dookie:create table" in message:#        |
-        response = response  + create_shopen()#  |
-    elif "dookie:insert row" in message:#        |
-        response = response + insert_shopen()#   |
+#    if "dookie:create table" in message:#        |
+#        response = response  + create_shopen()#  |
+#    elif "dookie:insert row" in message:#        |
+#        response = response + insert_shopen()#   |
 ##-----------------------------------------------
     if "i would like to open the shop" in message:
         response = response + open_shopen(name)
