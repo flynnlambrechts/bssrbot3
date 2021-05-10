@@ -109,8 +109,8 @@ def close_shopen(name):
 
 def timeTillClose(end_time):
     current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
-    close_time = datetime.datetime.strptime(str(end_time),'%Y-%m-%d %H:%M:%S').timestamp() #
-    remaining_time = int(close_time) - int((datetime.datetime.strptime(str(current_time),'%Y-%m-%d %H:%M:%S')).timestamp()) #
+    close_time = datetime.datetime.strptime(str(end_time),'%Y-%m-%d %H:%M:%S')
+    remaining_time = (close_time.timestamp()) - (datetime.datetime.strptime(str(current_time),'%Y-%m-%d %H:%M:%S').timestamp()) #
     print(str(remaining_time)) #
     return remaining_time
 
@@ -137,7 +137,7 @@ def get_shopen():
             value = str(row[4])
             date = row[5]
         
-        if int(timeTillClose(end_time)) >= int(datetime.timedelta(minutes=0)):
+        if int(timeTillClose(end_time)) >= 0:
             if value == "True":
                 response = response + "Yes, shop was opened by " + person + " at " + str(start_time.strftime('%I:%M %p')) + "."
             elif value == "False":
