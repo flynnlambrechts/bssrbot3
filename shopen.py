@@ -137,7 +137,7 @@ def get_shopen():
             value = str(row[4])
             date = row[5]
         
-        if timeTillClose(end_time) >= datetime.timedelta(minutes=0):
+        if int(timeTillClose(end_time)) >= int(datetime.timedelta(minutes=0)):
             if value == "True":
                 response = response + "Yes, shop was opened by " + person + " at " + str(start_time.strftime('%I:%M %p')) + "."
             elif value == "False":
