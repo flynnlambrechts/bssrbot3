@@ -76,7 +76,10 @@ def open_shopen(name):
     try: 
         global con
         global index
-        global current_time, end_time, date
+        date_and_time = datetime.datetime.now(TIMEZONE)
+        current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
+        end_time = (date_and_time + datetime.timedelta(hours=3)).strftime('%Y-%m-%d %H:%M:%S')
+        date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
         cur = con.cursor()
         cur.execute('''UPDATE shopen1 SET
             index=%s, person= %s, start_time = %s, end_time = %s, value = %s,
@@ -93,12 +96,12 @@ def close_shopen(name):
     try:
         global con
         global index
-        unix = int(time.time())
-        current_time = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d %H:%M:%S'))
+        global TIMEZONE
+        current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
         cur = con.cursor()
         cur.execute('''UPDATE shopen1 SET
             index=%s, person= %s, end_time = %s, value = %s''',
-                (index, name, current_time,'false'))
+                (index, name, str(current_time),'false'))
         print("Shopen updated successfully")
         con.commit()
         return "Shop has been closed!"
