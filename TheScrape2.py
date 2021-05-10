@@ -11,6 +11,7 @@ import requests
 #from utils import value
 from utils import wit_response
 from getmenuweek import getmenuweek
+from getmenuweek import checkForDay
 '''
 global week
 week = 1 ### work out how to define the week
@@ -59,8 +60,16 @@ def checkForDino(message):
                 week = week + 1
                 print(str(week) + "week")
                 column = 1
-            
-    
+    if checkForDay(message):
+        print("day found")
+        week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+        if current_day > int(checkForDay(message)):
+            week = week + 1
+            day = str(week_days[int(checkForDay(message))])
+            current_day = int(checkForDay(message))
+        else:
+            current_day = int(checkForDay(message))
+            day = str(week_days[int(checkForDay(message))])
     #handling if meal is non-specified
     if value == "dino" or "cooking good looking" in message:
         if time < 10:
