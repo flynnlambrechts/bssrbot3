@@ -82,8 +82,8 @@ def open_shopen(name):
             index=%s, person= %s, start_time = %s, end_time = %s, value = %s,
             date = %s''',
                 (index,name,current_time,end_time,'true',date))
-        print("Shopen updated successfully")
-        con.commit()
+        con.commit() #
+        print("Shopen updated successfully") #
         return "Shop has been opened! \nShop will be automatically closed in 3hours."
     except Exception as error:
         print("Error: " + str(error) + "\n" + str(type(error)))
@@ -108,10 +108,10 @@ def close_shopen(name):
         
 
 def timeTillClose(end_time):
-    current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
-    close_time = datetime.datetime.strptime(str(end_time),'%Y-%m-%d %H:%M:%S')
+    current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S').timestamp() #
+    close_time = datetime.datetime.strptime(str(end_time),'%Y-%m-%d %H:%M:%S').timestamp() #
     remaining_time = close_time - datetime.datetime.strptime(str(current_time),'%Y-%m-%d %H:%M:%S')
-    print(remaining_time)
+    print(str(remaining_time)) #
     return remaining_time
 
 def get_shopen():
