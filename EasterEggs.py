@@ -8,7 +8,7 @@ def checkForEasterEggs(message):
         sample_responses = ["ben is a cockboy","molly farted","crispy is a simp","mitchy is thick","hugo is sick"]
         response = response + random.choice(sample_responses)
     elif "molly" in message or "molly rolfe" in message or "rolfey" in message:
-        response = response + "Molly is a butt nug."
+        response = response + "Molly is a butt nug. " + u"\U0001F61D"
     elif "benny g" in message or "ben grant" in message:
         response = response + "Time for the bad man to settle down..."
     elif "crispy" in message or "brendan crisp" in message:

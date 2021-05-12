@@ -7,10 +7,6 @@ import pytz
 
 TIMEZONE = pytz.timezone('Australia/Sydney')
 
-from connectdb import connectToDB
-from connectdb import con
-global con   
-
 global person
 person = str("Mike Hunt")
 
@@ -30,51 +26,8 @@ end_time = (date_and_time + datetime.timedelta(hours=3)).strftime('%Y-%m-%d %H:%
 date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
 
 
-def create_shopen():
-    global con
-    cur = con.cursor()
-    response = ""
+def open_shopen(name, con):
     try: 
-        cur.execute('''CREATE TABLE shopen1
-            (index INTEGER NOT NULL PRIMARY KEY,
-            person VARCHAR(50) NOT NULL,
-            start_time VARCHAR(50) NOT NULL,
-            end_time VARCHAR(50) NOT NULL,
-            value BOOLEAN NOT NULL,
-            date DATE NOT NULL)
-            ''')
-        print("Table created successfully")
-        response = response + "Table created."
-        con.commit()
-    except Exception as error:
-        response = response + "Fail: " + str(error)
-        print("Error: " + str(error) + "\n" + str(type(error)))
-    return response
-
-def insert_shopen():
-    global con
-    global person
-    global index
-    global current_time, end_time, date
-    response = ""
-    try:
-        cur = con.cursor()
-        cur.execute('''INSERT INTO shopen1 (
-            index, person, start_time, end_time, value, date)
-            VALUES (%s,%s,%s,%s,%s,%s)''',
-                (index, person,current_time,end_time,'true',date))
-        print("Shopen data inserted successfully")
-        response  = response + "Shop row inserted"
-        con.commit()
-    except Exception as error:
-        response = response + "Fail: " + str(error)
-        print("Error: " + str(error) + "\n" + str(type(error)))
-    return response
-
-
-def open_shopen(name):
-    try: 
-        global con
         global index
         date_and_time = datetime.datetime.now(TIMEZONE)
         current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
@@ -92,9 +45,8 @@ def open_shopen(name):
         print("Error: " + str(error) + "\n" + str(type(error)))
         return "Fail: " + str(error)
 
-def close_shopen(name):
+def close_shopen(name, con):
     try:
-        global con
         global index
         global TIMEZONE
         current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
@@ -117,9 +69,8 @@ def timeTillClose(end_time):
     print(str(remaining_time)) #
     return remaining_time
 
-def get_shopen():
+def get_shopen(con):
     try:
-        global con
         cur = con.cursor()
         cur.execute('''SELECT * FROM shopen1''')
         rows = cur.fetchall()
@@ -153,5 +104,47 @@ def get_shopen():
         response = response + "Fail: " + str(error)
     return response
 
+
+
+
+##def create_shopen(con):
+##    response = ""
+##    try: 
+##        cur.execute('''CREATE TABLE shopen1
+##            (index INTEGER NOT NULL PRIMARY KEY,
+##            person VARCHAR(50) NOT NULL,
+##            start_time VARCHAR(50) NOT NULL,
+##            end_time VARCHAR(50) NOT NULL,
+##            value BOOLEAN NOT NULL,
+##            date DATE NOT NULL)
+##            ''')
+##        print("Table created successfully")
+##        response = response + "Table created."
+##        con.commit()
+##    except Exception as error:
+##        response = response + "Fail: " + str(error)
+##        print("Error: " + str(error) + "\n" + str(type(error)))
+##    return response
+##
+##def insert_shopen():
+##    global person
+##    global index
+##    global current_time, end_time, date
+##    
+##    
+##    response = ""
+##    try:
+##        cur = con.cursor()
+##        cur.execute('''INSERT INTO shopen1 (
+##            index, person, start_time, end_time, value, date)
+##            VALUES (%s,%s,%s,%s,%s,%s)''',
+##                (index, person,current_time,end_time,'true',date))
+##        print("Shopen data inserted successfully")
+##        response  = response + "Shop row inserted"
+##        con.commit()
+##    except Exception as error:
+##        response = response + "Fail: " + str(error)
+##        print("Error: " + str(error) + "\n" + str(type(error)))
+##    return response
 
 

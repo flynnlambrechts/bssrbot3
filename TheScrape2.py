@@ -27,51 +27,21 @@ global week
 week = getmenuweek()
 
 def checkForDino(message):
-    global day_value
-    global week
-    #global column
-    global row
-    global page
+    global current_day #day of week 0-6 inclusive
+    global day_value #day of week 1-7 inclusive
+    global day #name of the day e.g. monday, wedneday, tomorrow, today
+    global week #week of cycle
+
     global entity, value
     entity, value = wit_response(message)
-    global response
+    #global response
     response = ""
     
-    global current_day
-    current_day = datetime.now(TIMEZONE).weekday()
-    time = datetime.now(TIMEZONE).time().hour
-    day = "Today"
+    getDay(message) #checks for days
     
-    #See if user is asking about tomorrow
-    if "tomorrow" in message or "tmrw" in message or "tomoz" in message:
-        day = "Tomorrow"
-        current_day+=1
-        time = 0
-        reponse = response + "Tomorrow"
-        ## this will need to be changed to either go to next page or say that the menu hasnt been updated
-        if current_day==7:
-            if week==4:
-                #response = response + "Sorry, I do not have the menu for next week yet!"
-                return response
-                week = 1
-                print(str(week) + "week")
-                column = 1
-            else:
-                week = week + 1
-                print(str(week) + "week")
-                column = 1
-    if checkForDay(message):
-        print("day found")
-        week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-        if current_day > int(checkForDay(message)):
-            week = week + 1
-            day = str(week_days[int(checkForDay(message))])
-            current_day = int(checkForDay(message))
-        else:
-            current_day = int(checkForDay(message))
-            day = str(week_days[int(checkForDay(message))])
     #handling if meal is non-specified
-    if value == "dino" or "cooking good looking" in message:
+    if value == "dino" in message or "cooking good looking" in message:
+        time = datetime.now(TIMEZONE).time().hour
         if time < 10:
             response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 1
@@ -101,6 +71,52 @@ def checkForDino(message):
         day_value = current_day + 1
         response = response + dinnermenu()
     return response
+
+def getDay(message): #here is where we get the day and current_day and sometimes week
+    global current_day
+    global day
+    global week
+    global column
+
+    current_day = datetime.now(TIMEZONE).weekday()
+    day = "Today"
+    
+    #See if user is asking about tomorrow
+    if "tomorrow" in message or "tmrw" in message or "tomoz" in message:
+        day = "Tomorrow"
+        current_day+=1
+        time = 0
+        ## this will need to be changed to either go to next page or say that the menu hasnt been updated
+        if current_day==7:
+            if week==4:
+                week = 1
+                print(str(week) + " week")
+                column = 1
+            else:
+                week = week + 1
+                print(str(week) + "week")
+                column = 1
+    #check if user has asked about a day of the week
+    elif checkForDay(message):
+        print("day found")
+        week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+        if current_day > int(checkForDay(message)):
+            print(str(week) + " week")
+            if str(week)==str("4"):
+                week = 1
+                print(str(week) + " week")
+            else:
+                week = week + 1
+                print(str(week) + " week")
+            current_day = int(checkForDay(message))
+            day = str(week_days[int(checkForDay(message))])
+        else:
+            current_day = int(checkForDay(message))
+            day = str(week_days[int(checkForDay(message))])
+
+    #otherwise must be today: and day and current_day are not updated from todays value
+
+
 
 def breakfastmenu():
     global day_value

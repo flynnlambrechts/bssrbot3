@@ -28,8 +28,8 @@ def getmenuweek():
 #print(getmenuweek())
 
 
-def checkForDay(message): #check if day of week specified
-    day = ""
+def checkForDay(message): #check of day of week specified
+    day = "" 
     if "monday" in message or " mon" in message or "mon " in message:
         day = str('0')
     elif "tuesday" in message or " tues" in message or "tues " in message:
