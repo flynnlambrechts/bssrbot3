@@ -43,5 +43,5 @@ def checkForDay(message): #check of day of week specified
     elif "saturday" in message or " sat" in message or "sat " in message:
         day = 5
     elif "sunday" in message or " sun" in message or "sun " in message:
-        day = 7
+        day = 6
     return day
