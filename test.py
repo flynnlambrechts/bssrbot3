@@ -1,5 +1,5 @@
+from tornado.escape import linkify
 
-DATABASE_URL =  "www.google.com"
-db = (DATABASE_URL, "sslmode='require'")
 
-print(db)
+post = "Check out www.google.com"
+print(linkify(post))

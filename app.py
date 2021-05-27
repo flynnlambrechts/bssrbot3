@@ -23,6 +23,9 @@ from shop_catalogue import shop_catalogue
 from users import *                     #for viewing users
 from getmenuweek import checkForDay
 
+
+from tornado.escape import linkify
+
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #used for fb connection
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN'] #used to verify fb
@@ -131,6 +134,9 @@ def get_bot_response(message_text):
         else:
             response = response + "You shall not, PASS: \n" + str(recipient_id)
         con.close()
+    elif "link" in message:
+        post = "Check out www.google.com"
+        response = response + linkify(post)
     else:
         response = response + "Sorry, I don't understand: " + message
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
