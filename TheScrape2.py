@@ -70,6 +70,8 @@ def checkForDino(message):
         response = response + (f"Dinner {day}: \n")
         day_value = current_day + 1
         response = response + dinnermenu()
+    response = response + " \n\nPlease leave feedback here: https://bit.ly/3hVT0DX"
+    
     return response
 
 def getDay(message): #here is where we get the day and current_day and sometimes week
