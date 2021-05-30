@@ -1,4 +1,4 @@
-import os
+
 import psycopg2
 
 import time
@@ -95,9 +95,9 @@ def get_shopen(con):
             if value == "True":
                 response = response + "Shop was opened by " + person + " at " + str(start_time.strftime('%I:%M %p')) + "."
             elif value == "False":
-                response = response + "Sorry, shop closed :("
+                response = response + "Sorry, shop closed " + u"\U0001F61E"
         else:
-            response = response + "Sorry, shop closed :("
+            response = response + "Sorry, shop closed " + u"\U0001F61E"
     except Exception as error:
         print("Error: " + str(error) + "\n" + str(type(error)))
         response = ""

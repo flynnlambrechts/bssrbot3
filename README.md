@@ -1,4 +1,4 @@
-# BssrBot 3.2.1
+# BssrBot 3.2.2
 > Basser's Dino Menu, Shop and Calendar Assistant
 
 ## Requirements
@@ -23,6 +23,15 @@ Database: postgresql - stores information input by users
 3. In the thescrape2 find what week of the year corresponds to current menu week and update subtract value
 4. (Optional) Reduce multiples of 4 in thescrape2 to only possible values
 
+## To Update calendar
+1. \copy data into db using heroku:
+	\copy calendar FROM <path_to_calednar.csv> WITH (FORMAT CSV);
+2. Go to calendar1 and zero week in getaway function
+3. Push changes
+### Formatting Calendar
+- Make sure have a zero row at top with days in
+- change nulls to blanks and then update line in calendar1
+
 ## Capabilities
 - Return meal from Dino, breakfast, lunch and dinner
  	- including tomorrow and days of week
@@ -32,13 +41,21 @@ Database: postgresql - stores information input by users
 - Get user's name
 - Shopen
 - Easter Eggs
-- Shop catalogue 
+- Shop catalogue
+- Dinotimes
+- Dino Feedback link
+- Calendar
+	- Week by week
+	- Days
+	- Week numbers
+	- next week
 
 ## Work On
-- day next week and week = 4 - SOLVED
-- why does Monday lunch work but not lunch Monday - SOLVED
-- connecting to DB - SOLVED
 - calendar - IN PROGRESS
-
+	add day by day
+	add next week
+	maybe add week number
+- putting menu in db
+- getting dessert
 
 Github# bssrbot-dev

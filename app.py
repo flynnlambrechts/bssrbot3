@@ -15,16 +15,15 @@ from pymessenger.bot import Bot         #not sure
 
 from utils import wit_response          #for nlp
 from TheScrape2 import checkForDino     #for scraping htmls
+from TheScrape2 import dinotimes        #pulls the dino times from the scrape
 from EasterEggs import checkForEasterEggs #self explanatory
 from shopen import *                    #for all shopen related
+from calendar1 import get_events
 from jokes import getjoke               #for jokes
 from shop_catalogue import shop_catalogue 
 
 from users import *                     #for viewing users
 from getmenuweek import checkForDay
-
-
-from tornado.escape import linkify
 
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #used for fb connection
@@ -62,27 +61,27 @@ def receive_message():
     else:
         # get whatever message a user sent the bot
         output = request.get_json()
-        try:
-            #log(output) #entire output good for finding sender ids what message contains etc
-            for event in output['entry']:
-                messaging = event['messaging']
-                for message in messaging:
-                  if message.get('message'):
-                    #Facebook Messenger ID for user so we know where to send response back to
-                    global recipient_id
-                    recipient_id = message['sender']['id']
+    try:
+        #log(output) #entire output good for finding sender ids what message contains etc
+        for event in output['entry']:
+            messaging = event['messaging']
+            for message in messaging:
+              if message.get('message'):
+                #Facebook Messenger ID for user so we know where to send response back to
+                global recipient_id
+                recipient_id = message['sender']['id']
 
-                    #if it has text
-                    if message['message'].get('text'):
-                        message_text = message['message']['text']
-                        print(message_text)
-                        response_sent_text = get_bot_response(message_text)
-                        send_message(recipient_id, response_sent_text)
-                    #if user sends us a GIF, photo,video, or any other non-text item
-                    if message['message'].get('attachments'):
-                        response_sent_nontext = "Nice pic!"
-                        send_message(recipient_id, response_sent_nontext)
-        except TypeError: #if anti-idling add on pings bot we wont get an error
+                #if it has text
+                if message['message'].get('text'):
+                    message_text = message['message']['text']
+                    print(message_text)
+                    response_sent_text = get_bot_response(message_text)
+                    send_message(recipient_id, response_sent_text)
+                #if user sends us a GIF, photo,video, or any other non-text item
+                if message['message'].get('attachments'):
+                    response_sent_nontext = "Nice pic!"
+                    send_message(recipient_id, response_sent_nontext)
+    except TypeError: #if anti-idling add on pings bot we wont get an error
             print('PING!') 
     return "Message Processed"
 
@@ -114,34 +113,32 @@ def get_bot_response(message_text):
         response = response + checkForDino(message)
     elif checkIfGreeting(message):
         response = response + "Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs."
-        response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen? \n4. What's the shop catalogue?")
+        response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen? \n4. What's the shop catalogue? \n5. What's on tonight? \n6. Events on this week?")
     elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
         response = response + "You're welcome!" + u"\U0001F60B" #tongue out emoji
     elif checkForShopen(message):
         response = response + checkForShopen(message)
-    #elif checkForCalendar(message):
-        #response = response + checkForCalendar(message)
+    elif checkForCalendar(message):
+        response = response + checkForCalendar(message)
     elif checkForEasterEggs(message):
         response = response + checkForEasterEggs(message)
+    elif "time" in message:
+        global dinotimes
+        response = response + dinotimes
     elif "my name" in message:
         response = response + getname()
     elif "joke" in message:
         response = response + getjoke()
     elif "show me users" in message:
         con = getCon()
-        if recipient_id in Admin_ID: 
+        if str(recipient_id) in Admin_ID: 
             response = response + "Users: \n" + view_users(con)
         else:
             response = response + "You shall not, PASS: \n" + str(recipient_id)
         con.close()
-    elif "link" in message:
-        post = "Check out www.google.com"
-        response = response + linkify(post)
     else:
-        response = response + "Sorry, I don't understand: " + message
+        response = response + "Sorry, I don't understand: \n" + message
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
-    #adduser(con) #adds user to database
-    #con.close()
     return response
 
 def getname(): #gets user full name in format "F_name L_name"
@@ -213,9 +210,23 @@ def checkForShopen(message):
     con.close()
     return response
 
+def checkForCalendar(message):
+    response = ""
+    if "events" in message \
+    or "event" in message \
+    or "whats on" in message \
+    or "what’s on" in message \
+    or "what is on" in message:
+        con = getCon()
+        response = response + get_events(message, con)
+        con.close()
+    return response
+
 
 #uses PyMessenger to send response to user
 def send_message(recipient_id, response):
+    if recipient_id == "5443690809005509": #CHECKS IF HUGO IS MESSAGING
+        response = response + "\n\nSHUTUP HUGO"
     #sends user the text message provided via input response parameter
     bot.send_text_message(recipient_id, response)
     con = getCon()

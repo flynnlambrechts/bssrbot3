@@ -26,12 +26,21 @@ page = str(7)
 global week
 week = getmenuweek()
 
+
+#define the dino times here used throughout
+breakfasttime = "7:00-10:00am"
+lunchtime = "12:15-2:15pm"
+dinnertime = "5:00-7:15pm"
+dinotimes = "Dino Times: \nBreakfast: " + breakfasttime + "\nLunch: " + lunchtime + "\nDinner: " + dinnertime
+
+
+
 def checkForDino(message):
     global current_day #day of week 0-6 inclusive
     global day_value #day of week 1-7 inclusive
     global day #name of the day e.g. monday, wedneday, tomorrow, today
     global week #week of cycle
-
+    global breakfasttime, lunchtime, dinnertime, dinotimes
     global entity, value
     entity, value = wit_response(message)
     #global response
@@ -40,12 +49,15 @@ def checkForDino(message):
     getDay(message) #checks for days
     
     #handling if meal is non-specified
-    if value == "dino" in message or "cooking good looking" in message:
+    if value == "dino" or "cooking good looking" in message:
         time = datetime.now(TIMEZONE).time().hour
-        if time < 10:
+        if "time" in message:
+            response = response + dinotimes
+        elif time < 10:
             response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 1
             response = response + breakfastmenu()
+            
         elif time < 14:
             response = response + (f"Lunch {day}: \n")
             day_value = current_day + 1
@@ -57,21 +69,30 @@ def checkForDino(message):
         else: 
             response = response + "No more meals today :)"
     elif value == "breakfast":
-        response = response + (f"Breakfast {day}: \n")
-        day_value = current_day + 1
-        response = response + breakfastmenu()
+        if "time" in message:
+            response = response + "Breakfast at dino is at " + breakfasttime 
+        else:
+            response = response + (f"Breakfast {day}: \n")
+            day_value = current_day + 1
+            response = response + breakfastmenu()
         
     elif value == "lunch":
-        response = response + (f"Lunch {day}: \n")
-        day_value = current_day + 1
-        response = response + lunchmenu()
+        if "time" in message:
+            response = response + "Lunch at dino is at " + lunchtime
+        else:
+            response = response + (f"Lunch {day}: \n")
+            day_value = current_day + 1
+            response = response + lunchmenu()
 
     elif value == "dinner":
-        response = response + (f"Dinner {day}: \n")
-        day_value = current_day + 1
-        response = response + dinnermenu()
-    response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
-    
+        if "time" in message:
+            response = response + "Dinner at dino is at " + dinnertime
+        else:
+            response = response + (f"Dinner {day}: \n")
+            day_value = current_day + 1
+            response = response + dinnermenu()
+    if "time" not in message: #adds feedback link to end of response unless user is asking for time
+        response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
     return response
 
 def getDay(message): #here is where we get the day and current_day and sometimes week
