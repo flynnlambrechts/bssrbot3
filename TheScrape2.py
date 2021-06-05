@@ -25,6 +25,7 @@ page = str(7)
 
 global week
 week = getmenuweek()
+print(str(week) + " week thescrape2")
 
 
 #define the dino times here used throughout
@@ -40,6 +41,8 @@ def checkForDino(message):
     global day_value #day of week 1-7 inclusive
     global day #name of the day e.g. monday, wedneday, tomorrow, today
     global week #week of cycle
+    week = getmenuweek()
+    print(str(week) + " week checkfordino")
     global breakfasttime, lunchtime, dinnertime, dinotimes
     global entity, value
     entity, value = wit_response(message)
@@ -100,7 +103,7 @@ def getDay(message): #here is where we get the day and current_day and sometimes
     global day
     global week
     global column
-
+    print(str(week) + " week a")
     current_day = datetime.now(TIMEZONE).weekday()
     day = "Today"
     
@@ -257,8 +260,10 @@ def getinfo(column):
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
-            plain_text = str(td).replace(r"– \n \n","- ").replace(r" \n \n", ", ").replace(r"– \n", "- ").replace(r"\n–","-").replace(", \n",", ").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ")
-            info.append(plain_text.replace("<td>","").replace("</td>","").replace("amp;",""))
+            #plain_text = str(td).replace(r"– \n \n","- ").replace(r" \n \n", ", ").replace(r"– \n", "- ").replace(r"\n–","-").replace(", \n",", ").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ")
+            stuff = str(td).replace("<td>","").replace("</td>","").replace("amp;","").replace(r"\n","")
+            plain_text  =  stuff.strip(""",.;:-¢"'�_!?I•,L4J£<~""") #removes all weird artifacts
+            info.append(plain_text)
         else:
             print("none!")
     #print(str(row) + str(column) + "row column")
