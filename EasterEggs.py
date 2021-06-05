@@ -19,8 +19,14 @@ def checkForEasterEggs(message):
         response = response + "A really commited vego most likely with a hickey on his neck."
     elif "mitch" in message or "mitch kerrison" in message or "mitchy" in message:
         response = response + "Did you mean: 'Booty Mitch'?"
+    elif "booty mitch" in message:
+        response = response + "DUMPTRUCK"
     elif "flynn" in message or "flynn lambrechts" in message:
         response = response + "Sick Lad"
+    elif "jasmine" in message or "jas" in message:
+        response = response + "A valuable contributor"
+    elif "ethan" in message:
+        response = response + "A valuable contributor"
     elif "sidd" in message:
         response = response + "Best med student."    
     elif "mackenzie" in message or "mackenzie travers" in message or "kenz" in message:
@@ -50,5 +56,5 @@ def checkForEasterEggs(message):
     elif "em col" in message:
         response  = response  + "Hold my bball?"
     elif "floor 4" in message or "floor four" in message:
-        response  = response  + "the second best floor"
+        response  = response  + "the second best floor"  
     return response
