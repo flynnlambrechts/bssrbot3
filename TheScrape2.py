@@ -158,6 +158,7 @@ def breakfastmenu():
             header = ""
             column = 0
             header = header + columnlist()[i]
+            header = addemojis(header)
             content = ""
             if day_value == 8:
                 column = 1
@@ -165,6 +166,7 @@ def breakfastmenu():
                 column = day_value
             content = content + columnlist()[i]
             if content != "":
+                content = addemojiscontent(content)
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
         except IndexError:
             print('NOK')
@@ -184,6 +186,7 @@ def lunchmenu():
             header = ""
             column = 0
             header = header + columnlist()[i]
+            header = addemojis(header)
             content = ""
             if day_value == 8:
                 column = 1
@@ -191,6 +194,7 @@ def lunchmenu():
                 column = day_value
             content = content + columnlist()[i]
             if content != "":
+                content = addemojiscontent(content)
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
         except IndexError:
             print('NOK')
@@ -208,8 +212,9 @@ def dinnermenu():
     for i in range(1,Range):
         try:
             header = ""
-            column = 0
+            column = 0 #set to first column to get header
             header = header + columnlist()[i]
+            header = addemojis(header)
             content = ""
             if day_value == 8:
                 column = 1
@@ -217,13 +222,32 @@ def dinnermenu():
                 column = day_value
             content = content + columnlist()[i]
             if content != "":
+                content = addemojiscontent(content)
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
         except IndexError:
             print('NOK')
     return response
 
+def addemojis(header):
+    header = header.replace("salad", u"salad \U0001F957")
+    if "vegetarian option" in header:
+        header = header.replace("vegetarian option", u"vegetarian option\U0001F966")
+    else:
+        header = header.replace("vegetarian", u"vegetarian \U0001F966")
+    header = header.replace("main course", u"main course \U0001F37D").replace("hot option", u"hot option \U0001F37D")
+    header = header.replace("residential breakfast", u"residential breakfast \U0001f95e")
+    return header
 
-def columnlist():
+def addemojiscontent(content):
+    content = content.replace("egg", u"egg \U0001F95A")
+    content = content.replace("pancake", u"pancake \U0001f95e")
+    content = content.replace("pizza", u"pizza \U0001f355")
+    content = content.replace("sushi", u"sushi \U0001f363")
+    content = content.replace("chicken", u"chicken \U0001F357")
+    content = content.replace("honey", u"honey \U0001F36F")
+    return content
+
+def columnlist(): #gets the info from each column as a list
     global row
     global column
     rowcontents = []
