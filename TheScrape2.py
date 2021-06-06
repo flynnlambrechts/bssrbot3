@@ -70,7 +70,9 @@ def checkForDino(message):
             day_value = current_day + 1
             response = response + dinnermenu()
         else: 
-            response = response + "No more meals today :)"
+            response = response + (f"Breakfast Tomorrow: \n")
+            day_value = current_day + 2
+            response = response + breakfastmenu()
     elif value == "breakfast":
         if "time" in message:
             response = response + "Breakfast at dino is at " + breakfasttime 
@@ -179,7 +181,7 @@ def lunchmenu():
     global page
     global week
     page = str((2*(week-1)+1.5))
-    Range = int("2")
+    Range = int("3")
     response = ""
     for i in range(0,Range):
         try:
@@ -207,7 +209,7 @@ def dinnermenu():
     global page
     global week
     page = str((2*(week-1)+2))
-    Range = int("7")
+    Range = int("8")
     response = ""
     for i in range(1,Range):
         try:
@@ -221,6 +223,8 @@ def dinnermenu():
             else:
                 column = day_value
             content = content + columnlist()[i]
+            if header == "vegetables":
+                content = ""
             if content != "":
                 content = addemojiscontent(content)
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
@@ -231,15 +235,18 @@ def dinnermenu():
 def addemojis(header):
     header = header.replace("salad", u"salad \U0001F957")
     if "vegetarian option" in header:
-        header = header.replace("vegetarian option", u"vegetarian option\U0001F966")
+        header = header.replace("vegetarian option", u"vegetarian option \U0001F331")
     else:
-        header = header.replace("vegetarian", u"vegetarian \U0001F966")
+        header = header.replace("vegetarian", u"vegetarian \U0001F331")
     header = header.replace("main course", u"main course \U0001F37D").replace("hot option", u"hot option \U0001F37D")
     header = header.replace("residential breakfast", u"residential breakfast \U0001f95e")
+    header = header.replace("soup", u"soup \U0001f372")
+    header = header.replace("the dessert station", u"the dessert station \U0001f370")
+    header = header.replace("additional vegetables", u"additional vegetables \U0001F966")
     return header
 
 def addemojiscontent(content):
-    content = content.replace("egg", u"egg \U0001F95A")
+    #content = content.replace("egg", u"egg \U0001F95A")
     content = content.replace("pancake", u"pancake \U0001f95e")
     content = content.replace("pizza", u"pizza \U0001f355")
     content = content.replace("sushi", u"sushi \U0001f363")
