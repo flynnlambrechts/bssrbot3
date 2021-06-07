@@ -10,9 +10,9 @@ def checkForEasterEggs(message):
     elif "molly" in message or "molly rolfe" in message or "rolfey" in message:
         response = response + "Molly is a butt nug. " + u"\U0001F61D"
     elif "benny g" in message or "ben grant" in message:
-        response = response + "Time for the family man to return his old ways..."
+        response = response + "Time for the family man to return to his old ways..."
     elif "crispy" in message or "brendan crisp" in message:
-        response = response + "That man is bricked up in a brick house."
+        response = response + u"That man is bricked up in a brick house. \U0001f9f1"
     elif "feature" in message:
         response = response + "Come to 507 if you want a feature."
     elif "hugo" in message or "hugo john" in message:
