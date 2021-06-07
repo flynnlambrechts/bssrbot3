@@ -24,9 +24,9 @@ def checkForEasterEggs(message):
     elif "flynn" in message or "flynn lambrechts" in message:
         response = response + "Sick Lad"
     elif "jasmine" in message or "jas" in message:
-        response = response + "A valuable contributor"
+        response = response + u"A valuable contributor \U0001f4af"
     elif "ethan" in message:
-        response = response + "A valuable contributor"
+        response = response + u"A valuable contributor \U0001f4af"
     elif "sidd" in message:
         response = response + "Best med student."    
     elif "mackenzie" in message or "mackenzie travers" in message or "kenz" in message:
