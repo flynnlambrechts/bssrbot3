@@ -111,7 +111,6 @@ def get_bot_response(message_text):
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
     if entity == 'mealtype:mealtype': #if user is asking for a meal (uses wit.ai)
         response = response + checkForDino(message)
-        response = "Having some issues with the menu right now will be back later today"
     elif checkIfGreeting(message):
         response = response + "Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs."
         response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen? \n4. What's the shop catalogue? \n5. What's on tonight? \n6. Events on this week?")
@@ -217,12 +216,20 @@ def checkForCalendar(message):
     or "event" in message \
     or "whats on" in message \
     or "what’s on" in message \
-    or "what's on" in message \
     or "what is on" in message:
         con = getCon()
         response = response + get_events(message, con)
         con.close()
     return response
+
+
+# def checkForKill(message):
+#     if "dino wrong" in message and str(recipient_id) in Admin_ID:
+#         con = getCon()
+#         killswitch(message, con)
+#         con.close()
+
+
 
 
 #uses PyMessenger to send response to user

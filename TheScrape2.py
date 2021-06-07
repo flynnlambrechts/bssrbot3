@@ -56,6 +56,10 @@ def checkForDino(message):
         time = datetime.now(TIMEZONE).time().hour
         if "time" in message:
             response = response + dinotimes
+        elif day == "Tomorrow":
+            response = response + (f"Dino Breakfast Tomorrow: \n")
+            day_value = current_day + 1
+            response = response + breakfastmenu()
         elif time < 10:
             response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 1
@@ -71,7 +75,7 @@ def checkForDino(message):
             response = response + dinnermenu()
         else: 
             response = response + (f"Breakfast Tomorrow: \n")
-            day_value = current_day + 2
+            day_value = current_day + 1
             response = response + breakfastmenu()
     elif value == "breakfast":
         if "time" in message:
@@ -152,7 +156,6 @@ def breakfastmenu():
     global Range
     global page
     global week
-    week = 4
     page = str((2*(week-1)+1))
     Range = int("2")
     response = ""
@@ -181,7 +184,6 @@ def lunchmenu():
     global Range
     global page
     global week
-    week = 4
     page = str((2*(week-1)+1.5))
     Range = int("3")
     response = ""
@@ -210,7 +212,6 @@ def dinnermenu():
     global Range
     global page
     global week
-    week = 4
     page = str((2*(week-1)+2))
     Range = int("8")
     response = ""
