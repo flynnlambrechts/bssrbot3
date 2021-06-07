@@ -152,6 +152,7 @@ def breakfastmenu():
     global Range
     global page
     global week
+    week = 4
     page = str((2*(week-1)+1))
     Range = int("2")
     response = ""
@@ -180,6 +181,7 @@ def lunchmenu():
     global Range
     global page
     global week
+    week = 4
     page = str((2*(week-1)+1.5))
     Range = int("3")
     response = ""
@@ -208,6 +210,7 @@ def dinnermenu():
     global Range
     global page
     global week
+    week = 4
     page = str((2*(week-1)+2))
     Range = int("8")
     response = ""
