@@ -59,6 +59,8 @@ def checkForDino(message):
         elif day == "Tomorrow":
             response = response + (f"Dino Breakfast Tomorrow: \n")
             day_value = current_day + 1
+            print(current_day)
+            print(day_value)
             response = response + breakfastmenu()
         elif time < 10:
             response = response + (f"Breakfast {day}: \n")
@@ -76,6 +78,8 @@ def checkForDino(message):
         else: 
             response = response + (f"Breakfast Tomorrow: \n")
             day_value = current_day + 1
+            print(current_day)
+            print(day_value)
             response = response + breakfastmenu()
     elif value == "breakfast":
         if "time" in message:
