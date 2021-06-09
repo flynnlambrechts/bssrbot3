@@ -77,7 +77,7 @@ def checkForDino(message):
             response = response + dinnermenu()
         else: 
             response = response + (f"Breakfast Tomorrow: \n")
-            day_value = int(datetime.now(TIMEZONE).weekday()) + 2
+            day_value = int(datetime.now(TIMEZONE).weekday()) + 2 #this might have to be 1 but idk wth is going on
             print(current_day)
             print(day_value)
             response = response + breakfastmenu()
