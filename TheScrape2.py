@@ -238,6 +238,8 @@ def dinnermenu():
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
         except IndexError:
             print('NOK')
+    if "Oven roast barramundi" in response:
+        response = response + "\nHmm... sounds like a roundy run to me..."
     return response
 
 def addemojis(header):
