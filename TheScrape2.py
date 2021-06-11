@@ -255,7 +255,7 @@ def addemojis(header):
 
 def addemojiscontent(content):
     #content = content.replace("egg", u"egg \U0001F95A")
-    content = content.replace("pancake", u"pancake \U0001f95e")
+    content = content.replace("pancakes", u"pancakes \U0001f95e")
     content = content.replace("pizza", u"pizza \U0001f355")
     content = content.replace("sushi", u"sushi \U0001f363")
     content = content.replace("chicken", u"chicken \U0001F357")
