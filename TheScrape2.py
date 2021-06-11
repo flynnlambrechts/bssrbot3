@@ -239,7 +239,7 @@ def dinnermenu():
         except IndexError:
             print('NOK')
     if "Oven roast barramundi" in response:
-        response = response + "\nHmm... sounds like a roundy run to me..."
+        response = response + u"\nHmm... sounds like a roundy run to me... \U0001F914 \n"
     return response
 
 def addemojis(header):
