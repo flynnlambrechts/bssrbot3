@@ -189,7 +189,7 @@ def lunchmenu():
     global page
     global week
     page = str((2*(week-1)+1.5))
-    Range = int("3")
+    Range = int("4")
     response = ""
     for i in range(0,Range):
         try:
