@@ -240,6 +240,8 @@ def dinnermenu():
             print('NOK')
     if "Oven roast barramundi" in response:
         response = response + u"\nHmm... sounds like a roundy run to me... \U0001F914 \n"
+    elif "Roast turkey" in response:
+        response = "Dino changed dinner but heres what it's supposed to be:\n\n" + response
     return response
 
 def addemojis(header):
