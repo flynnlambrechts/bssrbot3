@@ -104,9 +104,24 @@ def checkForDino(message):
             response = response + (f"Dinner {day}: \n")
             day_value = current_day + 1
             response = response + dinnermenu()
-    if "time" not in message: #adds feedback link to end of response unless user is asking for time
-        response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
+    #if "time" not in message: #adds feedback link to end of response unless user is asking for time
+        #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
     return response
+
+def checkForButton(message):
+    if "time" not in message: #adds feedback link to end of response unless user is asking for time
+        #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
+        url_button = [
+                    {
+                        "type": "web_url",
+                        "url": "https://bit.ly/3hVT0DX",
+                        "title": "Leave Feedback"
+                    }
+        ]
+    else:
+        url_button = []
+    return url_button
+
 
 def getDay(message): #here is where we get the day and current_day and sometimes week
     global current_day

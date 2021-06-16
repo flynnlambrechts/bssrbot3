@@ -16,6 +16,7 @@ from pymessenger.bot import Bot         #not sure
 from utils import wit_response          #for nlp
 from TheScrape2 import checkForDino     #for scraping htmls
 from TheScrape2 import dinotimes        #pulls the dino times from the scrape
+from TheScrape2 import checkForButton   #Checks whether should add feedback button
 from EasterEggs import checkForEasterEggs #self explanatory
 from shopen import *                    #for all shopen related
 from calendar1 import get_events
@@ -108,9 +109,12 @@ def get_bot_response(message_text):
     response = ""
     global value, entity
     entity, value = wit_response(message) #prev message_text
+    global url_button
+    url_button = []
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
     if entity == 'mealtype:mealtype': #if user is asking for a meal (uses wit.ai)
         response = response + checkForDino(message)
+        url_button = checkForButton(message)
     elif checkIfGreeting(message):
         response = response + "Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs."
         response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen? \n4. What's the shop catalogue? \n5. What's on tonight? \n6. Events on this week?")
@@ -206,7 +210,7 @@ def checkForShopen(message):
         response = response + get_shopen(con)
         response = response + "\n" + "\n" + shop_catalogue
     elif "catalogue" in message or ("shop" in message and "sell" in message):
-            response = response + str(shop_catalogue)
+        response = response + str(shop_catalogue)
     con.close()
     return response
 
@@ -238,7 +242,11 @@ def send_message(recipient_id, response):
     if recipient_id == "5443690809005509": #CHECKS IF HUGO IS MESSAGING
         response = response + "\n\nSHUTUP HUGO"
     #sends user the text message provided via input response parameter
-    bot.send_text_message(recipient_id, response)
+    if url_button != []:
+        text = str(response)
+        bot.send_button_message(recipient_id, text, url_button)
+    else:
+        bot.send_text_message(recipient_id, response)
     con = getCon()
     adduser(con)
     con.close()
