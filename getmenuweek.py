@@ -13,7 +13,7 @@ def getmenuweek():
     global week
     #15 is value from the current week of the year to the start of the current menu
     week = (int(x.strftime("%W"))-14) #21 to 22
-    global week
+    
     menuweek = 0
     for i in numbers:
             #print(i)
