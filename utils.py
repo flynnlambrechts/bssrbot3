@@ -17,6 +17,7 @@ def wit_response(message): #prev message_text
         global value
         entity = None
         value = None
+
         try:
                 entity = list(resp['entities'])[0]
                 value = resp['entities'][entity][0]['value']

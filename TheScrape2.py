@@ -56,6 +56,12 @@ def checkForDino(message):
         time = datetime.now(TIMEZONE).time().hour
         if "time" in message:
             response = response + dinotimes
+        elif day == "Tomorrow":
+            response = response + (f"Dino Breakfast Tomorrow: \n")
+            day_value = current_day + 1
+            print(current_day)
+            print(day_value)
+            response = response + breakfastmenu()
         elif time < 10:
             response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 1
@@ -71,7 +77,9 @@ def checkForDino(message):
             response = response + dinnermenu()
         else: 
             response = response + (f"Breakfast Tomorrow: \n")
-            day_value = current_day + 2
+            day_value = int(datetime.now(TIMEZONE).weekday()) + 2 #this might have to be 1 but idk wth is going on
+            print(current_day)
+            print(day_value)
             response = response + breakfastmenu()
     elif value == "breakfast":
         if "time" in message:
@@ -96,9 +104,24 @@ def checkForDino(message):
             response = response + (f"Dinner {day}: \n")
             day_value = current_day + 1
             response = response + dinnermenu()
-    if "time" not in message: #adds feedback link to end of response unless user is asking for time
-        response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
+    #if "time" not in message: #adds feedback link to end of response unless user is asking for time
+        #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
     return response
+
+def checkForButton(message):
+    if "time" not in message: #adds feedback link to end of response unless user is asking for time
+        #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
+        url_button = [
+                    {
+                        "type": "web_url",
+                        "url": "https://bit.ly/3hVT0DX",
+                        "title": "Leave Feedback"
+                    }
+        ]
+    else:
+        url_button = []
+    return url_button
+
 
 def getDay(message): #here is where we get the day and current_day and sometimes week
     global current_day
@@ -152,7 +175,6 @@ def breakfastmenu():
     global Range
     global page
     global week
-    week = 4
     page = str((2*(week-1)+1))
     Range = int("2")
     response = ""
@@ -181,7 +203,6 @@ def lunchmenu():
     global Range
     global page
     global week
-    week = 4
     page = str((2*(week-1)+1.5))
     Range = int("4")
     response = ""
@@ -210,7 +231,6 @@ def dinnermenu():
     global Range
     global page
     global week
-    week = 4
     page = str((2*(week-1)+2))
     Range = int("8")
     response = ""
@@ -233,6 +253,10 @@ def dinnermenu():
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
         except IndexError:
             print('NOK')
+    if "Oven roast barramundi" in response:
+        response = response + u"\nHmm... sounds like a roundy run to me... \U0001F914 \n"
+    elif "Roast turkey" in response:
+        response = "Dino changed dinner but heres what it's supposed to be:\n\n" + response
     return response
 
 def addemojis(header):
@@ -250,7 +274,7 @@ def addemojis(header):
 
 def addemojiscontent(content):
     #content = content.replace("egg", u"egg \U0001F95A")
-    content = content.replace("pancake", u"pancake \U0001f95e")
+    content = content.replace("pancakes", u"pancakes \U0001f95e")
     content = content.replace("pizza", u"pizza \U0001f355")
     content = content.replace("sushi", u"sushi \U0001f363")
     content = content.replace("chicken", u"chicken \U0001F357")

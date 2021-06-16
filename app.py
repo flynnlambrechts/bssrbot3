@@ -16,6 +16,7 @@ from pymessenger.bot import Bot         #not sure
 from utils import wit_response          #for nlp
 from TheScrape2 import checkForDino     #for scraping htmls
 from TheScrape2 import dinotimes        #pulls the dino times from the scrape
+from TheScrape2 import checkForButton   #Checks whether should add feedback button
 from EasterEggs import checkForEasterEggs #self explanatory
 from shopen import *                    #for all shopen related
 from calendar1 import get_events
@@ -60,8 +61,10 @@ def receive_message():
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
     else:
         # get whatever message a user sent the bot
+        
         output = request.get_json()
     try:
+        print("Message recieved")
         #log(output) #entire output good for finding sender ids what message contains etc
         for event in output['entry']:
             messaging = event['messaging']
@@ -82,9 +85,7 @@ def receive_message():
                     response_sent_nontext = "Nice pic!"
                     send_message(recipient_id, response_sent_nontext)
     except TypeError: #if anti-idling add on pings bot we wont get an error
-            print('PING!')
-    except:
-        print("an error occured....")
+            print('PING!') 
     return "Message Processed"
 
 def log(message):
@@ -110,10 +111,12 @@ def get_bot_response(message_text):
     response = ""
     global value, entity
     entity, value = wit_response(message) #prev message_text
+    global url_button
+    url_button = []
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
     if entity == 'mealtype:mealtype': #if user is asking for a meal (uses wit.ai)
         response = response + checkForDino(message)
-        #response = "Having some issues with the menu right now will be back later today"
+        url_button = checkForButton(message)
     elif checkIfGreeting(message):
         response = response + "Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs."
         response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen? \n4. What's the shop catalogue? \n5. What's on tonight? \n6. Events on this week?")
@@ -209,7 +212,7 @@ def checkForShopen(message):
         response = response + get_shopen(con)
         response = response + "\n" + "\n" + shop_catalogue
     elif "catalogue" in message or ("shop" in message and "sell" in message):
-            response = response + str(shop_catalogue)
+        response = response + str(shop_catalogue)
     con.close()
     return response
 
@@ -227,12 +230,25 @@ def checkForCalendar(message):
     return response
 
 
+# def checkForKill(message):
+#     if "dino wrong" in message and str(recipient_id) in Admin_ID:
+#         con = getCon()
+#         killswitch(message, con)
+#         con.close()
+
+
+
+
 #uses PyMessenger to send response to user
 def send_message(recipient_id, response):
     if recipient_id == "5443690809005509": #CHECKS IF HUGO IS MESSAGING
         response = response + "\n\nSHUTUP HUGO"
     #sends user the text message provided via input response parameter
-    bot.send_text_message(recipient_id, response)
+    if url_button != []:
+        text = str(response)
+        bot.send_button_message(recipient_id, text, url_button)
+    else:
+        bot.send_text_message(recipient_id, response)
     con = getCon()
     adduser(con)
     con.close()
