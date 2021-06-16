@@ -61,9 +61,10 @@ def receive_message():
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
     else:
         # get whatever message a user sent the bot
-        print("Message recieved")
+        
         output = request.get_json()
     try:
+        print("Message recieved")
         #log(output) #entire output good for finding sender ids what message contains etc
         for event in output['entry']:
             messaging = event['messaging']
