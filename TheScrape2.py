@@ -49,7 +49,7 @@ def checkForDino(message):
     #global response
     response = ""
     
-    getDay(message) #checks for days
+    getDay(message) #checks for days and creates current_day
     
     #handling if meal is non-specified
     if value == "dino" or "cooking good looking" in message:
@@ -73,7 +73,8 @@ def checkForDino(message):
             response = response + lunchmenu()
         elif time < 19:
             response = response + (f"Dinner {day}: \n")
-            day_value = current_day + 1
+            day_value = int(datetime.now(TIMEZONE).weekday()) + 1
+            #day_value = current_day + 1 #maybe should be this?????
             response = response + dinnermenu()
         else: 
             response = response + (f"Breakfast Tomorrow: \n")
@@ -111,17 +112,20 @@ def checkForDino(message):
 def checkForButton(message):
     if "time" not in message: #adds feedback link to end of response unless user is asking for time
         #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
-        url_button = [
+        url_buttons = [{
+                    "type": "web_url",
+                    "url": "https://bit.ly/3hVT0DX",
+                    "title": "Leave Feedback"
+                    },
                     {
-                        "type": "web_url",
-                        "url": "https://bit.ly/3hVT0DX",
-                        "title": "Leave Feedback"
+                    "type": "web_url",
+                    "url": "https://user.resi.inloop.com.au/home",
+                    "title": "Latemeal"
                     }
-        ]
+                    ]
     else:
-        url_button = []
-    return url_button
-
+        url_buttons = []
+    return url_buttons
 
 def getDay(message): #here is where we get the day and current_day and sometimes week
     global current_day
@@ -204,7 +208,7 @@ def lunchmenu():
     global page
     global week
     page = str((2*(week-1)+1.5))
-    Range = int("4")
+    Range = int("3")
     response = ""
     for i in range(0,Range):
         try:

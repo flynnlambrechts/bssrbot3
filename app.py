@@ -9,9 +9,12 @@ import time                             #for time
 import pytz                             #timezone
 import psycopg2                         #database stuff
 import requests                         #for sending get request
+import json
 
 from flask import Flask, request        #flask
 from pymessenger.bot import Bot         #not sure
+#from pymessenger import Bot
+#from pymessenger import __init__
 
 from utils import wit_response          #for nlp
 from TheScrape2 import checkForDino     #for scraping htmls
@@ -49,6 +52,8 @@ def getCon(): #gets the connection  to the database when required
     return con
 
 
+#----------------------------------------------------------------------------------------------
+
 
 #We will receive messages that Facebook sends our bot at this endpoint 
 @app.route("/", methods=['GET', 'POST'])
@@ -61,10 +66,8 @@ def receive_message():
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
     else:
         # get whatever message a user sent the bot
-        
         output = request.get_json()
     try:
-        print("Message recieved")
         #log(output) #entire output good for finding sender ids what message contains etc
         for event in output['entry']:
             messaging = event['messaging']
@@ -73,20 +76,26 @@ def receive_message():
                 #Facebook Messenger ID for user so we know where to send response back to
                 global recipient_id
                 recipient_id = message['sender']['id']
-
+                global buttons
                 #if it has text
                 if message['message'].get('text'):
                     message_text = message['message']['text']
                     print(message_text)
-                    response_sent_text = get_bot_response(message_text)
-                    send_message(recipient_id, response_sent_text)
+                    response_sent_text, buttons = get_bot_response(message_text)
+                    send_message(recipient_id, response_sent_text, buttons)
                 #if user sends us a GIF, photo,video, or any other non-text item
-                if message['message'].get('attachments'):
+                elif message['message'].get('attachments'):
+                    #response = "Hello"
+                    #send_other(recipient_id, response)
+                    buttons = []
                     response_sent_nontext = "Nice pic!"
-                    send_message(recipient_id, response_sent_nontext)
+                    send_message(recipient_id, response_sent_nontext, buttons)
     except TypeError: #if anti-idling add on pings bot we wont get an error
-            print('PING!') 
+            print('PING!')
+    except:
+            print("an error occured...") 
     return "Message Processed"
+
 
 def log(message):
     print(message)
@@ -111,12 +120,12 @@ def get_bot_response(message_text):
     response = ""
     global value, entity
     entity, value = wit_response(message) #prev message_text
-    global url_button
-    url_button = []
+    global buttons
+    buttons = []
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
     if entity == 'mealtype:mealtype': #if user is asking for a meal (uses wit.ai)
         response = response + checkForDino(message)
-        url_button = checkForButton(message)
+        buttons = checkForButton(message)
     elif checkIfGreeting(message):
         response = response + "Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs."
         response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen? \n4. What's the shop catalogue? \n5. What's on tonight? \n6. Events on this week?")
@@ -131,6 +140,13 @@ def get_bot_response(message_text):
     elif "time" in message:
         global dinotimes
         response = response + dinotimes
+    elif "latemeal" in message or "late" in message:
+        response = "Order a late meal here:"
+        buttons = [{
+                "type": "web_url",
+                "url": "https://user.resi.inloop.com.au/home",
+                "title": "Latemeal"
+                }]
     elif "my name" in message:
         response = response + getname()
     elif "joke" in message:
@@ -145,7 +161,7 @@ def get_bot_response(message_text):
     else:
         response = response + "Sorry, I don't understand: \n" + message
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
-    return response
+    return response, buttons
 
 def getname(): #gets user full name in format "F_name L_name"
     global recipient_id
@@ -212,7 +228,7 @@ def checkForShopen(message):
         response = response + get_shopen(con)
         response = response + "\n" + "\n" + shop_catalogue
     elif "catalogue" in message or ("shop" in message and "sell" in message):
-        response = response + str(shop_catalogue)
+            response = response + str(shop_catalogue)
     con.close()
     return response
 
@@ -237,25 +253,135 @@ def checkForCalendar(message):
 #         con.close()
 
 
-
-
-#uses PyMessenger to send response to user
-def send_message(recipient_id, response):
+#formerly uses PyMessenger to send response to user
+#now routes to send message with or without buttons
+def send_message(recipient_id, response, buttons):
     if recipient_id == "5443690809005509": #CHECKS IF HUGO IS MESSAGING
         response = response + "\n\nSHUTUP HUGO"
     #sends user the text message provided via input response parameter
-    if url_button != []:
-        text = str(response)
-        bot.send_button_message(recipient_id, text, url_button)
+    #print("test")
+    if buttons != []:
+        #text = str(response)
+        #bot.send_button_message(recipient_id, text, url_button)
+        send_buttons(recipient_id, response, buttons)
     else:
-        bot.send_text_message(recipient_id, response)
+        #bot.send_text_message(recipient_id, response)
+        send_nonbuttons(recipient_id, response)
     con = getCon()
     adduser(con)
     con.close()
     return "success"
 
 
+#sends response with quick replies and button
+def send_buttons(recipient_id, response, buttons): #change to send button message
+    params = {
+           "access_token": os.environ["ACCESS_TOKEN"]
+    }
+
+    headers = {
+            "Content-Type": "application/json"
+    }
+    #message_text = str(response)
+    # buttons = [{
+    #             "type": "web_url",
+    #             "url": "https://bit.ly/3hVT0DX",
+    #             "title": "Leave Feedback"
+    #             },
+    #             {
+    #             "type": "web_url",
+    #             "url": "https://user.resi.inloop.com.au/home",
+    #             "title": "Latemeal"
+    #             }
+    #             ]
+    #print(type(buttons))
+    data = json.dumps({
+                "recipient": {
+                    "id": recipient_id
+                },
+                "message": {
+                    "attachment":{
+                        "type":"template",
+                        "payload":{
+                            "template_type":"button",
+                            "text":str(response),
+                            "buttons": buttons
+                        }
+                    },
+                    "quick_replies":[{
+                            "content_type":"text",
+                            "title":"Breakfast",
+                            "payload":"Breakfast"
+                            },
+                            {
+                            "content_type":"text",
+                            "title":"Lunch",
+                            "payload":"Lunch"
+                            },
+                            {
+                            "content_type":"text",
+                            "title":"Dinner",
+                            "payload":"Dinner"
+                            },
+                            {
+                            "content_type":"text",
+                            "title":"Dino",
+                            "payload":"Dino"
+                            }]
+                }
+    })
+
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+    return "other sent"
+
+def send_nonbuttons(recipient_id, response):
+    message_text = str(response)
+    params = {
+           "access_token": os.environ["ACCESS_TOKEN"]
+    }
+
+    headers = {
+            "Content-Type": "application/json"
+    }
+
+    data = json.dumps({
+               "recipient": {
+                      "id": recipient_id
+               },
+               "message": {
+                    "text": message_text,
+                    "quick_replies":[{
+                            "content_type":"text",
+                            "title":"Breakfast",
+                            "payload":"Breakfast"
+                            },
+                            {
+                            "content_type":"text",
+                            "title":"Lunch",
+                            "payload":"Lunch"
+                            },
+                            {
+                            "content_type":"text",
+                            "title":"Dinner",
+                            "payload":"Dinner"
+                            },
+                            {
+                            "content_type":"text",
+                            "title":"Dino",
+                            "payload":"Dino"
+                            }]
+               }
+    })
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+
+
 if __name__ == "__main__":
     app.run()
+
+
+
+
+
+
 
 
