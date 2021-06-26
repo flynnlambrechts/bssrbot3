@@ -107,7 +107,7 @@ def checkForDino(message):
             response = response + dinnermenu()
     #if "time" not in message: #adds feedback link to end of response unless user is asking for time
         #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
-    response = response + "\nNote:\n Dino is not sticking to their menu as strictly due to short staffing relating to COVID so the menu may be a bit wrong for a while :("
+    response = response + "\nNote:\nDino is not sticking to their menu as strictly due to short staffing relating to COVID so the menu may be a bit wrong for a while :("
     return response
 
 def checkForButton(message):
