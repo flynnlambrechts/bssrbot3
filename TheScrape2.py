@@ -251,6 +251,7 @@ def dinnermenu():
             else:
                 column = day_value
             content = content + columnlist()[i]
+            print(content)
             if header == "vegetables":
                 content = ""
             if content != "":
