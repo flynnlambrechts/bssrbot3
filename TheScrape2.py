@@ -251,14 +251,14 @@ def dinnermenu():
             else:
                 column = day_value
             content = content + str(columnlist()[i])
-            print(content)
+            #print(content)
             if header == "vegetables":
                 content = ""
             if content != "":
-                print(content + " !=")
+                #print(content + " !=")
                 content = addemojiscontent(content)
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
-                print(response + "RESPONSE !=")
+                #print(response + "RESPONSE !=")
         except IndexError:
             print('NOK')
     if "Oven roast barramundi" in response:
