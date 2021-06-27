@@ -258,7 +258,7 @@ def dinnermenu():
                 print(content + " !=")
                 content = addemojiscontent(content)
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
-                print(response + " !=")
+                print(response + "RESPONSE !=")
         except IndexError:
             print('NOK')
     if "Oven roast barramundi" in response:
