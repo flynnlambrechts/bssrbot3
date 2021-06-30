@@ -29,10 +29,10 @@ print(str(week) + " week thescrape2")
 
 
 #define the dino times here used throughout
-breakfasttime = "7:00-10:00am"
-lunchtime = "12:15-2:15pm"
-dinnertime = "5:00-7:15pm"
-dinotimes = "Dino Times: \nBreakfast: " + breakfasttime + "\nLunch: " + lunchtime + "\nDinner: " + dinnertime
+breakfasttime = "7:00-7:45am"
+lunchtime = "11:45-12:30pm"
+dinnertime = "4:30-5:15pm"
+dinotimes = "Basser Dino Times: \nBreakfast: " + breakfasttime + "\nLunch: " + lunchtime + "\nDinner: " + dinnertime
 
 
 
@@ -84,15 +84,15 @@ def checkForDino(message):
             response = response + breakfastmenu()
     elif value == "breakfast":
         if "time" in message:
-            response = response + "Breakfast at dino is at " + breakfasttime 
+            response = response + "Basser Breakfast at dino is at " + breakfasttime 
         else:
-            response = response + (f"Breakfast {day}: \n")
+            response = response + (f"Basser Breakfast {day}: \n")
             day_value = current_day + 1
             response = response + breakfastmenu()
         
     elif value == "lunch":
         if "time" in message:
-            response = response + "Lunch at dino is at " + lunchtime
+            response = response + "Basser Lunch at dino is at " + lunchtime
         else:
             response = response + (f"Lunch {day}: \n")
             day_value = current_day + 1
@@ -100,7 +100,7 @@ def checkForDino(message):
 
     elif value == "dinner":
         if "time" in message:
-            response = response + "Dinner at dino is at " + dinnertime
+            response = response + "Basser Dinner at dino is at " + dinnertime
         else:
             response = response + (f"Dinner {day}: \n")
             day_value = current_day + 1
