@@ -84,15 +84,15 @@ def checkForDino(message):
             response = response + breakfastmenu()
     elif value == "breakfast":
         if "time" in message:
-            response = response + "Basser Breakfast at dino is at " + breakfasttime 
+            response = response + "Basser Breakfast is at " + breakfasttime 
         else:
-            response = response + (f"Basser Breakfast {day}: \n")
+            response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 1
             response = response + breakfastmenu()
         
     elif value == "lunch":
         if "time" in message:
-            response = response + "Basser Lunch at dino is at " + lunchtime
+            response = response + "Basser Lunch is at " + lunchtime
         else:
             response = response + (f"Lunch {day}: \n")
             day_value = current_day + 1
@@ -100,7 +100,7 @@ def checkForDino(message):
 
     elif value == "dinner":
         if "time" in message:
-            response = response + "Basser Dinner at dino is at " + dinnertime
+            response = response + "Basser Dinner is at " + dinnertime
         else:
             response = response + (f"Dinner {day}: \n")
             day_value = current_day + 1
