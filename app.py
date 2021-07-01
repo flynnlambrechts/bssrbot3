@@ -68,7 +68,7 @@ def receive_message():
         # get whatever message a user sent the bot
         output = request.get_json()
     try:
-        log(output) #entire output good for finding sender ids what message contains etc
+        #log(output) #entire output good for finding sender ids what message contains etc
         for event in output['entry']:
             messaging = event['messaging']
             for message in messaging:
@@ -123,7 +123,7 @@ def get_bot_response(message_text, recipient_id):
     #global buttons
     buttons = []
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
-    if notBasser(message):
+    if notBasser(message) and "dookie:" not in message:
         response = notBasser(message)
     elif entity and "dookie:" not in message: #if user is asking for a meal (uses wit.ai)
         con = getCon()

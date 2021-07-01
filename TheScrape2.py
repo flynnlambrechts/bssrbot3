@@ -27,7 +27,7 @@ page = str(7)
 
 #global week
 week = getmenuweek()
-print(str(week) + " week thescrape2")
+#print(str(week) + " week thescrape2")
 
 
 #define the dino times here used throughout
@@ -39,7 +39,7 @@ dinotimes = "".join(["Basser Dino Times: \nBreakfast: ", breakfasttime, "\nLunch
 
 
 def checkForDino(message, con, value):
-    print("checkForDino")
+    #print("checkForDino")
     #global current_day #day of week 0-6 inclusive
     #global day_value #day of week 1-7 inclusive
     #global day #name of the day e.g. monday, wedneday, tomorrow, today
@@ -121,11 +121,11 @@ def checkForDino(message, con, value):
     note = addnote(con, value, day)
     if note is not None and "time" not in message:
         response = response + str(note)
-    print("checkForDino DONE")
+    #print("checkForDino DONE")
     return response
 
 def checkForButton(message):
-    print("checkForButton")
+    #print("checkForButton")
     if "time" not in message: #adds feedback link to end of response unless user is asking for time
         #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
         url_buttons = [{
@@ -141,7 +141,7 @@ def checkForButton(message):
                     ]
     else:
         url_buttons = []
-    print("checkForButton DONE")
+    #print("checkForButton DONE")
     return url_buttons
 
 def getDay(message, week): #here is where we get the day and current_day and sometimes week

@@ -27,7 +27,7 @@ def add_custom_message(message, con):
 	#insert new row if new day
 	#update current day if same day
 	custom_message = get_custom_message(message)
-	print(custom_message)
+	#print(custom_message)
 	breakfast = None
 	lunch = None
 	dinner = None
@@ -62,7 +62,7 @@ def add_custom_message(message, con):
 			print("all cleared")
 		
 		elif dummy != "(False,)": #if the day exits then update current day
-			print("!= " + dummy)
+			#print("!= " + dummy)
 			print("updating row")
 			#make so only updates specific row instead of all rows
 			cur.execute('''UPDATE custom_message SET
