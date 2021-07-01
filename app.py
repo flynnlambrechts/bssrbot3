@@ -123,9 +123,14 @@ def get_bot_response(message_text, recipient_id):
     #global buttons
     buttons = []
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
-    if notBasser(message) and "dookie:" not in message:
+    if "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
+        con = getCon()
+        add_custom_message(message, con)
+        response = response + "Adding custom message..."
+        con.close()
+    elif notBasser(message):
         response = notBasser(message)
-    elif entity and "dookie:" not in message: #if user is asking for a meal (uses wit.ai)
+    elif entity: #if user is asking for a meal (uses wit.ai)
         con = getCon()
         response = response + checkForDino(message, con, value)
         buttons = checkForButton(message)
@@ -169,11 +174,6 @@ def get_bot_response(message_text, recipient_id):
         response = "gif"
     elif "joke" in message:
         response = response + getjoke()
-    elif "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
-        con = getCon()
-        add_custom_message(message, con)
-        response = response + "Adding custom message..."
-        con.close()
     elif "show me users" in message:
         con = getCon()
         if str(recipient_id) in Admin_ID: 
