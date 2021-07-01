@@ -67,33 +67,33 @@ def receive_message():
     else:
         # get whatever message a user sent the bot
         output = request.get_json()
-#try:
-    #log(output) #entire output good for finding sender ids what message contains etc
-    for event in output['entry']:
-        messaging = event['messaging']
-        for message in messaging:
-          if message.get('message'):
-            #Facebook Messenger ID for user so we know where to send response back to
-            #global recipient_id
-            recipient_id = message['sender']['id']
-            #global buttons
-            #if it has text
-            if message['message'].get('text'):
-                message_text = message['message']['text']
-                print(message_text)
-                response_sent_text, buttons = get_bot_response(message_text, recipient_id)
-                send_message(recipient_id, response_sent_text, buttons)
-            #if user sends us a GIF, photo,video, or any other non-text item
-            elif message['message'].get('attachments'):
-                #response = "Hello"
-                #send_other(recipient_id, response)
-                buttons = []
-                response_sent_nontext = "Nice pic!"
-                send_message(recipient_id, response_sent_nontext, buttons)
-#except TypeError: #if anti-idling add on pings bot we wont get an error
-        #print('PING!')
-#except:
-        #print("an error occured...") 
+    try:
+        log(output) #entire output good for finding sender ids what message contains etc
+        for event in output['entry']:
+            messaging = event['messaging']
+            for message in messaging:
+              if message.get('message'):
+                #Facebook Messenger ID for user so we know where to send response back to
+                #global recipient_id
+                recipient_id = message['sender']['id']
+                #global buttons
+                #if it has text
+                if message['message'].get('text'):
+                    message_text = message['message']['text']
+                    print(message_text)
+                    response_sent_text, buttons = get_bot_response(message_text, recipient_id)
+                    send_message(recipient_id, response_sent_text, buttons)
+                #if user sends us a GIF, photo,video, or any other non-text item
+                elif message['message'].get('attachments'):
+                    #response = "Hello"
+                    #send_other(recipient_id, response)
+                    buttons = []
+                    response_sent_nontext = "Nice pic!"
+                    send_message(recipient_id, response_sent_nontext, buttons)
+    except TypeError: #if anti-idling add on pings bot we wont get an error
+            print('PING!')
+    except:
+            print("an error occured...") 
     return "Message Processed"
 
 
