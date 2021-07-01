@@ -39,7 +39,6 @@ dinotimes = "".join(["Basser Dino Times: \nBreakfast: ", breakfasttime, "\nLunch
 
 
 def checkForDino(message, con, value):
-    start = datetime.now(TIMEZONE).timestamp()
     print("checkForDino")
     #global current_day #day of week 0-6 inclusive
     #global day_value #day of week 1-7 inclusive
@@ -123,8 +122,6 @@ def checkForDino(message, con, value):
     if note is not None and "time" not in message:
         response = response + str(note)
     print("checkForDino DONE")
-    end = datetime.now(TIMEZONE).timestamp()
-    print(str(end - start) + " checkForDino")
     return response
 
 def checkForButton(message):
