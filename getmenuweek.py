@@ -1,9 +1,7 @@
-import pytz
+from pytz import timezone
 import datetime
 
-global numbers
-#multiples of 4 to account for the four week cycle (must be less than 40)
-numbers = [40,36,32,28,24,20,16,12,8,4]
+#global numbers
 
 
 
@@ -12,21 +10,23 @@ numbers = [40,36,32,28,24,20,16,12,8,4]
 
 #print(print(str(week) + " week"))
 def getmenuweek():
-    TIMEZONE = pytz.timezone('Australia/Sydney')
+    TIMEZONE = timezone('Australia/Sydney')
     x = datetime.datetime.now(TIMEZONE)
     week = (int(x.strftime("%W"))-22) #21 to 22
     menuweek = 0
-    global numbers
+    #global numbers
+    #multiples of 4 to account for the four week cycle (must be less than 40)
+    numbers = [40,36,32,28,24,20,16,12,8,4]
     for i in numbers:
             #print(i)
             if week > i:
                     menuweek = week - i
-                    print(str(menuweek) + "week for i")
+                    #print(str(menuweek) + "week for i")
                     break
             else:
                     #print("Nah")
                     menuweek = week
-    print(str(menuweek) + "week getweekmenu")
+    #print(str(menuweek) + "week getweekmenu")
     return menuweek
 
 #print(getmenuweek())

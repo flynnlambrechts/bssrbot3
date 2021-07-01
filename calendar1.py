@@ -2,8 +2,8 @@
 from datetime import *
 import time
 
-import pytz
-TIMEZONE = pytz.timezone('Australia/Sydney')
+from pytz import timezone
+TIMEZONE = timezone('Australia/Sydney')
 
 from getmenuweek import checkForDay
 
@@ -21,11 +21,11 @@ def getevent(day, message):
 
 
 def getDay(message):
-    global current_day
+    # global current_day
     
-    global weekofterm
-    global column_value
-    global day
+    # global weekofterm
+    # global column_value
+    # global day
 
     current_day = datetime.now(TIMEZONE).weekday()
     x = datetime.now(TIMEZONE)
@@ -45,7 +45,7 @@ def getDay(message):
         #print(column_value)
     elif checkForDay(message):
         print("day found")
-        global week_days
+        #global week_days
         if current_day > int(checkForDay(message)):
             if weekofterm == 10:
                 print("end of term") #FIX this
@@ -58,6 +58,7 @@ def getDay(message):
             current_day = int(checkForDay(message))
             column_value = current_day + 2
             day = str(week_days[int(checkForDay(message))])
+    return current_day, day, weekofterm, column_value
 
 def checkfornumber(message):
     weeknumber = ""
@@ -95,10 +96,11 @@ def checkfornumber(message):
 ##8 - sunday
 def get_events(message, con):
     response  = ""
-    global weekofterm
-    global column_value
-    global day
+    # global weekofterm
+    # global column_value
+    # global day
     try:
+        current_day, day, weekofterm, column_value = getDay(message)
         if "week" in message:
             cur  = con.cursor()
             getDay(message)

@@ -53,25 +53,25 @@ def view_users(con):
     return response
 
 
-##def create_users():
-##    global con 
-##    con                                                             #CONNECT DB
-##
-##    cur = con.cursor()
-##    response = ""
-##    try:
-##        cur.execute('''CREATE TABLE users (
-##            full_name VARCHAR(100) PRIMARY KEY NOT NUll,
-##            first_name VARCHAR(50) NOT NULL,
-##            last_name VARCHAR(50) NOT NULL,
-##            PSID VARCHAR(200) NOT NULL 
-##            ) ON CONFLICT DO NOTHING''')
-##        print("User Table created successfully")
-##        con.commit()
-##        
-##    except Exception as error:
-##        response = response + "Fail in adding users table: " + str(error)
-##        print("Error: " + str(error) + "\n" + str(type(error)))
-##    con.close()                                                     #DISCONNECT DB
-##    return response
+# def create_users():
+#    global con 
+#    con                                                             #CONNECT DB
+
+#    cur = con.cursor()
+#    response = ""
+#    try:
+#        cur.execute('''CREATE TABLE users (
+#            full_name VARCHAR(100) PRIMARY KEY NOT NUll,
+#            first_name VARCHAR(50) NOT NULL,
+#            last_name VARCHAR(50) NOT NULL,
+#            PSID VARCHAR(200) NOT NULL 
+#            ) ON CONFLICT DO NOTHING''')
+#        print("User Table created successfully")
+#        con.commit()
+       
+#    except Exception as error:
+#        response = response + "Fail in adding users table: " + str(error)
+#        print("Error: " + str(error) + "\n" + str(type(error)))
+#    con.close()                                                     #DISCONNECT DB
+#    return response
 
