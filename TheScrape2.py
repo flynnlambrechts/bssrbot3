@@ -33,7 +33,7 @@ week = getmenuweek()
 #define the dino times here used throughout
 breakfasttime = "7:00-7:45am" #"7:00-10:00am"
 lunchtime = "11:45-12:30pm" #"12:15-2:15pm"
-dinnertime = "4:30-5:15pm"  #"5:00-7:15pm"
+dinnertime = "4:45-5:30pm"  #"5:00-7:15pm"
 dinotimes = "".join(["Basser Dino Times: \nBreakfast: ", breakfasttime, "\nLunch: ", lunchtime, "\nDinner: ", dinnertime])
 
 
