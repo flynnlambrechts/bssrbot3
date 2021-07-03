@@ -86,11 +86,11 @@ def checkForDino(message, con, value):
     elif value == "breakfast":
         if "time" in message:
             response = response + "Basser breakfast is at " + breakfasttime
-        # elif time > 14: #after 2pm will give the value for the next day
-        #     day = "Tomorrow"
-        #     response = response + (f"Breakfast {day}: \n")
-        #     day_value = current_day + 2
-        #     response = response + breakfastmenu(day_value, column, week)
+        elif time > 14 and day == "Today": #after 2pm will give the value for the next day
+            day = "Tomorrow"
+            response = response + (f"Breakfast {day}: \n")
+            day_value = current_day + 2
+            response = response + breakfastmenu(day_value, column, week)
         else:
             response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 1
@@ -99,11 +99,11 @@ def checkForDino(message, con, value):
     elif value == "lunch":
         if "time" in message:
             response = response + "Basser lunch is at " + lunchtime
-        # elif time > 17: #after 2pm will give the value for the next day
-        #     day = "Tomorrow"
-        #     response = response + (f"Lunch {day}: \n")
-        #     day_value = current_day + 2
-        #     response = response + lunchmenu(day_value, column, week)
+        elif time > 17 and day == "Today": #after 2pm will give the value for the next day
+            day = "Tomorrow"
+            response = response + (f"Lunch {day}: \n")
+            day_value = current_day + 2
+            response = response + lunchmenu(day_value, column, week)
         else:
             response = response + (f"Lunch {day}: \n")
             day_value = current_day + 1
@@ -112,6 +112,11 @@ def checkForDino(message, con, value):
     elif value == "dinner":
         if "time" in message:
             response = response + "Basser dinner is at " + dinnertime
+        elif time > 20 and day == "Today": #after 2pm will give the value for the next day
+            day = "Tomorrow"
+            response = response + (f"Dinner {day}: \n")
+            day_value = current_day + 2
+            response = response + dinnermenu(day_value, column, week)
         else:
             response = response + (f"Dinner {day}: \n")
             day_value = current_day + 1
