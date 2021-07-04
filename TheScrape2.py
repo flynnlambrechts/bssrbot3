@@ -44,7 +44,7 @@ def checkForDino(message, con, value):
     #global day_value #day of week 1-7 inclusive
     #global day #name of the day e.g. monday, wedneday, tomorrow, today
     #global week #week of cycle
-    week = getmenuweek()
+    thisweek = getmenuweek()
     print(str(week) + " checkforDino")
     #print(str(week) + " week checkfordino")
     #global breakfasttime, lunchtime, dinnertime, dinotimes
@@ -52,7 +52,7 @@ def checkForDino(message, con, value):
     #entity, value = wit_response(message)
     response = ""
     
-    day, current_day, column = getDay(message, week) #checks for days and creates current_day
+    day, current_day, column, week = getDay(message, week) #checks for days and creates current_day
     time = datetime.now(TIMEZONE).time().hour
     #handling if meal is non-specified
     if value == "dino": 
@@ -190,7 +190,7 @@ def getDay(message, week): #here is where we get the day and current_day and som
             day = str(week_days[int(checkForDay(message))])
     #elif "today" in message:
         #day = "Today"
-    return day, current_day, column
+    return day, current_day, column, week
 
     #otherwise must be today: and day and current_day are not updated from todays value
 
