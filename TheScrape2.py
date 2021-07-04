@@ -45,6 +45,7 @@ def checkForDino(message, con, value):
     #global day #name of the day e.g. monday, wedneday, tomorrow, today
     #global week #week of cycle
     week = getmenuweek()
+    print(str(week) + " checkforDino")
     #print(str(week) + " week checkfordino")
     #global breakfasttime, lunchtime, dinnertime, dinotimes
     #global entity, value
@@ -112,7 +113,7 @@ def checkForDino(message, con, value):
     elif value == "dinner":
         if "time" in message:
             response = response + "Basser dinner is at " + dinnertime
-        elif time > 20 and day == "Today": #after 2pm will give the value for the next day
+        elif time > 20 and day == "Today": #after 8pm will give the value for the next day
             day = "Tomorrow"
             response = response + (f"Dinner {day}: \n")
             day_value = current_day + 2
@@ -263,6 +264,7 @@ def lunchmenu(day_value, column, week):
     return response
 
 def dinnermenu(day_value, column, week):
+    print(str(week) + " dinnermenu")
     #print("dinnermenu")
     page = str((2*(week-1)+2))
     Range = int("8")

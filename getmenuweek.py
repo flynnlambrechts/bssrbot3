@@ -27,6 +27,7 @@ def getmenuweek():
                     #print("Nah")
                     menuweek = week
     #print(str(menuweek) + "week getweekmenu")
+    print(str(menuweek) + " getmenuweek")
     return menuweek
 
 #print(getmenuweek())
