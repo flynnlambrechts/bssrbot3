@@ -44,7 +44,7 @@ def checkForDino(message, con, value):
     #global day_value #day of week 1-7 inclusive
     #global day #name of the day e.g. monday, wedneday, tomorrow, today
     #global week #week of cycle
-    thisweek = getmenuweek()
+    week = getmenuweek()
     print(str(week) + " checkforDino")
     #print(str(week) + " week checkfordino")
     #global breakfasttime, lunchtime, dinnertime, dinotimes
