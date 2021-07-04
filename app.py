@@ -92,8 +92,8 @@ def receive_message():
                     send_message(recipient_id, response_sent_nontext, buttons)
     except TypeError: #if anti-idling add on pings bot we wont get an error
             print('PING!')
-    # except:
-    #         print("an error occured...") 
+    except:
+            print("an error occured...") 
     return "Message Processed"
 
 
