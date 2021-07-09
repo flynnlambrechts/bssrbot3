@@ -84,7 +84,7 @@ def checkForDino(message, con, value):
             print(current_day)
             print(day_value)
             response = response + breakfastmenu(day_value, column, week)
-    elif value == "breakfast":
+    elif value == "breakfast" :
         if "time" in message:
             response = response + "Basser breakfast is at " + breakfasttime
         elif time > 14 and day == "Today": #after 2pm will give the value for the next day
