@@ -105,7 +105,7 @@ def getDino(message, value, con=None):
 
 	response = meal.getresponse(value, day, current_day, week)
 
-	if con:
+	if con is not None:
 		note = addnote(con, meal, day)
 		if note is not None:
 			response = response + str(note)
