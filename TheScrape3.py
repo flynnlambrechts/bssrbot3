@@ -203,11 +203,9 @@ def addnote(con, meal, day):
 	note = None
 	if day == "Today": #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
 		try: 
-			note = "".join(["Note:\n",read_custom_message(meal, con)])
-		except AttributeError:
-			note = None
+			note = "".join([u"Note: \uE301 \n",read_custom_message(meal, con)])
 		except:
-			print("Error in addnote.")
+			print("Probably no message.")
 	return note
 
 def openhtml(page):
