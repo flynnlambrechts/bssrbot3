@@ -47,7 +47,7 @@ def receive_message():
         output = request.get_json()
     try:
         if output:
-            log(output) #entire output good for finding sender ids what message contains etc
+            #log(output) #entire output good for finding sender ids what message contains etc
             for event in output['entry']:
                 messaging = event['messaging']
                 for message in messaging:
@@ -73,9 +73,6 @@ def receive_message():
                             log(output)
         else:
             print('PING!')
-
-    except TypeError: #if anti-idling add on pings bot we wont get an error
-        print('PING!1')
     except:
        PrintException()
     return "Message Processed"
