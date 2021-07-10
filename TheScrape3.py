@@ -99,7 +99,7 @@ def getDino(message, value, con=None):
 		meal = Lunch(week)
 
 	elif value == "dinner":
-		if time > 20 and day == "Today":
+		if time > 21 and day == "Today":
 			day, current_day, week = isTomorrow(day, current_day, week)
 		meal = Dinner(week)
 
