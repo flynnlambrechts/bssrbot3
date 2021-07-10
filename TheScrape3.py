@@ -202,8 +202,7 @@ def addnote(con, meal, day):
 	meal = type(meal).__name__.lower()
 	if day == "Today": #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
 		try: 
-			#note = "".join(["Note:\n",read_custom_message(meal, con)])
-			note = ""
+			note = "".join(["Note:\n",read_custom_message(meal, con)])
 		except AttributeError:
 			note = None
 		except:

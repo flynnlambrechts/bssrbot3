@@ -53,10 +53,10 @@ def receive_message():
                 for message in messaging:
                     if message.get('message'):
                         recipient_id = str(message['sender']['id'])
-                        print(str(recipient_id) + " PSID")
+                        #print(str(recipient_id) + " PSID")
                         if message['message'].get('text'):
                             message_text = message['message']['text']
-                            print("Input- " + message_text)
+                            print(message_text)
                             get_bot_response(recipient_id, message_text)
 
                             con = getCon()
