@@ -52,6 +52,7 @@ def receive_message():
             for message in messaging:
                 if message.get('message'):
                     recipient_id = message['sender']['id']
+                    print(str(recipient_id) + " PSID")
                     if message['message'].get('text'):
                         message_text = message['message']['text']
                         print(message_text)
