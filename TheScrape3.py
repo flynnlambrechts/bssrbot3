@@ -206,6 +206,8 @@ def addnote(con, meal, day):
 			note = ""
 		except AttributeError:
 			note = None
+		except:
+			print("Error in addnote.")
 	else: #otherwise there is no note
 		note = None 
 

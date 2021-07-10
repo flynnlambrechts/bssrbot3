@@ -74,6 +74,7 @@ def receive_message():
 
     except TypeError: #if anti-idling add on pings bot we wont get an error
         print('PING!')
+        print(output)
     except:
        PrintException()
     return "Message Processed"
