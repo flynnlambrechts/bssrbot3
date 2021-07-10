@@ -1,69 +1,37 @@
+#TheScrape2 IS NOW A RELIC OF THE PAST (NO LONGER IN USE)
+#She is very slow but is accurate i think
+#Kept around as a last resort if TheScrape3 has mistakes
 from datetime import *
 import time
-#import calendar
-#import pytz
 from pytz import timezone
 TIMEZONE = timezone('Australia/Sydney')
 
-# Importing BeautifulSoup class from the bs4 module
-from bs4 import BeautifulSoup
-import requests
+from bs4 import BeautifulSoup # Importing BeautifulSoup class from the bs4 module
 
-#from utils import value
-#from utils import wit_response
-from getmenuweek import getmenuweek
-from getmenuweek import checkForDay
 from killswitch import read_custom_message
-'''
-global week
-week = 1 ### work out how to define the week
-'''
-
-#global column
-column = 6
-
-#global page
-page = str(7)
-
-#global week
-week = getmenuweek()
-#print(str(week) + " week thescrape2")
-
 
 #define the dino times here used throughout
-breakfasttime = "7:00-7:45am" #"7:00-10:00am"
-lunchtime = "11:45-12:30pm" #"12:15-2:15pm"
-dinnertime = "4:45-5:30pm"  #"5:00-7:15pm"
-dinotimes = "".join(["Basser Dino Times: \nBreakfast: ", breakfasttime, "\nLunch: ", lunchtime, "\nDinner: ", dinnertime])
-
-
+from bot_constants import (bassertimes, dinotimes)
 
 def checkForDino(message, con, value):
-    #print("checkForDino")
-    #global current_day #day of week 0-6 inclusive
-    #global day_value #day of week 1-7 inclusive
-    #global day #name of the day e.g. monday, wedneday, tomorrow, today
-    #global week #week of cycle
     week = getmenuweek()
-    print(str(week) + " checkforDino")
-    #print(str(week) + " week checkfordino")
-    #global breakfasttime, lunchtime, dinnertime, dinotimes
-    #global entity, value
-    #entity, value = wit_response(message)
+
     response = ""
     
     day, current_day, column, week = getDay(message, week) #checks for days and creates current_day
+    #current_day: day of week 0-6 inclusive
+    #day_value: day of week 1-7 inclusive
+    #day: name of the day e.g. monday, wednesday, tomorrow, today
+    #week: week of cycle (1-4)
+
     time = datetime.now(TIMEZONE).time().hour
-    #handling if meal is non-specified
-    if value == "dino": 
-        #time = datetime.now(TIMEZONE).time().hour
+    
+    if value == "dino": #handling if meal is non-specified
         if "time" in message:
             response = response + dinotimes
         elif day == "Tomorrow":
             response = response + (f"Dino Breakfast Tomorrow: \n")
             day_value = current_day + 1
-            print(current_day)
-            print(day_value)
             response = response + breakfastmenu(day_value, column, week)
         elif time < 10:
             response = response + (f"Breakfast {day}: \n")
@@ -76,18 +44,15 @@ def checkForDino(message, con, value):
         elif time < 19:
             response = response + (f"Dinner {day}: \n")
             day_value = int(datetime.now(TIMEZONE).weekday()) + 1
-            #day_value = current_day + 1 #maybe should be this?????
             response = response + dinnermenu(day_value, column, week)
         else: 
             response = response + (f"Breakfast Tomorrow: \n")
-            day_value = int(datetime.now(TIMEZONE).weekday()) + 2 #this might have to be 1 but idk wth is going on
-            print(current_day)
-            print(day_value)
+            day_value = int(datetime.now(TIMEZONE).weekday()) + 2 #this is 2 since early +1 was done cause "tomorrow" was in message
             response = response + breakfastmenu(day_value, column, week)
-    elif value == "breakfast" :
+    elif value == "breakfast":
         if "time" in message:
-            response = response + "Basser breakfast is at " + breakfasttime
-        elif time > 14 and day == "Today": #after 2pm will give the value for the next day
+            response = response + "Basser breakfast is at " +  bassertimes["breakfast"]
+        elif time > 14 and day == "Today": #after 2pm will give the breakfast for the next day
             day = "Tomorrow"
             response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 2
@@ -110,8 +75,8 @@ def checkForDino(message, con, value):
         
     elif value == "lunch":
         if "time" in message:
-            response = response + "Basser lunch is at " + lunchtime
-        elif time > 17 and day == "Today": #after 2pm will give the value for the next day
+            response = response + "Basser lunch is at " + bassertimes["lunch"]
+        elif time > 17 and day == "Today": #after 5pm will give the lunch for the next day
             day = "Tomorrow"
             response = response + (f"Lunch {day}: \n")
             day_value = current_day + 2
@@ -134,7 +99,7 @@ def checkForDino(message, con, value):
 
     elif value == "dinner":
         if "time" in message:
-            response = response + "Basser dinner is at " + dinnertime
+            response = response + "Basser dinner is at " + bassertimes["dinner"]
         elif time > 20 and day == "Today": #after 8pm will give the value for the next day
             day = "Tomorrow"
             response = response + (f"Dinner {day}: \n")
@@ -155,37 +120,19 @@ def checkForDino(message, con, value):
             response = response + (f"Dinner {day}: \n")
             day_value = current_day + 1
             response = response + dinnermenu(day_value, column, week)
-    #if "time" not in message: #adds feedback link to end of response unless user is asking for time
-        #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
-    note = addnote(con, value, day)
-    if note is not None and "time" not in message:
-        response = response + str(note)
-    #print("checkForDino DONE")
-    return response
 
-def checkForButton(message):
-    #print("checkForButton")
-    if "time" not in message: #adds feedback link to end of response unless user is asking for time
-        #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
-        url_buttons = [{
-                    "type": "web_url",
-                    "url": "https://bit.ly/3hVT0DX",
-                    "title": "Leave Feedback"
-                    },
-                    {
-                    "type": "web_url",
-                    "url": "https://user.resi.inloop.com.au/home",
-                    "title": "Latemeal"
-                    }
-                    ]
+    if "time" not in message:
+        note = addnote(con, value, day)
     else:
-        url_buttons = []
-    #print("checkForButton DONE")
-    return url_buttons
+        note = None
+    if note is not None:
+        response = response + str(note)
+
+    return response
 
 def getDay(message, week): #here is where we get the day and current_day and sometimes week
     column = ""
-    #print(str(week) + " week a")
+
     current_day = datetime.now(TIMEZONE).weekday()
     day = "Today"
     
@@ -194,7 +141,7 @@ def getDay(message, week): #here is where we get the day and current_day and som
         day = "Tomorrow"
         current_day+=1
         time = 0
-        ## this will need to be changed to either go to next page or say that the menu hasnt been updated
+
         if current_day==7:
             if week==4:
                 week = 1
@@ -221,11 +168,10 @@ def getDay(message, week): #here is where we get the day and current_day and som
         else:
             current_day = int(checkForDay(message))
             day = str(week_days[int(checkForDay(message))])
-    #elif "today" in message:
-        #day = "Today"
+    #otherwise must be today: and day and current_day are not updated from todays value
     return day, current_day, column, week
 
-    #otherwise must be today: and day and current_day are not updated from todays value
+    
 
 # def wholedaymenu(message):
 #     global day_value
@@ -297,7 +243,6 @@ def lunchmenu(day_value, column, week):
     return response
 
 def dinnermenu(day_value, column, week):
-    print(str(week) + " dinnermenu")
     #print("dinnermenu")
     page = str((2*(week-1)+2))
     Range = int("8")
@@ -322,16 +267,9 @@ def dinnermenu(day_value, column, week):
                 #response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
         except IndexError:
             print('NOK')
-    # if "Oven roast barramundi" in response:
-    #     response = response + u"\nHmm... sounds like a roundy run to me... \U0001F914 \n"
-    # elif "Roast turkey" in response:
-    #     response = "Dino changed dinner but heres what it's supposed to be:\n\n" + response
-    # response = addemojisresponse(response)
-    #print("dinnermenu DONE")
     return response
 
 def addemojis(header):
-    #print("addemojisheader")
     header = header.replace("salad", u"salad \U0001F957")
     if "vegetarian option" in header:
         header = header.replace("vegetarian option", u"vegetarian option \U0001F331")
@@ -342,18 +280,15 @@ def addemojis(header):
     header = header.replace("soup", u"soup \U0001f372")
     header = header.replace("the dessert station", u"the dessert station \U0001f370")
     header = header.replace("additional vegetables", u"additional vegetables \U0001F966")
-    #print("addemojisheader DONE")
     return header
 
 def addemojiscontent(content):
-    #print("addemojiscontent")
     #content = content.replace("egg", u"egg \U0001F95A")
     content = content.replace("pancakes", u"pancakes \U0001f95e")
     content = content.replace("pizza", u"pizza \U0001f355")
     content = content.replace("sushi", u"sushi \U0001f363")
     content = content.replace("chicken", u"chicken \U0001F357")
     content = content.replace("honey", u"honey \U0001F36F")
-    #print("addemojiscontent DONE")
     return content
 
 # def addemojisresponse(response):
@@ -376,36 +311,27 @@ def addemojiscontent(content):
 
 
 def columnlist(page, column, Range): #gets the info from each column as a list
-    #print("columlist")
-    #global row
-    #global column
     rowcontents = []
     for i in range(0,Range):
         row = i
         content = getinfo(page, row, column)
         rowcontents.append(content)
-    #print("columlist DONE")
     return rowcontents
 
 def addnote(con, value, day):
-    #print("addnote")
     meal = value
     if day == "Today": #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
-        note = read_custom_message(meal, con)
+        try: 
+            note = "".join(["Note:\n",read_custom_message(meal, con).capitalize()])
+        except AttributeError:
+            note = None
     else: #otherwise there is no note
         note = None 
 
-    if note is not None:
-        note = "Note:\n" + note.capitalize()
-
-    #print("addnote DONE")
     return note
 
 
 def getinfo(page, row, column):
-    #print("getinfo")
-    #global page
-    #global row
     #-----------------------Opening the HTML file--------------------------#
     HTMLFile = open(str("menu/" + page + ".html"), "r") #try putting in func.
     #print(str(HTMLFile))
@@ -419,12 +345,10 @@ def getinfo(page, row, column):
     #print(soup.body.prettify())
 
     #print(soup.title) #prints the table title if it has one
-    try:
-        menu_table = soup.find("table", attrs={"class": "dataframe"})
-        menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
-    except AttributeError:
-        menu_table = soup.find("table", attrs={"class": "t1"})
-        menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
+
+    menu_table = soup.find("table", attrs={"class": "dataframe"})
+    menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
+
     #---------------------------------------------------------------------#
     info = []
     for td in menu_table_data[row].find_all("td"):
@@ -435,9 +359,34 @@ def getinfo(page, row, column):
             info.append(stuff)
         else:
             print("none!")
-    #print(str(row) + str(column) + "row column")
-    #print(info[column])
-    #print("getinfo DONE")
     return info[column]
+
+
+def getmenuweek():
+    TIMEZONE = timezone('Australia/Sydney')
+    x = datetime.datetime.now(TIMEZONE)
+    week = (int(x.strftime("%W"))+1) #plus one changes the cycle to match the dino cycle
+    menuweek = (week)%4+1 #this cheeky +1 changes range from (0-3 to 1-4)
+    print(menuweek)
+    return menuweek
+
+def checkForDay(message): #check of day of week specified
+    day = ""
+    if "monday" in message or " mon" in message or "mon " in message:
+        day = str('0')
+    elif "tuesday" in message or " tues" in message or "tues " in message:
+        day = 1
+    elif "wednesday" in message or " wed" in message or "wed " in message:
+        day = 2 
+    elif "thursday" in message or " thur" in message or "thur " in message or " thurs" in message or "thurs " in message:
+        day = 3
+    elif "friday" in message or " fri" in message or "fri " in message:
+        day = 4
+    elif "saturday" in message or " sat" in message or "sat " in message:
+        day = 5
+    elif "sunday" in message or " sun" in message or "sun " in message:
+        day = 6
+    return day
+
 
 

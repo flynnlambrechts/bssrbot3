@@ -5,9 +5,8 @@ import time
 from pytz import timezone
 TIMEZONE = timezone('Australia/Sydney')
 
-from getmenuweek import checkForDay
-
-week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+from TheScrape3 import checkForDay
+from bot_constants import week_days
 
 #column_value = 0
 '''
@@ -21,12 +20,6 @@ def getevent(day, message):
 
 
 def getDay(message):
-    # global current_day
-    
-    # global weekofterm
-    # global column_value
-    # global day
-
     current_day = datetime.now(TIMEZONE).weekday()
     x = datetime.now(TIMEZONE)
     weekofterm = (int(x.strftime("%W"))-21) #ZERO WEEK HERE

@@ -4,9 +4,6 @@ import psycopg2
 
 
 def insert_user(full_name, first_name, last_name, PSID, con):
-    #global con 
-    #con                                                             #CONNECT DB
-
     response = ""
     try:
         cur = con.cursor()
@@ -22,13 +19,9 @@ def insert_user(full_name, first_name, last_name, PSID, con):
     except Exception as error:
         #response = response + "Fail in insert user: " + str(error)
         print("User may be already added: " + str(error) + " type: " + str(type(error)))
-    #con.close()                                                     #DISCONNECT DB
 
 
 def view_users(con):
-    #global con 
-    #con                                                             #CONNECT DB
-
     response = ""
     try: 
         cur = con.cursor()
@@ -49,7 +42,6 @@ def view_users(con):
             response = response + "con closed"
         else:
             print("Error in Viewing Users: \n" + str(error) + " type: " + str(type(error)))
-    #con.close()                                                     #DISCONNECT DB
     return response
 
 
