@@ -30,7 +30,7 @@ def getCon(): #gets the connection  to the database when required
     return con
 
 
-def get_bot_response(recipient_id, message_text = "", attachment = ""):
+def get_bot_response(recipient_id, message_text = "AAAA", attachment = ""):
 	message = message_text.lower()
 	response  = Response(recipient_id)
 	picture = Response(recipient_id)
@@ -110,6 +110,9 @@ Here are some example questions:\
 
 	elif "gif" in message:
 		response.attachment = Gif("nice").get_gif()
+
+	elif "AAAA" in message:
+		response.text = "Oh no BssrBot isnt working rn."
 
 	elif "joke" in message:
 		response.text = getjoke()
