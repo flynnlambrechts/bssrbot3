@@ -200,6 +200,7 @@ def columnlist(page, column, Range): #gets the info from each column as a list
 
 def addnote(con, meal, day):
 	meal = type(meal).__name__.lower()
+	note = None
 	if day == "Today": #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
 		try: 
 			note = "".join(["Note:\n",read_custom_message(meal, con)])
@@ -207,9 +208,6 @@ def addnote(con, meal, day):
 			note = None
 		except:
 			print("Error in addnote.")
-	else: #otherwise there is no note
-		note = None 
-
 	return note
 
 def openhtml(page):
