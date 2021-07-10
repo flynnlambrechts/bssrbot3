@@ -71,11 +71,11 @@ def receive_message():
                         else:
                             print("No message?")
                             log(output)
-            else:
-                print('PING!')
+        else:
+            print('PING!')
 
     except TypeError: #if anti-idling add on pings bot we wont get an error
-        print('PING!')
+        print('PING!1')
     except:
        PrintException()
     return "Message Processed"
