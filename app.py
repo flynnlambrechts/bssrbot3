@@ -12,6 +12,8 @@ import response
 from get_bot_response import get_bot_response
 from models import Sender
 
+from bot_constants import VERIFY_TOKEN
+
 app = Flask(__name__)
 
 #Developer: Flynn
