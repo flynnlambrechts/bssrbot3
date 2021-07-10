@@ -55,7 +55,7 @@ def receive_message():
                     print(str(recipient_id) + " PSID")
                     if message['message'].get('text'):
                         message_text = message['message']['text']
-                        print(message_text)
+                        print("Input- " + message_text)
                         get_bot_response(recipient_id, message_text)
 
                         con = getCon()
