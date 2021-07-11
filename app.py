@@ -61,6 +61,7 @@ def receive_message():
             print('PING!')
     except:
         PrintException()
+        #maybe add func to text admin when error occurs
     return "Message Processed"
 
 

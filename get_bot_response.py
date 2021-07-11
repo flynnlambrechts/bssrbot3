@@ -122,7 +122,7 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 				print("not confident")
 				response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
 		except:
-			print("Wit error")
+			print("Wit Error...")
 			response.text = response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
 			pass
 
