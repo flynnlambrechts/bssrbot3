@@ -73,8 +73,8 @@ def receive_message():
                             log(output)
         else:
             print('PING!')
-        except:
-           PrintException()
+    except:
+       PrintException()
     return "Message Processed"
 
 
