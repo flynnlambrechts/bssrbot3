@@ -45,36 +45,36 @@ def receive_message():
     else:
         # get whatever message a user sent the bot
         output = request.get_json()
-# try:
-    if output:
-        #log(output) #entire output good for finding sender ids what message contains etc
-        for event in output['entry']:
-            messaging = event['messaging']
-            for message in messaging:
-                if message.get('message'):
-                    recipient_id = str(message['sender']['id'])
-                    #print(str(recipient_id) + " PSID")
-                    if message['message'].get('text'):
-                        message_text = message['message']['text']
-                        print(message_text)
-                        get_bot_response(recipient_id, message_text)
+    try:
+        if output:
+            #log(output) #entire output good for finding sender ids what message contains etc
+            for event in output['entry']:
+                messaging = event['messaging']
+                for message in messaging:
+                    if message.get('message'):
+                        recipient_id = str(message['sender']['id'])
+                        #print(str(recipient_id) + " PSID")
+                        if message['message'].get('text'):
+                            message_text = message['message']['text']
+                            print(message_text)
+                            get_bot_response(recipient_id, message_text)
 
-                        con = getCon()
-                        Sender(recipient_id).adduser(con)
-                        con.close()
+                            con = getCon()
+                            Sender(recipient_id).adduser(con)
+                            con.close()
 
-                    elif message['message'].get('attachments'):
-                        print("Picture")
-                        attachment = "blank for now"
-                        get_bot_response(recipient_id, attachment)
+                        elif message['message'].get('attachments'):
+                            print("Picture")
+                            attachment = "blank for now"
+                            get_bot_response(recipient_id, attachment)
 
-                    else:
-                        print("No message?")
-                        log(output)
-    else:
-        print('PING!')
-    # except:
-    #    PrintException()
+                        else:
+                            print("No message?")
+                            log(output)
+        else:
+            print('PING!')
+        except:
+           PrintException()
     return "Message Processed"
 
 
