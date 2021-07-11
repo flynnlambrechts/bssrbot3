@@ -3,9 +3,17 @@ import os
 
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #used for fb connection
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN'] #used to verify fb
+DATABASE_URL = os.environ['DATABASE_URL']
+
 Admin_ID = ["4409117335852974", #Flynn-DEV
             "3760608700732342" #Flynn-REAL
-            ] #id of users with powerful permission
+] #id of users with powerful permission
+
+Staff_ID = ["3963292617085764", #Kendy
+"4294576107270093", #Sam
+"4610989705596963", #Kyra
+"3890926854296476" #James
+]
 
 dino_quickreplies = [{'content_type': 'text', 'title': 'Breakfast', 'payload': 'Breakfast'},\
  {'content_type': 'text', 'title': 'Lunch', 'payload': 'Lunch'},\
@@ -13,6 +21,14 @@ dino_quickreplies = [{'content_type': 'text', 'title': 'Breakfast', 'payload': '
  {'content_type': 'text', 'title': 'Dino', 'payload': 'Dino'}]
  #{'content_type': 'text', 'title': 'All', 'payload': 'All'}]
 
+greeting_message = f"Hello! Welcome to BssrBot! I'm here to help you with all your dino and calendar needs.\
+Here are some example questions:\
+\n1. What's for dino? \
+\n2. What's for lunch today? \
+\n3. Is shopen? \
+\n4. What's the shop catalogue? \
+\n5. What's on tonight? \
+\n6. Events on this week?"
 
 shop_catalogue = u"Shop Currently Sells: \n\
 Pods $3\n\

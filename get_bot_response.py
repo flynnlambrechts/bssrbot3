@@ -5,6 +5,7 @@ import psycopg2
 from response import (Response, UrlButton, QuickReply, Gif, Image)
 
 from bot_constants import *
+from bot_functions import getCon
 
 #from TheScrape2 import checkForDino as getDino   #for scraping htmls
 from TheScrape3 import getDino
@@ -17,20 +18,12 @@ from jokes import getjoke               #for jokes
 
 from users import *                     #for viewing users
 from TheScrape3 import checkForDay
+from utils import wit_response
 
 from models import Sender
 
-def getCon(): #gets the connection  to the database when required
-    if "HEROKU" in os.environ:
-        DATABASE_URL =  os.environ['DATABASE_URL']
-        con = psycopg2.connect(DATABASE_URL, sslmode='require')
-    else:
-        con = psycopg2.connect(database="bssrbot1", user="flynnlambrechts", password="", host="127.0.0.1", port="5432")
-        print("Local Database opened successfully")
-    return con
 
-
-def get_bot_response(recipient_id, message_text = "AAAA", attachment = ""):
+def get_bot_response(recipient_id, message_text="", attachment = ""):
 	message = message_text.lower()
 	response  = Response(recipient_id)
 	picture = Response(recipient_id)
@@ -48,16 +41,13 @@ def get_bot_response(recipient_id, message_text = "AAAA", attachment = ""):
 	elif checkForDino(message): #rename to checkfordino later
 		value = checkForDino(message)
 		con = getCon()
-		response.text = getDino(message, value, con) #CURRENTLY CALLED checkForDino
+		response.text = getDino(message, value, recipient_id, con) #CURRENTLY CALLED checkForDino
 		con.close()
 
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.addbutton(button)
 		button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
 		response.addbutton(button)
-
-	elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
-		response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
 
 	elif checkForShopen(message, recipient_id):
 		response.text = checkForShopen(message, recipient_id)
@@ -83,11 +73,14 @@ def get_bot_response(recipient_id, message_text = "AAAA", attachment = ""):
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.addbutton(button)
 
+	elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
+		response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
+
 	elif "my name" in message:
 		user = Sender(recipient_id)
 		response.text = user.get_fullname()
 
-	elif "idiot" in message or "dumb" in message:
+	elif "idiot" in message or "dumb" in message or "stupid" in message:
 		link = Sender(recipient_id).get_profile_pic()
 		picture.attachment = Image(link).get_image()
 		picture.send()
@@ -96,26 +89,8 @@ def get_bot_response(recipient_id, message_text = "AAAA", attachment = ""):
 	elif "gif" in message:
 		response.attachment = Gif("nice").get_gif()
 
-	elif "AAAA" in message:
-		response.text = "Oh no BssrBot isnt working rn."
-
 	elif "joke" in message:
 		response.text = getjoke()
-		
-	elif "hello" in message or "hey" in message or "help" in message or "hi" in message:
-		greeting_message = f"Hello! Welcome to BssrBot! I'm here to help you with all your dino and calendar needs.\
-Here are some example questions:\
-\n1. What's for dino? \
-\n2. What's for lunch today? \
-\n3. Is shopen? \
-\n4. What's the shop catalogue? \
-\n5. What's on tonight? \
-\n6. Events on this week?"
-		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
-		print(str(button) + " Button")
-		response.addbutton(button)
-		response.text = greeting_message
-		#Response.addbutton(button)
 
 	elif "show me users" in message:
 
@@ -126,8 +101,24 @@ Here are some example questions:\
 			con.close()
 		else:
 			response.text = "You shall not, PASS: \n" + str(recipient_id)
+
+	elif "hello" in message or "hey" in message or "help" in message or "hi" in message: #hi sometimes causes conflicts
+		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
+		#print(str(button) + " Button")
+		response.addbutton(button)
+		response.text = greeting_message
+		#Response.addbutton(button)
+
 	else:
-		response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
+		entity, value, confidence = wit_response(message)
+		print(float(confidence))
+		if float(confidence) > 0.8:
+			print("confident")
+			#response.text  = " : ".join([str(entity), str(value), str(confidence)])
+			response.text = getResponse(entity, value, confidence)
+		else:
+			print("not confident")
+			response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
 
 	response.addquick_replies(dino_quickreplies)
 	response.send()
@@ -154,6 +145,7 @@ def getTime(message):
 		else :
 			response = response + dinotimes
 	return response
+
 
 
 def checkForDino(message):
@@ -205,4 +197,11 @@ def checkForCalendar(message):
 		con = getCon()
 		response = response + get_events(message, con)
 		con.close()
+	return response
+
+
+def getResponse(entity, value, confidence):
+	response = "blank"
+	if entity == "Praise:Praise":
+		response = f"No, you're {value}."
 	return response

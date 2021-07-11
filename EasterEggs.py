@@ -61,4 +61,8 @@ def checkForEasterEggs(message):
         response = response + "Fuck you."
     elif "aiden" in message:
         response = response + "That's my Senior Shots Officer."
+    elif "who made" in message:
+        response = response + "I was made by Flynn with help from Ethan and Yas."
+    elif "haha" in message:
+        response = response + "Very Funny."
     return response

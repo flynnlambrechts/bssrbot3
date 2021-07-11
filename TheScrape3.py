@@ -6,7 +6,8 @@ from pytz import timezone
 from bs4 import BeautifulSoup # Importing BeautifulSoup class from the bs4 module
 
 from killswitch import read_custom_message
-from bot_constants import week_days
+from bot_constants import (week_days, Staff_ID)
+from bot_functions import PrintException
 
 
 TIMEZONE = timezone('Australia/Sydney')
@@ -69,7 +70,7 @@ class Dinner(Meal):
 		self.headers = [u"Main Course \U0001F37D", u"Vegetarian \U0001F331", u"Salad \U0001F957", "Vegetables", u"Additional Vegetables \U0001F966", u"The Dessert Station \U0001f370"]
 
 
-def getDino(message, value, con=None):
+def getDino(message, value, recipient_id, con=None):
 	time = datetime.now(TIMEZONE).time().hour
 	week = getmenuweek()
 
@@ -106,7 +107,7 @@ def getDino(message, value, con=None):
 	response = meal.getresponse(value, day, current_day, week)
 
 	if con is not None:
-		note = addnote(con, meal, day)
+		note = addnote(con, meal, day, recipient_id)
 		if note is not None:
 			response = response + str(note)
 
@@ -198,13 +199,14 @@ def columnlist(page, column, Range): #gets the info from each column as a list
 		rowcontents.append(content)
 	return rowcontents
 
-def addnote(con, meal, day):
+def addnote(con, meal, day, recipient_id):
 	meal = type(meal).__name__.lower()
 	note = None
-	if day == "Today": #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
+	if day == "Today" and recipient_id not in Staff_ID: #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
 		try: 
 			note = "".join([u"Note: \uE301 \n",read_custom_message(meal, con)])
 		except:
+			PrintException()
 			print("Probably no message.")
 	return note
 
