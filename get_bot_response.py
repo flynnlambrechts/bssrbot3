@@ -55,21 +55,6 @@ def get_bot_response(recipient_id, message_text = "AAAA", attachment = ""):
 		response.addbutton(button)
 		button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
 		response.addbutton(button)
-	    
-	elif "hello" in message or "hey" in message or "help" in message or "hi" in message:
-		greeting_message = f"Hello! Welcome to BssrBot! I'm here to help you with all your dino and calendar needs.\
-Here are some example questions:\
-\n1. What's for dino? \
-\n2. What's for lunch today? \
-\n3. Is shopen? \
-\n4. What's the shop catalogue? \
-\n5. What's on tonight? \
-\n6. Events on this week?"
-		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
-		print(str(button) + " Button")
-		response.addbutton(button)
-		response.text = greeting_message
-		#Response.addbutton(button)
 
 	elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
 		response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
@@ -116,6 +101,21 @@ Here are some example questions:\
 
 	elif "joke" in message:
 		response.text = getjoke()
+		
+	elif "hello" in message or "hey" in message or "help" in message or "hi" in message:
+		greeting_message = f"Hello! Welcome to BssrBot! I'm here to help you with all your dino and calendar needs.\
+Here are some example questions:\
+\n1. What's for dino? \
+\n2. What's for lunch today? \
+\n3. Is shopen? \
+\n4. What's the shop catalogue? \
+\n5. What's on tonight? \
+\n6. Events on this week?"
+		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
+		print(str(button) + " Button")
+		response.addbutton(button)
+		response.text = greeting_message
+		#Response.addbutton(button)
 
 	elif "show me users" in message:
 
