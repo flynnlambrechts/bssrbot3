@@ -5,11 +5,10 @@ import psycopg2
 from response import (Response, UrlButton, QuickReply, Gif, Image)
 
 from bot_constants import *
-from bot_functions import getCon
+from bot_functions import (PrintException, getCon)
 
 #from TheScrape2 import checkForDino as getDino   #for scraping htmls
 from TheScrape3 import getDino
-from EasterEggs import checkForEasterEggs #self explanatory
 from shopen import *                    #for all shopen related
 from killswitch import add_custom_message
 from calendar1 import get_events
@@ -18,9 +17,14 @@ from jokes import getjoke               #for jokes
 
 from users import *                     #for viewing users
 from TheScrape3 import checkForDay
-from utils import wit_response
+#from utils import wit_response
 
 from models import Sender
+
+from rivescript import RiveScript
+bot = RiveScript()
+bot.load_directory("./brain")
+bot.sort_replies()
 
 
 def get_bot_response(recipient_id, message_text="", attachment = ""):
@@ -55,9 +59,6 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 	elif checkForCalendar(message):
 		response.text = checkForCalendar(message)
 
-	elif checkForEasterEggs(message):
-		response.text = checkForEasterEggs(message)
-
 	elif checkForDay(message) or "tomorrow" in message or "today" in message or "all" in message:
 		response.text = getDino(message, "breakfast", recipient_id)
 		response.send()
@@ -75,10 +76,6 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 
 	elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
 		response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
-
-	elif "my name" in message:
-		user = Sender(recipient_id)
-		response.text = user.get_fullname()
 
 	elif "idiot" in message or "dumb" in message or "stupid" in message:
 		link = Sender(recipient_id).get_profile_pic()
@@ -111,21 +108,11 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 
 	else:	
 		try:
-			entity, value, confidence = wit_response(message)
-			print(float(confidence))
-			if float(confidence) > 0.8:
-				print("confident")
-				#response.text  = " : ".join([str(entity), str(value), str(confidence)])
-				response.text = getResponse(entity, value, confidence)
-
-			else:
-				print("not confident")
-				response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
+			reply = bot.reply(str(recipient_id), message)
+			response.text = reply
 		except:
-			print("Wit Error...")
-			response.text = response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
-			pass
-
+			response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
+			PrintException()
 	response.addquick_replies(dino_quickreplies)
 	response.send()
 	#--------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -206,8 +193,8 @@ def checkForCalendar(message):
 	return response
 
 
-def getResponse(entity, value, confidence):
-	response = "blank"
-	if entity == "Praise:Praise":
-		response = f"No, you're {value}."
-	return response
+# def getResponse(entity, value, confidence):
+# 	response = "blank"
+# 	if entity == "Praise:Praise":
+# 		response = f"No, you're {value}."
+# 	return response

@@ -23,3 +23,6 @@ beautifulsoup4==4.9.3
 lxml==4.6.3
 psycopg2==2.8.6
 pyjokes==0.6.0
+fbmessenger==6.0.0
+rivescript==1.15.0
+
