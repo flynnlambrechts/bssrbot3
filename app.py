@@ -4,14 +4,12 @@ import os, sys                          #for heroku env
 import psycopg2                         #database stuff
 import json
 
-
-
 from flask import Flask, request        #flask
 
-import response
+from response import Response
 from get_bot_response import get_bot_response
 from models import Sender
-from bot_constants import VERIFY_TOKEN
+from bot_constants import (VERIFY_TOKEN, Admin_ID)
 from bot_functions import (PrintException, getCon)
 
 app = Flask(__name__)
@@ -61,6 +59,10 @@ def receive_message():
             print('PING!')
     except:
         PrintException()
+        for ID in Admin_ID:
+            response = Response(ID)
+            response.text = "Oh no something went wrong :("
+            response.send()
         #maybe add func to text admin when error occurs
     return "Message Processed"
 
