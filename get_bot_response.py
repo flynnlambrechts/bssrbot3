@@ -59,11 +59,11 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		response.text = checkForEasterEggs(message)
 
 	elif checkForDay(message) or "tomorrow" in message or "today" in message or "all" in message:
-		response.text = getDino(message, "breakfast")
+		response.text = getDino(message, "breakfast", recipient_id)
 		response.send()
-		response.text = getDino(message, "lunch")
+		response.text = getDino(message, "lunch", recipient_id)
 		response.send()
-		response.text = getDino(message, "dinner")
+		response.text = getDino(message, "dinner", recipient_id)
 
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.addbutton(button)
