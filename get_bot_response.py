@@ -109,13 +109,7 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 	else:	
 		try:
 			reply = bot.reply(str(recipient_id), message)
-			if reply == "As good as me.":
-				link = Sender(recipient_id).get_profile_pic()
-				picture.attachment = Image(link).get_image()
-				picture.send()
-				response.text = reply
-			else:
-				response.text = reply
+			response.text = reply
 		except:
 			response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
 			PrintException()
