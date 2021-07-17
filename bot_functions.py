@@ -4,7 +4,7 @@ import psycopg2
 from datetime import *
 from linecache import (checkcache, getline) # for error handling
 
-from bot_constants import DATABASE_URL
+from bot_constants import (DATABASE_URL, TIMEZONE)
 # from models import GlobalVar
 
 def PrintException():
@@ -25,7 +25,11 @@ def getCon(): #gets the connection  to the database when required
         print("Local Database opened successfully")
     return con
 
-def daysuntil(day): #date provided in date(YYYY,M,D) format
-    today = date.today()
-    diff = day - today
-    return (diff.days)
+# def daysuntil(day): #date provided in date(YYYY,M,D) format
+#     today = date.today()
+#     diff = day - today
+#     return (diff.days)
+
+def daysuntil(future): #date provided in date(YYYY,M,D) format
+    today = int(datetime.now(TIMEZONE).strftime('%j'))
+    return int(future.strftime('%j')) - today
