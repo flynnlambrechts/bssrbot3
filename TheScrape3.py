@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup # Importing BeautifulSoup class from the bs4 modul
 
 from killswitch import read_custom_message
 from bot_constants import (week_days, Staff_ID)
-from bot_functions import PrintException
+from bot_functions import (PrintException, daysuntil)
 
 
 TIMEZONE = timezone('Australia/Sydney')
@@ -71,47 +71,58 @@ class Dinner(Meal):
 
 
 def getDino(message, value, recipient_id, con=None):
-	time = datetime.now(TIMEZONE).time().hour
-	week = getmenuweek()
+	try:
+		time = datetime.now(TIMEZONE).time().hour
+		week = getmenuweek()
 
-	day, current_day, week = getDay(message, week)
+		day, current_day, week = getDay(message, week)
 
-	if value == "dino":
-		if day == "Tomorrow":
+		if value == "dino":
+			if day == "Tomorrow":
+				meal = Breakfast(week)
+			elif time < 10:
+				meal  = Breakfast(week)
+			elif time < 14:
+				meal = Lunch(week)
+			elif time < 19:
+				meal = Dinner(week)
+			else: #after 7pm
+				day, current_day, week = isTomorrow(day, current_day, week)
+				meal = Breakfast(week)
+
+		elif value == "breakfast":
+			if time > 14 and day == "Today": #after 2pm will give the breakfast for the next day
+				day, current_day, week = isTomorrow(day, current_day, week)
 			meal = Breakfast(week)
-		elif time < 10:
-			meal  = Breakfast(week)
-		elif time < 14:
+
+		elif value == "lunch":
+			if time > 17 and day == "Today": #after 5pm will give the lunch for the next day
+				day, current_day, week = isTomorrow(day, current_day, week)
 			meal = Lunch(week)
-		elif time < 19:
+
+		elif value == "dinner":
+			if time > 21 and day == "Today":
+				day, current_day, week = isTomorrow(day, current_day, week)
 			meal = Dinner(week)
-		else: #after 7pm
-			day, current_day, week = isTomorrow(day, current_day, week)
-			meal = Breakfast(week)
 
-	elif value == "breakfast":
-		if time > 14 and day == "Today": #after 2pm will give the breakfast for the next day
-			day, current_day, week = isTomorrow(day, current_day, week)
-		meal = Breakfast(week)
+		response = meal.getresponse(value, day, current_day, week)
 
-	elif value == "lunch":
-		if time > 17 and day == "Today": #after 5pm will give the lunch for the next day
-			day, current_day, week = isTomorrow(day, current_day, week)
-		meal = Lunch(week)
+		if con is not None:
+			note = addnote(con, meal, day, recipient_id)
+			if note is not None:
+				response = response + str(note)
 
-	elif value == "dinner":
-		if time > 21 and day == "Today":
-			day, current_day, week = isTomorrow(day, current_day, week)
-		meal = Dinner(week)
-
-	response = meal.getresponse(value, day, current_day, week)
-
-	if con is not None:
-		note = addnote(con, meal, day, recipient_id)
-		if note is not None:
-			response = response + str(note)
-
-	return response
+		#COUNT DOWN TO SPECIFIC EVENT
+		if day == "Today":
+			future = date(2021, 9, 13)
+			if date.today() <= day:
+				response = " ".join([response, str(daysuntil(future)), "Days until TRI 3..."])
+			else:
+				print(False)
+		return response
+	except:
+		PrintException()
+	
 
 def getmenuweek(): #1-4 inclusive cycle
 	x = datetime.now(TIMEZONE)
@@ -204,10 +215,13 @@ def addnote(con, meal, day, recipient_id):
 	note = None
 	if day == "Today" and recipient_id not in Staff_ID: #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
 		try: 
-			note = "".join([u"Note: \uE301 \n",read_custom_message(meal, con)])
+			note = "".join([u"Note: \uE301 \n",read_custom_message(meal, con),"\n\n"])
+		except TypeError:
+			#PrintException()
+			print("Type Error in addnote: Probably no message.")
+			pass
 		except:
 			PrintException()
-			print("Probably no message.")
 	return note
 
 def openhtml(page):

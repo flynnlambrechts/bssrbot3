@@ -127,25 +127,25 @@ def get_shopen(con):
 ##        print("Error: " + str(error) + "\n" + str(type(error)))
 ##    return response
 ##
-##def insert_shopen():
-##    global person
-##    global index
-##    global current_time, end_time, date
-##    
-##    
-##    response = ""
-##    try:
-##        cur = con.cursor()
-##        cur.execute('''INSERT INTO shopen1 (
-##            index, person, start_time, end_time, value, date)
-##            VALUES (%s,%s,%s,%s,%s,%s)''',
-##                (index, person,current_time,end_time,'true',date))
-##        print("Shopen data inserted successfully")
-##        response  = response + "Shop row inserted"
-##        con.commit()
-##    except Exception as error:
-##        response = response + "Fail: " + str(error)
-##        print("Error: " + str(error) + "\n" + str(type(error)))
-##    return response
+# def insert_shopen():
+#    global person
+#    global index
+#    global current_time, end_time, date
+   
+   
+#    response = ""
+#    try:
+#        cur = con.cursor()
+#        cur.execute('''INSERT INTO shopen1 (
+#            index, person, start_time, end_time, value, date)
+#            VALUES (%s,%s,%s,%s,%s,%s)''',
+#                (index, person,current_time,end_time,'true',date))
+#        print("Shopen data inserted successfully")
+#        response  = response + "Shop row inserted"
+#        con.commit()
+#    except Exception as error:
+#        response = response + "Fail: " + str(error)
+#        print("Error: " + str(error) + "\n" + str(type(error)))
+#    return response
 
 

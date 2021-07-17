@@ -1,5 +1,8 @@
 #Constants
 import os
+from pytz import timezone
+
+TIMEZONE = timezone('Australia/Sydney')
 
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #used for fb connection
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN'] #used to verify fb

@@ -114,11 +114,12 @@ def read_custom_message(meal, con):
 				note = "".join([str(row[1]) , "\n", str(note)]) #maybe use join()
 			else:
 				note = str(row[1]) + "\n"
+	except TypeError:
+			#PrintException()
+			print("Type Error in read_custom_message: Probably no message.")
+			pass
 	except:
-		PrintException()
-		print("Likely no custom message.")
-
-
+			PrintException()
 	return note
 
 

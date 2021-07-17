@@ -1,8 +1,11 @@
 #Bot Functions
 import os, sys
 import psycopg2
+from datetime import *
 from linecache import (checkcache, getline) # for error handling
+
 from bot_constants import DATABASE_URL
+# from models import GlobalVar
 
 def PrintException():
     exc_type, exc_obj, tb = sys.exc_info()
@@ -21,3 +24,8 @@ def getCon(): #gets the connection  to the database when required
         con = psycopg2.connect(database="bssrbot1", user="flynnlambrechts", password="", host="127.0.0.1", port="5432")
         print("Local Database opened successfully")
     return con
+
+def daysuntil(day): #date provided in date(YYYY,M,D) format
+    today = date.today()
+    diff = day - today
+    return (diff.days)

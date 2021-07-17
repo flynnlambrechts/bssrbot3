@@ -3,6 +3,7 @@ import os
 import requests
 
 from users import insert_user
+from bot_functions import (PrintException, getCon)
 
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 
@@ -33,5 +34,45 @@ class Sender:
 		insert_user(self.full_name, self.first_name, self.last_name, self.psid, con)
 
 
-# user = Sender(recipient_id)
-# print(user.get_fullname())
+class GlobalVar:
+	def __init__(self, name):
+		self.name = name
+
+	def insert(self, columns):
+		try:
+			self.columns = "(" + (", ".join(columns)) + ")"
+			self.values = tuple(columns.values())
+
+			con = getCon()
+			cur = con.cursor()
+			print('''INSERT INTO %s %s VALUES %s''' % (self.name, self.columns, self.values))
+			con.commit()
+			con.close()
+		except:
+			PrintException()
+
+	def update(self, columns):
+		try:
+			self.columns = r" = '%s', ".join(columns) + r" = '%s'" #quotes around %s as these will ensure postgresql recieves them as strings and not columns
+			self.values = tuple(columns.values())
+
+			con = getCon() 
+			cur = con.cursor()
+			cur.execute('''UPDATE %s SET %s''' % (self.name, self.columns % self.values))
+			con.commit()
+			con.close()
+			return f"{self.name} updated successfully."
+		except:
+			PrintException()	
+
+	def get(self):
+		try:
+			con = getCon()
+			cur = con.cursor()
+			cur.execute(f'''SELECT * FROM {self.name}''')
+			row = cur.fetchone()
+			con.close()
+			print(row)
+			return row
+		except:
+			PrintException()

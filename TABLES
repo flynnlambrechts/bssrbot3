@@ -1,0 +1,68 @@
+TABLES
+
+-------------------CALENDAR------------------
+DROP TABLE calendar;
+
+CREATE TABLE calendar (
+week VARCHAR(10) NOT NULL PRIMARY KEY,
+wholeweek VARCHAR(150),
+monday VARCHAR(150),
+tuesday VARCHAR(150),
+wednesday VARCHAR(150),
+thursday VARCHAR(150),
+friday VARCHAR(150),
+saturday VARCHAR(150),
+sunday VARCHAR(150)
+)  ;
+
+\copy calendar FROM /Users/flynnlambrechts/Desktop/Coding/BssrBot2/BssrBot-Dev/bssr_calendar/TRI_2_FINAL.csv WITH (FORMAT CSV); 
+
+
+---------------Custom Message Table------------
+
+CREATE TABLE custom_message (
+day VARCHAR(20) NOT NULL PRIMARY KEY,
+allday VARCHAR(200),
+breakfast VARCHAR(200),
+lunch VARCHAR(200),
+dinner VARCHAR(200)
+);
+
+INSERT INTO custom_message (
+    day,
+    allday,
+    breakfast,
+    lunch,
+    dinner)
+VALUES ('26-06-21',
+        'today is a special day',
+        'breakfast is beepboop',
+        'lunch is tunksy',
+        'dinner is nasty'
+        );
+
+SELECT day FROM custom_message WHERE day = '26-06-21';
+
+----------------Vacuum-----------------
+CREATE TABLE vacuum (
+index INTEGER NOT NULL PRIMARY KEY,
+location VARCHAR(250),
+person VARCHAR(100),
+time VARCHAR(100)
+);
+
+
+----------------Test Table-------------
+CREATE TABLE test1 (
+index INTEGER NOT NULL PRIMARY KEY,
+date VARCHAR(50),
+column1 VARCHAR(100),
+column2 VARCHAR(100)
+);
+
+INSERT INTO test1 (
+index,
+date,
+column1,
+column2)
+VALUES ('1','blank','blank','blank');

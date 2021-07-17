@@ -1,6 +1,6 @@
 // A generic set of chatting responses. This set mimicks the classic Eliza bot.
-+ *
-- Sorry I don't understand: '<star>'.
++ * 
+- Sorry I don't understand: "<star>".
 
 
 + [*] (sorry|apologize|apology) [*]
@@ -208,11 +208,9 @@
 - What are your feelings now?
 
 + [*] (yes|yeah|yep|yup) [*]
-- Please go on.
-- Please tell me more about this.
-- Why don't you tell me a little more about this.
 - I see.
 - I understand.
+- Okay then.
 
 + [*] (nope|nah) [*]
 - Are you saying no just to be negative?
@@ -253,10 +251,8 @@
 - Does that question interest you?
 - What is it you really want to know?
 - Are such questions much on your mind?
-- What answer would please you most?
 - What do you think?
 - What comes to mind when you ask that?
-- Have you asked such questions before?
 - Have you asked anyone else?
 
 + [*] because [*]
