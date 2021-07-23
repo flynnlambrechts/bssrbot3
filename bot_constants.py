@@ -65,6 +65,18 @@ notbassertimes = {"Baxter" : "Baxter Dino Times:\nBreakfast: 8:00-8:45am\nLunch:
 "Fig" : "Fig Tree Dino Times:\nBreakfast: 9:00-9:45am\nLunch: 1:45-2:30pm\nDinner: 6:45-7:30pm",\
 "Hall" : "Hall Dino Times:\nBreakfast: As Normal \nDinner: 7:45-8:30pm"}
 
+#DINO TIMES FROM 26TH JULY
+new_bassertimes = {"breakfast": "8:45-10:00am",\
+"lunch" : "1:15-2:15pm",\
+"dinner" : "6:15-7:15pm"}
+new_dinotimes = "".join(["Basser (and Baxter) Dino Times: \nBreakfast: ", new_bassertimes["breakfast"], "\nLunch: ", new_bassertimes["lunch"], "\nDinner: ", new_bassertimes["dinner"]])
+
+new_notbassertimes = {"Baxter" : "Baxter Dino Times:\nBreakfast: 8:45-10:00am\nLunch: 1:15-2:15pm\nDinner: 6:15-7:15pm",\
+"Goldstein" : "Goldstein Dino Times:\nBreakfast: 7:30-8:30am\nLunch: 12:00-1:00pm\nDinner: 5:00-6:00pm",\
+"Fig" : "Fig Tree Dino Times:\nBreakfast: 7:30-8:30am\nLunch: 12:00-1:00pm\nDinner: 5:00-6:00pm",\
+"Hall" : "Hall Dino Times:\nBreakfast: As Normal \nDinner: 7:30-8:15pm"}
+
+
 #used in TheScrape3
 week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
 

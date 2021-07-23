@@ -153,6 +153,13 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 	return "Response formulated"
 
 def getTime(message):
+	#updated dino times
+	if daysuntil(datetime.date(2021, 7, 26))<=0:
+		global notbassertimes, bassertimes, dinotimes
+		notbassertimes = new_notbassertimes
+		bassertimes = new_bassertimes
+		dinotimes = new_dinotimes
+
 	response = ""
 	if "baxter" in message:
 		response = response + notbassertimes["Baxter"]
