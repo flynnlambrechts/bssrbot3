@@ -54,24 +54,24 @@ Shapes $2.5\n\
 Cadbury Blocks $2.5\n\
 Red Rock Deli Chips $3"
 
-#Basser used in get_bot_response
-bassertimes = {"breakfast": "7:00-7:45am",\
-"lunch" : "11:45-12:30pm",\
-"dinner" : "4:30-5:15pm"}
-dinotimes = "".join(["Basser Dino Times: \nBreakfast: ", bassertimes["breakfast"], "\nLunch: ", bassertimes["lunch"], "\nDinner: ", bassertimes["dinner"]])
+# #Basser used in get_bot_response
+# bassertimes = {"breakfast": "7:00-7:45am",\
+# "lunch" : "11:45-12:30pm",\
+# "dinner" : "4:30-5:15pm"}
+# dinotimes = "".join(["Basser Dino Times: \nBreakfast: ", bassertimes["breakfast"], "\nLunch: ", bassertimes["lunch"], "\nDinner: ", bassertimes["dinner"]])
 
-notbassertimes = {"Baxter" : "Baxter Dino Times:\nBreakfast: 8:00-8:45am\nLunch: 12:45-1:30pm\nDinner: 5:45-6:30pm",\
-"Goldstein" : "Goldstein Dino Times:\nBreakfast: 9:00-9:45am\nLunch: 1:45-2:30pm\nDinner: 6:45-7:30pm",\
-"Fig" : "Fig Tree Dino Times:\nBreakfast: 9:00-9:45am\nLunch: 1:45-2:30pm\nDinner: 6:45-7:30pm",\
-"Hall" : "Hall Dino Times:\nBreakfast: As Normal \nDinner: 7:45-8:30pm"}
+# notbassertimes = {"Baxter" : "Baxter Dino Times:\nBreakfast: 8:00-8:45am\nLunch: 12:45-1:30pm\nDinner: 5:45-6:30pm",\
+# "Goldstein" : "Goldstein Dino Times:\nBreakfast: 9:00-9:45am\nLunch: 1:45-2:30pm\nDinner: 6:45-7:30pm",\
+# "Fig" : "Fig Tree Dino Times:\nBreakfast: 9:00-9:45am\nLunch: 1:45-2:30pm\nDinner: 6:45-7:30pm",\
+# "Hall" : "Hall Dino Times:\nBreakfast: As Normal \nDinner: 7:45-8:30pm"}
 
 #DINO TIMES FROM 26TH JULY
-new_bassertimes = {"breakfast": "8:45-10:00am",\
+bassertimes = {"breakfast": "8:45-10:00am",\
 "lunch" : "1:15-2:15pm",\
 "dinner" : "6:15-7:15pm"}
-new_dinotimes = "".join(["Basser (and Baxter) Dino Times: \nBreakfast: ", new_bassertimes["breakfast"], "\nLunch: ", new_bassertimes["lunch"], "\nDinner: ", new_bassertimes["dinner"]])
+dinotimes = "".join(["Basser (and Baxter) Dino Times: \nBreakfast: ", bassertimes["breakfast"], "\nLunch: ", bassertimes["lunch"], "\nDinner: ", bassertimes["dinner"]])
 
-new_notbassertimes = {"Baxter" : "Baxter Dino Times:\nBreakfast: 8:45-10:00am\nLunch: 1:15-2:15pm\nDinner: 6:15-7:15pm",\
+notbassertimes = {"Baxter" : "Baxter Dino Times:\nBreakfast: 8:45-10:00am\nLunch: 1:15-2:15pm\nDinner: 6:15-7:15pm",\
 "Goldstein" : "Goldstein Dino Times:\nBreakfast: 7:30-8:30am\nLunch: 12:00-1:00pm\nDinner: 5:00-6:00pm",\
 "Fig" : "Fig Tree Dino Times:\nBreakfast: 7:30-8:30am\nLunch: 12:00-1:00pm\nDinner: 5:00-6:00pm",\
 "Hall" : "Hall Dino Times:\nBreakfast: As Normal \nDinner: 7:30-8:15pm"}
