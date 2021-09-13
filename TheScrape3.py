@@ -126,7 +126,7 @@ def getDino(message, value, recipient_id, con=None):
 
 def getmenuweek(): #1-4 inclusive cycle
 	x = datetime.now(TIMEZONE)
-	week = (int(x.strftime("%W"))+1) #plus one changes the cycle to match the dino cycle
+	week = (int(x.strftime("%W"))+0) #plus zero changes the cycle to match the dino cycle
 	menuweek = (week)%4+1 #this cheeky +1 changes range from (0-3 to 1-4)
 	print(str(menuweek) + " Menu Week")
 	return menuweek
