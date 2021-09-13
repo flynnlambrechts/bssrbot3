@@ -114,9 +114,9 @@ def getDino(message, value, recipient_id, con=None):
 
 		#COUNT DOWN TO SPECIFIC EVENT
 		if day == "Today":
-			future = date(2021, 9, 13)
+			future = date(2021, 10, 18)
 			if date.today() <= future:
-				response = " ".join([response, str(daysuntil(future)), "Days until TRI 3..."])
+				response = " ".join([response, str(daysuntil(future)), "Days until freedom..."])
 			else:
 				print(False)
 		return response
