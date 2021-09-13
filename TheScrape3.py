@@ -119,7 +119,7 @@ def getDino(message, value, recipient_id, con=None):
 				if recipient_id in Staff_ID:
 					response = " ".join([response, str(daysuntil(future)), "Days until freedom..."])
 				else:
-					response = " ".join([response, str(daysuntil(future)), "Days until a Regeant Rumsie..."])
+					response = " ".join([response, str(daysuntil(future)), "Days until a Regeant Rumsie 🍺🍺"])
 			else:
 				print(False)
 		return response
