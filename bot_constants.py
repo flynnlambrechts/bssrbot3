@@ -15,7 +15,8 @@ Admin_ID = ["4409117335852974", #Flynn-DEV
 Staff_ID = ["3963292617085764", #Kendy
 "4294576107270093", #Sam
 "4610989705596963", #Kyra
-"3890926854296476" #James
+"3890926854296476", #James
+"4522684851127792" #mum
 ]
 
 dino_quickreplies = [{'content_type': 'text', 'title': 'Breakfast', 'payload': 'Breakfast'},\
