@@ -14,6 +14,7 @@ class Sender:
 		r = requests.get(url = URL)
 		data = r.json()
 		self.first_name = data['first_name']
+		print(self.first_name)
 		self.last_name = data['last_name']
 		self.psid = recipient_id
 		self.full_name  = " ".join([data['first_name'],data['last_name']])
