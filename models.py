@@ -9,15 +9,18 @@ ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 
 class Sender:
 	def __init__(self, recipient_id):
-		URL = "".join(["https://graph.facebook.com/v2.6/", recipient_id, "?fields=first_name,last_name,profile_pic&access_token=", ACCESS_TOKEN])
-		r = requests.get(url = URL)
-		data = r.json()
-		self.first_name = data['first_name']
-		self.last_name = data['last_name']
 		self.psid = recipient_id
-		self.full_name  = " ".join([data['first_name'],data['last_name']])
-		self.profile_pic = data['profile_pic']
-
+		try:
+			URL = "".join(["https://graph.facebook.com/v2.6/", recipient_id, "?fields=first_name,last_name,profile_pic&access_token=", ACCESS_TOKEN])
+			r = requests.get(url = URL)
+			data = r.json()
+			self.first_name = data['first_name']
+			self.last_name = data['last_name']
+			self.psid = recipient_id
+			self.full_name  = " ".join([data['first_name'],data['last_name']])
+			self.profile_pic = data['profile_pic']
+		except:
+			PrintException()
 	def get_firstname(self):
 		return self.first_name
 
@@ -31,10 +34,8 @@ class Sender:
 		return self.profile_pic
 
 	def adduser(self, con):
-		try:
-			insert_user(self.full_name, self.first_name, self.last_name, self.psid, con)
-		except:
-			PrintException()
+		insert_user(self.full_name, self.first_name, self.last_name, self.psid, con)
+
 
 class GlobalVar:
 	def __init__(self, name):
