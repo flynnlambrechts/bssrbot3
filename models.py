@@ -31,8 +31,10 @@ class Sender:
 		return self.profile_pic
 
 	def adduser(self, con):
-		insert_user(self.full_name, self.first_name, self.last_name, self.psid, con)
-
+		try:
+			insert_user(self.full_name, self.first_name, self.last_name, self.psid, con)
+		except:
+			PrintException()
 
 class GlobalVar:
 	def __init__(self, name):

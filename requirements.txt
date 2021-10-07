@@ -25,4 +25,6 @@ psycopg2==2.8.6
 pyjokes==0.6.0
 fbmessenger==6.0.0
 rivescript==1.15.0
-
+python-dateutil==2.8.1
+tabulate==0.8.9
+PyGithub==1.55
