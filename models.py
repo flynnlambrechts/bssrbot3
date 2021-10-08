@@ -21,6 +21,7 @@ class Sender:
 			self.full_name  = " ".join([data['first_name'],data['last_name']])
 			self.profile_pic = data['profile_pic']
 		except:
+			print("Error in Send __init__:")
 			PrintException()
 	def get_firstname(self):
 		return self.first_name
