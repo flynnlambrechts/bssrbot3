@@ -28,7 +28,7 @@ class Sender:
 			self.full_name  = None
 			self.profile_pic = None
 		try:
-			URL = f"https://graph.facebook.com/v12.0/{self.psid}?fields=name,profile_pic&access_token={ACCESS_TOKEN}"
+			URL = f"https://graph.facebook.com/{self.psid}?fields=first_name,last_name,profile_pic&access_token={ACCESS_TOKEN}"
 			r = requests.get(url = URL)
 			data = r.json()
 			print("\nUSING ME: " + str(data))
