@@ -9,8 +9,12 @@ ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 
 class Sender:
 	def __init__(self, recipient_id):
-		try:
-			self.psid = recipient_id
+		self.psid = recipient_id
+		self.first_name = None
+		self.last_name = None
+		self.full_name  = None
+		self.profile_pic = None
+		try:			
 			# URL = "".join(["https://graph.facebook.com/v2.6/", recipient_id, "?fields=first_name,last_name,profile_pic&access_token=", ACCESS_TOKEN])
 			URL = "".join(["https://graph.facebook.com/v12.0/", recipient_id, "?fields=first_name,last_name,profile_pic&access_token=", ACCESS_TOKEN])
 			r = requests.get(url = URL)
@@ -18,7 +22,6 @@ class Sender:
 			print("recipient_id: " + str(recipient_id))
 			self.first_name = data['first_name']
 			self.last_name = data['last_name']
-			self.psid = recipient_id
 			self.full_name  = " ".join([data['first_name'],data['last_name']])
 			self.profile_pic = data['profile_pic']
 		except:
@@ -29,6 +32,8 @@ class Sender:
 			URL = "".join(["https://graph.facebook.com/v12.0/me?fields=first_name,last_name,profile_pic&access_token=", ACCESS_TOKEN])
 			r = requests.get(url = URL)
 			data = r.json()
+			print("\nUSING ME: " + str(data))
+		except:
 			print("\nUSING ME: " + str(data))
 	def get_firstname(self):
 		return self.first_name
