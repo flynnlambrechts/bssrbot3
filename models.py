@@ -14,6 +14,7 @@ class Sender:
 			URL = "".join(["https://graph.facebook.com/v2.6/", recipient_id, "?fields=first_name,last_name,profile_pic&access_token=", ACCESS_TOKEN])
 			r = requests.get(url = URL)
 			data = r.json()
+			printf("DATA: " + str(data))
 			self.first_name = data['first_name']
 			print(self.first_name)
 			self.last_name = data['last_name']
