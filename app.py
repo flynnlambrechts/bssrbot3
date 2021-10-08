@@ -31,7 +31,7 @@ def receive_message():
         output = request.get_json()
     try:
         if output:
-            #log(output) #entire output good for finding sender ids what message contains etc
+            log(output) #entire output good for finding sender ids what message contains etc
             for event in output['entry']:
                 messaging = event['messaging']
                 for message in messaging:
