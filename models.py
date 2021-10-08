@@ -16,13 +16,12 @@ class Sender:
 			data = r.json()
 			print("DATA: " + str(data))
 			self.first_name = data['first_name']
-			print(self.first_name)
 			self.last_name = data['last_name']
 			self.psid = recipient_id
 			self.full_name  = " ".join([data['first_name'],data['last_name']])
 			self.profile_pic = data['profile_pic']
 		except:
-			print("Error in Send __init__:")
+			print("DATA RETURN BY FB: " + str(data))
 			PrintException()
 	def get_firstname(self):
 		return self.first_name
