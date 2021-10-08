@@ -25,6 +25,11 @@ class Sender:
 			PrintException()
 			print("DATA RETURNED BY FB: " + str(data))
 
+		try:
+			URL = "".join(["https://graph.facebook.com/v12.0/me?fields=first_name,last_name,profile_pic&access_token=", ACCESS_TOKEN])
+			r = requests.get(url = URL)
+			data = r.json()
+			print("\nUSING ME: " + str(data))
 	def get_firstname(self):
 		return self.first_name
 
