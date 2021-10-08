@@ -21,8 +21,20 @@ class Sender:
 			self.full_name  = " ".join([data['first_name'],data['last_name']])
 			self.profile_pic = data['profile_pic']
 		except:
-			print("DATA RETURN BY FB: " + str(data))
 			PrintException()
+			print("DATA RETURNED BY FB: " + str(data))
+
+		try:
+			print("\nTrying New Version")
+			URL = "".join(["https://graph.facebook.com/v12.0/", recipient_id, "?fields=first_name,last_name,profile_pic&access_token=", ACCESS_TOKEN])
+			r = requests.get(url = URL)
+			data = r.json()
+			print("DATA RETURNED BY FB: " + str(data))
+
+		except:
+			PrintException()
+			print("DATA RETURNED BY FB: " + str(data))
+
 	def get_firstname(self):
 		return self.first_name
 
