@@ -27,13 +27,6 @@ class Sender:
 			self.last_name = None
 			self.full_name  = None
 			self.profile_pic = None
-		try:
-			URL = f"https://graph.facebook.com/{self.psid}?fields=first_name,last_name,profile_pic&access_token={ACCESS_TOKEN}"
-			r = requests.get(url = URL)
-			data = r.json()
-			print("\nUSING ME: " + str(data))
-		except:
-			print("\nUSING ME: " + str(data))
 	def get_firstname(self):
 		return self.first_name
 

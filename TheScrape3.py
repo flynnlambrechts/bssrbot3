@@ -116,10 +116,11 @@ def getDino(message, value, recipient_id, con=None):
 		if day == "Today":
 			future = date(2021, 10, 18)
 			if date.today() <= future:
-				if recipient_id in Staff_ID:
-					response = " ".join([response, str(daysuntil(future)), "Days until freedom..."])
+				if recipient_id not in Staff_ID:
+					response = " ".join([response, str(daysuntil(future)), "Happy freedom day!"])
 				else:
-					response = " ".join([response, str(daysuntil(future)), "Days until a Regent Rumsie 🍺🍺"])
+					print("Staff")
+					#response = " ".join([response, str(daysuntil(future)), ""])
 			else:
 				print(False)
 		return response
