@@ -113,14 +113,14 @@ def getDino(message, value, recipient_id, con=None):
 				response = response + str(note)
 
 		#COUNT DOWN TO SPECIFIC EVENT
-		if day == "Today":
-			future = date(2021, 10, 18)
-			if date.today() <= future:
-				if recipient_id not in Staff_ID:
-					response = " ".join([response, "Happy freedom day!"])
-				else:
-					print("Staff")
-					#response = " ".join([response, str(daysuntil(future)), ""])
+		# if day == "Today":
+		# 	future = date(2021, 10, 18)
+		# 	if date.today() <= future:
+		# 		if recipient_id not in Staff_ID:
+		# 			response = " ".join([response, "Happy freedom day!"])
+		# 		else:
+		# 			print("Staff")
+		# 			#response = " ".join([response, str(daysuntil(future)), ""])
 			else:
 				print(False)
 		return response
