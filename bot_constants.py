@@ -68,9 +68,9 @@ Red Rock Deli Chips $3"
 # "Hall" : "Hall Dino Times:\nBreakfast: As Normal \nDinner: 7:45-8:30pm"}
 
 #DINO TIMES FROM 26TH JULY
-bassertimes = {"breakfast": "8:45-10:00am",\
-"lunch" : "1:15-2:15pm",\
-"dinner" : "6:15-7:15pm"}
+bassertimes = {"breakfast": "7:30-10:00am",\
+"lunch" : "12:00-2:15pm",\
+"dinner" : "5:30-8:00pm"}
 dinotimes = "".join(["Basser (and Baxter) Dino Times: \nBreakfast: ", bassertimes["breakfast"], "\nLunch: ", bassertimes["lunch"], "\nDinner: ", bassertimes["dinner"]])
 
 notbassertimes = {"Baxter" : "Baxter Dino Times:\nBreakfast: 8:45-10:00am\nLunch: 1:15-2:15pm\nDinner: 6:15-7:15pm",\
