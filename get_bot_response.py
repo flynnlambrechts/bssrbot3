@@ -161,6 +161,7 @@ def getTime(message):
 	# 	dinotimes = new_dinotimes
 
 	response = ""
+	''' THIS WAS USED IN COVID WHEN DIFFERENT COLLEGES HAD DIFFERENT MEAL TIMES
 	if "baxter" in message:
 		response = response + notbassertimes["Baxter"]
 	elif "goldstein" in message or "goldie" in message or "goldy" in message:
@@ -175,9 +176,19 @@ def getTime(message):
 			if meal == "dino":
 				response = response + dinotimes
 			else:
-				response = "".join([response, f"Basser {meal} is at ",bassertimes[meal],"."])
+				response = "".join([response, f"{meal} is at ",bassertimes[meal],"."])
 		else :
 			response = response + dinotimes
+	''' 
+
+	meal = checkForDino(message)
+	if meal:
+		if meal == "dino":
+			response = response + dinotimes
+		else:
+			response = "".join([response, f"{meal} is at ",bassertimes[meal],"."])
+	else :
+		response = response + dinotimes
 	return response
 
 

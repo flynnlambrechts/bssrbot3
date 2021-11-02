@@ -71,8 +71,9 @@ Red Rock Deli Chips $3"
 bassertimes = {"breakfast": "7:30-10:00am",\
 "lunch" : "12:00-2:15pm",\
 "dinner" : "5:30-8:00pm"}
-dinotimes = "".join(["Basser (and Baxter) Dino Times: \nBreakfast: ", bassertimes["breakfast"], "\nLunch: ", bassertimes["lunch"], "\nDinner: ", bassertimes["dinner"]])
+dinotimes = "".join(["Basser Dino Times: \nBreakfast: ", bassertimes["breakfast"], "\nLunch: ", bassertimes["lunch"], "\nDinner: ", bassertimes["dinner"]])
 
+#no longer used this was a COVID thing
 notbassertimes = {"Baxter" : "Baxter Dino Times:\nBreakfast: 8:45-10:00am\nLunch: 1:15-2:15pm\nDinner: 6:15-7:15pm",\
 "Goldstein" : "Goldstein Dino Times:\nBreakfast: 7:30-8:30am\nLunch: 12:00-1:00pm\nDinner: 5:00-6:00pm",\
 "Fig" : "Fig Tree Dino Times:\nBreakfast: 7:30-8:30am\nLunch: 12:00-1:00pm\nDinner: 5:00-6:00pm",\
