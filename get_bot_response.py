@@ -201,7 +201,7 @@ def checkForDino(message):
 		value = "breakfast"
 	elif "lunch" in message:
 		value = "lunch"
-	elif "dinner" in message or "dins" in message or "supper" in message:
+	elif "dinner" in message or "dins" in message or "supper" in message or "munchathon" in message:
 		value = "dinner"
 	return value
 
