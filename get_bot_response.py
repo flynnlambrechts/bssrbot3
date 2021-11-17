@@ -99,9 +99,14 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		response.addbutton(button)
 
 	elif "latemeal" in message or "late" in message or "inloop" in message:
-		response = "Order a late meal here:"
+		response.text = "Order a late meal here:"
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.addbutton(button)
+
+	elif "washing" in message or "laundry" in message or "dryer" in message :
+		response.text = "Click here to view the status of the washers and dryers:"
+		button = UrlButton("Laundry Status", "https://recharge.it.unsw.edu.au/LaundryMonitor/").get_button()
+		response.add_button(button)
 
 	elif "idiot" in message or "dumb" in message or "stupid" in message:
 		link = Sender(recipient_id).get_profile_pic()
