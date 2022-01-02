@@ -67,6 +67,8 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		add_custom_message(message_text, con)
 		response.text = "Adding custom message..."
 		con.close()
+	elif HOLIDAY_MODE:
+		response.text = "Missing Dino? Too bad, BssrBot is on holidays";
 
 	elif "time" in message:
 		response.text = getTime(message)
@@ -104,7 +106,7 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		response.addbutton(button)
 
 	elif "washing" in message or "laundry" in message or "dryer" in message:
-		response.text = "Click here to view the status of the washers and dryers:"
+		response.text = "Click here to view the status of the washing machines and dryers:"
 		button = UrlButton("Laundry Status", "https://recharge.it.unsw.edu.au/LaundryMonitor/").get_button()
 		response.addbutton(button)
 
