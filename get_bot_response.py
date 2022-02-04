@@ -74,15 +74,16 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		response.text = getTime(message)
 
 	elif checkForDino(message):
-		value = checkForDino(message)
-		con = getCon()
-		response.text = getDino(message, value, recipient_id, con) #CURRENTLY CALLED checkForDino
-		con.close()
+		response.text = "Sorry y'all Basser Bot doesnt have the menu atm."
+		# value = checkForDino(message)
+		# con = getCon()
+		# response.text = getDino(message, value, recipient_id, con) #CURRENTLY CALLED checkForDino
+		# con.close()
 
-		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
-		response.addbutton(button)
-		button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
-		response.addbutton(button)
+		# button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
+		# response.addbutton(button)
+		# button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
+		# response.addbutton(button)
 
 	elif checkForShopen(message, recipient_id):
 		response.text = checkForShopen(message, recipient_id)
