@@ -59,8 +59,8 @@ Red Rock Deli Chips $3"
 
 # #Basser used in get_bot_response
 bassertimes = {"breakfast": "7:30-10:00am",\
-"lunch" : "12:00-2:15pm",\
-"dinner" : "5:00-8:00pm",\
+"lunch" : "12:00-1:00pm",\
+"dinner" : "5:00-6:15pm",\
 "seconds" : "6:30-6:45pm, 7:45-8:00pm"}
 dinotimes = "".join(["Dino Times: \nBreakfast: ", bassertimes["breakfast"], \
     "\nLunch: ", bassertimes["lunch"], \
