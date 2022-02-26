@@ -84,7 +84,9 @@ def get_events(message, con):
     # global day
     try:
         current_day, day, weekofterm, column_value = getDay(message)
-        if "week" in message:
+        if weekofterm > 10 or weekofterm < 1:
+            raise Exception(f"Week is out of range (1-10). You input '{weekofterm}'")
+        elif "week" in message:
             cur  = con.cursor()
             getDay(message)
             if check_for_number(message): # checks if user is asking for a specific week
@@ -115,7 +117,7 @@ def get_events(message, con):
              
     except Exception as error:
         #PrintException()
-        #response = response + "Error in getting events: \n" + str(error)
-        response = response + "It's Holidays go have fun."
+        response = f"Error in getting events: \n{error}"
+        #response = response + "It's Holidays go have fun."
     return response
     
