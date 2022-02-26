@@ -1,10 +1,10 @@
 // A generic set of chatting responses. This set mimicks the classic Eliza bot.
 + * 
 - Sorry I don't understand: "<star>".
-
+- That didn't make sense to me.
 
 + [*] (sorry|apologize|apology) [*]
-- Please don't apologize.
+- Please don't apologise.
 - Apologies are not necessary.
 - I've told you that apologies are not required.
 - It did not bother me. Please continue.

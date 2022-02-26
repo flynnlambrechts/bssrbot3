@@ -6,3 +6,24 @@
 + [*] (vacuum|vaccum|vacume|vac|cuum) [*] {weight=10}
 - <call>get_vacuum</call>
 
+// Coffee Night
+
++ [*] nominate [*]
+- There we go
+
++ [*] nominate [*] {weight=10} 
+- Please send through your WildCat nominations in the format:\n
+^ "Nominate 'person' for 'reason'." 
+
++ [*] nominate * for * {weight=30}
+- Successfully nominated <star1> as Wildcat of the week for <star2>. <call>add_nomination <star1> <star2></call>
+
+
++ [*] quote [*]
+- Please send through your quotes in the format:\n
+^ "'Person' said 'quote'."
+
++ * said *
+- I can't believe <star1> said <star2>. <call>add_quote <star1> <star2></call>
+
+// End Coffee Night

@@ -1,14 +1,14 @@
 ! version = 2.0
 
 + (@hello)
-- Hello! Welcome to BssrBot! I'm here to help you with all your dino and calendar needs.
-^ Here are some example questions:
-^ 1. What's for dino?
-^ 2. What's for lunch today?
-^ 3. Is shopen?
-^ 4. What's the shop catalogue?
-^ 5. What's on tonight?
-^ 6. Events on this week?
+- Hello! Welcome to BssrBot! I'm here to help you with all your dino and calendar needs. \n
+^ Here are some example questions:\n
+^ 1. What's for dino?\n
+^ 2. What's for lunch today?\n
+^ 3. Is shopen?\n
+^ 4. What's the shop catalogue?\n
+^ 5. What's on tonight?\n
+^ 6. Events on this week?\n
 
 + hello bot
 - Hello, human!

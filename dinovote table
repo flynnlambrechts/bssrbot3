@@ -1,0 +1,20 @@
+
+CREATE TABLE dinovote (
+day VARCHAR(20) NOT NULL PRIMARY KEY,
+breakfast INTEGER,
+lunch INTEGER,
+dinner INTEGER
+);
+
+INSERT INTO dinovote (
+    day,
+    breakfast,
+    lunch,
+    dinner)
+VALUES ('26-06-21',
+        0,
+        0,
+        0
+        );
+
+SELECT day FROM dinovote WHERE day = '26-06-21';

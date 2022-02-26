@@ -1,13 +1,11 @@
-  
-#Python libraries that we need to import for our bot
+  #Python libraries that we need to import for our bot
 import os, sys                          #for heroku env
 import psycopg2                         #database stuff
 import json
 
 from flask import Flask, request        #flask
 
-from response import Response
-from get_bot_response import get_bot_response
+from bot_response import bot_response
 from models import Sender
 from bot_constants import (VERIFY_TOKEN, Admin_ID)
 from bot_functions import (PrintException, getCon)
@@ -41,16 +39,17 @@ def receive_message():
                         if message['message'].get('text'):
                             message_text = message['message']['text']
                             print(message_text)
-                            get_bot_response(recipient_id, message_text)
+                            bot_response(recipient_id, message_text)
 
                             con = getCon()
                             Sender(recipient_id).adduser(con)
                             con.close()
 
                         elif message['message'].get('attachments'):
-                            print("Picture")
-                            attachment = "blank for now"
-                            get_bot_response(recipient_id, attachment)
+                            print(message['message'].get('attachments'))
+                            attachment = message['message'].get('attachments')
+                            message_text = "blank"
+                            bot_response(recipient_id, message_text, attachment)
 
                         else:
                             print("No message?")
@@ -59,11 +58,6 @@ def receive_message():
             print('PING!')
     except:
         PrintException()
-        for ID in Admin_ID:
-            response = Response(ID)
-            response.text = "Oh no something went wrong :("
-            response.send()
-        #maybe add func to text admin when error occurs
     return "Message Processed"
 
 

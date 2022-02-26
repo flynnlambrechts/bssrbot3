@@ -1,0 +1,24 @@
+Custom Message Table
+
+CREATE TABLE custom_message (
+day VARCHAR(20) NOT NULL PRIMARY KEY,
+allday VARCHAR(200),
+breakfast VARCHAR(200),
+lunch VARCHAR(200),
+dinner VARCHAR(200)
+);
+
+INSERT INTO custom_message (
+    day,
+    allday,
+    breakfast,
+    lunch,
+    dinner)
+VALUES ('26-06-21',
+        'today is a special day',
+        'breakfast is beepboop',
+        'lunch is tunksy',
+        'dinner is nasty'
+        );
+
+SELECT day FROM custom_message WHERE day = '26-06-21';

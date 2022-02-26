@@ -66,3 +66,21 @@ date,
 column1,
 column2)
 VALUES ('1','blank','blank','blank');
+
+
+-------------Wildcats--------------------
+CREATE TABLE Wildcats (
+nominee VARCHAR(100),
+reason VARCHAR(200),
+date DATE,
+person VARCHAR(100)
+);
+
+
+-------------Quotes--------------------
+CREATE TABLE quotes (
+quotee VARCHAR(100),
+quote VARCHAR(200),
+date DATE,
+person VARCHAR(100)
+);

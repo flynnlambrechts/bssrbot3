@@ -1,0 +1,18 @@
+heroku pg:psql postgresql-perpendicular-85200 --app bssrbot3
+
+DROP TABLE calendar;
+
+CREATE TABLE calendar (
+week VARCHAR(10) NOT NULL PRIMARY KEY,
+wholeweek VARCHAR(150),
+monday VARCHAR(150),
+tuesday VARCHAR(150),
+wednesday VARCHAR(150),
+thursday VARCHAR(150),
+friday VARCHAR(150),
+saturday VARCHAR(150),
+sunday VARCHAR(150)
+)  ;
+
+\copy calendar FROM /Users/flynnlambrechts/Desktop/Coding/BssrBot2/BssrBot-Dev/bssr_calendar/TRI_2_FINAL.csv WITH (FORMAT CSV); 
+

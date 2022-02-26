@@ -152,10 +152,10 @@ def getDay(message, week): #here is where we get the day and current_day and som
                 print(str(week) + "week")
                 column = 1
     #check if user has asked about a day of the week
-    elif checkForDay(message):
+    elif check_for_day(message):
         print("day found")
         week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-        if current_day > int(checkForDay(message)):
+        if current_day > int(check_for_day(message)):
             print(str(week) + " week")
             if str(week)==str("4"):
                 week = 1
@@ -163,11 +163,11 @@ def getDay(message, week): #here is where we get the day and current_day and som
             else:
                 week = week + 1
                 print(str(week) + " week")
-            current_day = int(checkForDay(message))
-            day = str(week_days[int(checkForDay(message))])
+            current_day = int(check_for_day(message))
+            day = str(week_days[int(check_for_day(message))])
         else:
-            current_day = int(checkForDay(message))
-            day = str(week_days[int(checkForDay(message))])
+            current_day = int(check_for_day(message))
+            day = str(week_days[int(check_for_day(message))])
     #otherwise must be today: and day and current_day are not updated from todays value
     return day, current_day, column, week
 
@@ -193,7 +193,7 @@ def getDay(message, week): #here is where we get the day and current_day and som
 #         response = response + dinnermenu() + "\n\n"
 
 #     elif day == "Tomorrow":
-#     elif checkForDay(message):
+#     elif check_for_day(message):
 
 
 def breakfastmenu(day_value, column, week):
@@ -370,7 +370,7 @@ def getmenuweek():
     print(menuweek)
     return menuweek
 
-def checkForDay(message): #check of day of week specified
+def check_for_day(message): #check of day of week specified
     day = ""
     if "monday" in message or " mon" in message or "mon " in message:
         day = str('0')

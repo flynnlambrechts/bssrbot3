@@ -1,30 +1,9 @@
-
 import psycopg2
-
 import time
 import datetime
 from pytz import timezone
 
 TIMEZONE = timezone('Australia/Sydney')
-
-global person
-person = str("Mike Hunt")
-
-global index
-index = int(1)
-
-global current_time, end_time, date
-'''
-current_time = datetime.datetime.now(TIMEZONE).strftime('%H:%M:%S')
-date_and_time = datetime.datetime.now(TIMEZONE)
-end_time = (date_and_time + datetime.timedelta(hours=3)).strftime('%H:%M:%S') #closes shop after 3 hours
-'''
-
-date_and_time = datetime.datetime.now(TIMEZONE)
-current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
-end_time = (date_and_time + datetime.timedelta(hours=3)).strftime('%Y-%m-%d %H:%M:%S')
-date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
-
 
 def open_shopen(name, con):
     try: 
@@ -59,10 +38,9 @@ def close_shopen(name, con):
         return "Shop has been closed!"
     except Exception as error:
         print("Error: " + str(error) + "\n" + str(type(error)))
-        return "Fail: " + str(error)
-        
+        return "Fail: " + str(error)     
 
-def timeTillClose(end_time):
+def time_till_close(end_time):
     current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
     close_time = datetime.datetime.strptime(str(end_time),'%Y-%m-%d %H:%M:%S')
     remaining_time = (close_time.timestamp()) - (datetime.datetime.strptime(str(current_time),'%Y-%m-%d %H:%M:%S').timestamp()) #
@@ -92,7 +70,7 @@ def get_shopen(con):
             value = str(row[4])
             date = row[5]
         
-        if int(timeTillClose(end_time)) >= 0:
+        if int(time_till_close(end_time)) >= 0:
             if value == "True":
                 response = response + "Shop was opened by " + person + " at " + str(start_time.strftime('%I:%M %p')) + "."
             elif value == "False":

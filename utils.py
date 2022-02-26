@@ -1,4 +1,3 @@
-
 #wit.ai
 #watch https://www.youtube.com/watch?v=e29Aj6tJ_5k&list=PLyb_C2HpOQSC4M3lzzrql7DSppTeAxh-x&index=9
 #and previous video in this playlist to understand

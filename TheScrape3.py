@@ -7,8 +7,7 @@ from bs4 import BeautifulSoup # Importing BeautifulSoup class from the bs4 modul
 
 from killswitch import read_custom_message
 from bot_constants import (week_days, Staff_ID)
-from bot_functions import (PrintException, daysuntil)
-
+from bot_functions import (PrintException, days_until)
 
 TIMEZONE = timezone('Australia/Sydney')
 
@@ -59,9 +58,9 @@ class Breakfast(Meal):
 
 class Lunch(Meal):
 	def __init__(self, week, meal=None, day=None):
-		self.Range = range(1,3)
+		self.Range = range(0,3)
 		self.page = str((2*(week-1)+1.5))
-		self.headers = [u"Hot Option \U0001F37D", u"Vegetarian Option \U0001F331", u"Salad \U0001F957"]#u"Soup \U0001f372"]
+		self.headers = [u"Hot Option \U0001F37D", u"Vegetarian Option \U0001F331", u"Soup \U0001f372"]
 
 class Dinner(Meal):
 	def __init__(self, week, meal=None, day=None):
@@ -70,7 +69,7 @@ class Dinner(Meal):
 		self.headers = [u"Main Course \U0001F37D", u"Vegetarian \U0001F331", u"Salad \U0001F957", "Vegetables", u"Additional Vegetables \U0001F966", u"The Dessert Station \U0001f370"]
 
 
-def getDino(message, value, recipient_id, con=None):
+def get_dino(message, value, recipient_id, con=None):
 	try:
 		time = datetime.now(TIMEZONE).time().hour
 		week = getmenuweek()
@@ -91,17 +90,17 @@ def getDino(message, value, recipient_id, con=None):
 				meal = Breakfast(week)
 
 		elif value == "breakfast":
-			if time > 14 and day == "Today": #after 2pm will give the breakfast for the next day
+			if time > 14 and day == "Today" and "today" not in message: #after 2pm will give the breakfast for the next day
 				day, current_day, week = isTomorrow(day, current_day, week)
 			meal = Breakfast(week)
 
 		elif value == "lunch":
-			if time > 17 and day == "Today": #after 5pm will give the lunch for the next day
+			if time > 17 and day == "Today" and "today" not in message: #after 5pm will give the lunch for the next day
 				day, current_day, week = isTomorrow(day, current_day, week)
 			meal = Lunch(week)
 
 		elif value == "dinner":
-			if time > 21 and day == "Today":
+			if time > 21 and day == "Today" and "today" not in message:
 				day, current_day, week = isTomorrow(day, current_day, week)
 			meal = Dinner(week)
 
@@ -113,24 +112,19 @@ def getDino(message, value, recipient_id, con=None):
 				response = response + str(note)
 
 		#COUNT DOWN TO SPECIFIC EVENT
-		# if day == "Today":
-		# 	future = date(2021, 10, 18)
-		# 	if date.today() <= future:
-		# 		if recipient_id not in Staff_ID:
-		# 			response = " ".join([response, "Happy freedom day!"])
-		# 		else:
-		# 			print("Staff")
-		# 			#response = " ".join([response, str(daysuntil(future)), ""])
+		if day == "Today":
+			future = date(2021, 9, 13)
+			if date.today() <= future:
+				response = " ".join([response, str(days_until(future)), "Days until TRI 3..."])
 			else:
 				print(False)
 		return response
 	except:
-		PrintException()
-	
+		PrintException()	
 
 def getmenuweek(): #1-4 inclusive cycle
 	x = datetime.now(TIMEZONE)
-	week = (int(x.strftime("%W"))+3) #plus three changes the cycle to match the dino cycle
+	week = (int(x.strftime("%W"))+0) #plus one changes the cycle to match the dino cycle
 	menuweek = (week)%4+1 #this cheeky +1 changes range from (0-3 to 1-4)
 	print(str(menuweek) + " Menu Week")
 	return menuweek
@@ -146,23 +140,23 @@ def getDay(message, week): #here is where we get the day and current_day and som
 		day, current_day, week = isTomorrow(day, current_day, week)
 
 	#check if user has asked about a day of the week
-	elif checkForDay(message):
+	elif check_for_day(message):
 		print("Day Found!")
-		daynumber = int(checkForDay(message))
+		daynumber = int(check_for_day(message))
 		if current_day > daynumber:
-			print(str(week) + " week, checkForDay")
+			print(str(week) + " week, check_for_day")
 			if str(week)==str("4"):
 				week = 1
-				print(str(week) + " week, checkForDay if 4")
+				print(str(week) + " week, check_for_day if 4")
 			else:
 				week = week + 1
-				print(str(week) + " week, checkForDay else")
+				print(str(week) + " week, check_for_day else")
 		current_day = daynumber
 		day = str(week_days[current_day])
 	#otherwise must be today: and day and current_day are not updated from todays value
 	return day, current_day, week
 
-def checkForDay(message): #check of day of week specified
+def check_for_day(message): #check of day of week specified
 	day = ""
 	if "monday" in message or " mon" in message or "mon " in message:
 		day = str('0')
@@ -194,6 +188,11 @@ def isTomorrow(day, current_day, week):
 		current_day = 0 #sets it back to monday
 	return day, current_day, week
 	
+def isToday(day, current_day, week):
+	day = "Today"
+	current_day = datetime.now(TIMEZONE).weekday()
+	week = getmenuweek()
+	return day, current_day, week
 
 def addemojiscontent(content):
 	#content = content.replace("egg", u"egg \U0001F95A")
@@ -203,7 +202,6 @@ def addemojiscontent(content):
 	content = content.replace("chicken", u"chicken \U0001F357")
 	#content = content.replace("honey", u"honey \U0001F36F")
 	return content
-
 
 def columnlist(page, column, Range): #gets the info from each column as a list
 	rowcontents = []

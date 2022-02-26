@@ -1,7 +1,4 @@
-#users
 import psycopg2
-
-
 
 def insert_user(full_name, first_name, last_name, PSID, con):
     response = ""
@@ -19,7 +16,6 @@ def insert_user(full_name, first_name, last_name, PSID, con):
     except Exception as error:
         #response = response + "Fail in insert user: " + str(error)
         print("User may be already added: " + str(error) + " type: " + str(type(error)))
-
 
 def view_users(con):
     response = ""

@@ -178,7 +178,7 @@
 ! person i       = you
 
 // Set arrays
-! array hello 	   = hi hello hey yo holla gday bonjour
+! array hello 	   = hi hello hey yo holla gday bonjour help
 ! array malenoun   = male guy boy dude boi man men gentleman gentlemen
 ! array femalenoun = female girl chick woman women lady babe
 ! array mennoun    = males guys boys dudes bois men gentlemen

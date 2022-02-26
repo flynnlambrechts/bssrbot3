@@ -9,24 +9,15 @@ ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 
 class Sender:
 	def __init__(self, recipient_id):
+		URL = "".join(["https://graph.facebook.com/v12.0/", recipient_id, "?fields=first_name,last_name,profile_pic&access_token=", ACCESS_TOKEN])
+		r = requests.get(url = URL)
+		data = r.json()
+		self.first_name = data['first_name']
+		self.last_name = data['last_name']
 		self.psid = recipient_id
-		try:			
-			# URL = "".join(["https://graph.facebook.com/v2.6/", recipient_id, "?fields=first_name,last_name,profile_pic&access_token=", ACCESS_TOKEN])
-			URL = "".join(["https://graph.facebook.com/v12.0/", recipient_id, "?fields=first_name,last_name,profile_pic&access_token=", ACCESS_TOKEN])
-			r = requests.get(url = URL)
-			data = r.json()
-			print("recipient_id: " + str(recipient_id))
-			self.first_name = data['first_name']
-			self.last_name = data['last_name']
-			self.full_name  = " ".join([data['first_name'],data['last_name']])
-			self.profile_pic = data['profile_pic']
-		except:
-			PrintException()
-			print("DATA RETURNED BY FB: " + str(data))
-			self.first_name = None
-			self.last_name = None
-			self.full_name  = None
-			self.profile_pic = None
+		self.full_name  = " ".join([data['first_name'],data['last_name']])
+		self.profile_pic = data['profile_pic']
+
 	def get_firstname(self):
 		return self.first_name
 

@@ -5,24 +5,14 @@ import time
 from pytz import timezone
 TIMEZONE = timezone('Australia/Sydney')
 
-from TheScrape3 import checkForDay
+from TheScrape3 import check_for_day
 from bot_constants import week_days
-
-#column_value = 0
-'''
-def getevent(day, message):
-    global week_days
-    current_day = datetime.now(TIMEZONE).weekday()
-    if "tomorrow" in message or "tmrw" in message or "tomoz" in message:
-
-    elif 
-'''
-
+from bot_functions import PrintException
 
 def getDay(message):
     current_day = datetime.now(TIMEZONE).weekday()
     x = datetime.now(TIMEZONE)
-    weekofterm = (int(x.strftime("%W"))-6) #ZERO WEEK HERE
+    weekofterm = (int(x.strftime("%W"))-21) #ZERO WEEK HERE
     
     day = "Today"
     column_value = int(current_day) + 2
@@ -36,24 +26,24 @@ def getDay(message):
         else:
             column_value = int(current_day) + 3
         #print(column_value)
-    elif checkForDay(message):
+    elif check_for_day(message):
         print("day found")
         #global week_days
-        if current_day > int(checkForDay(message)):
+        if current_day > int(check_for_day(message)):
             if weekofterm == 10:
                 print("end of term") #FIX this
             else:
                 weekofterm+=1
-            current_day = int(checkForDay(message))
+            current_day = int(check_for_day(message))
             column_value = current_day + 2
-            day = str(week_days[int(checkForDay(message))])
+            day = str(week_days[int(check_for_day(message))])
         else:
-            current_day = int(checkForDay(message))
+            current_day = int(check_for_day(message))
             column_value = current_day + 2
-            day = str(week_days[int(checkForDay(message))])
+            day = str(week_days[int(check_for_day(message))])
     return current_day, day, weekofterm, column_value
 
-def checkfornumber(message):
+def check_for_number(message):
     weeknumber = ""
     if "one" in message or "1" in message:
         weeknumber = 1
@@ -97,8 +87,8 @@ def get_events(message, con):
         if "week" in message:
             cur  = con.cursor()
             getDay(message)
-            if checkfornumber(message): # checks if user is asking for a specific week
-                weekofterm = checkfornumber(message)
+            if check_for_number(message): # checks if user is asking for a specific week
+                weekofterm = check_for_number(message)
             if "next" in message:
                 weekofterm+=1
             cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
@@ -124,7 +114,8 @@ def get_events(message, con):
                 response = response + f"Events on {day}: \n" + str(row[column_value])
              
     except Exception as error:
-        print("Error: " + str(error) + "\n" + str(type(error)))
-        response = response + "Error in getting events: \n" + str(error)
+        #PrintException()
+        #response = response + "Error in getting events: \n" + str(error)
+        response = response + "It's Holidays go have fun."
     return response
     

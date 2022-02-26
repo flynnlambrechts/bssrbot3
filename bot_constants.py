@@ -5,10 +5,10 @@ from pytz import timezone
 TIMEZONE = timezone('Australia/Sydney')
 
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #used for fb connection
-ACCESS_TOKEN_BACKUP = os.environ['ACCESS_TOKEN_BACKUP']
+ACCESS_TOKEN_BACKUP = os.environ['ACCESS_TOKEN_BACKUP'] #Used for the backup page, is NULL in Bssrbot-DEV
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN'] #used to verify fb
 DATABASE_URL = os.environ['DATABASE_URL']
-HOLIDAY_MODE = False
+PAT = os.environ['PAT'] #Personal Access Token for Flynn needs to be updated to add more admins
 
 Admin_ID = ["4409117335852974", #Flynn-DEV
             "3760608700732342" #Flynn-REAL
@@ -59,13 +59,9 @@ Red Rock Deli Chips $3"
 
 # #Basser used in get_bot_response
 bassertimes = {"breakfast": "7:30-10:00am",\
-"lunch" : "12:00-1:00pm",\
-"dinner" : "5:00-6:15pm",\
-"seconds" : "6:30-6:45pm, 7:45-8:00pm"}
-dinotimes = "".join(["Dino Times: \nBreakfast: ", bassertimes["breakfast"], \
-    "\nLunch: ", bassertimes["lunch"], \
-    "\nDinner: ", bassertimes["dinner"],\
-    "\n\nSeconds: ", bassertimes["seconds"]])
+"lunch" : "12:00-2:15pm",\
+"dinner" : "5:30-8:00pm"}
+dinotimes = "".join(["Dino Times: \nBreakfast: ", bassertimes["breakfast"], "\nLunch: ", bassertimes["lunch"], "\nDinner: ", bassertimes["dinner"]])
 
 #no longer used this was a COVID thing
 notbassertimes = {"Baxter" : "Baxter Dino Times:\nBreakfast: 8:45-10:00am\nLunch: 1:15-2:15pm\nDinner: 6:15-7:15pm",\
