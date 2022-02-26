@@ -254,11 +254,10 @@ def check_for_calendar(message):
 	or "what’s on" in message \
 	or "what's on" in message \
 	or "what is on" in message:
-		## temporarily removing calender cause COVID-19
-		# con = getCon()
-		# response = response + get_events(message, con)
-		# con.close()
+		con = getCon()
+		response = response + get_events(message, con)
+		con.close()
 
-		response = "https://www.nsw.gov.au/covid-19"
+		# response = "https://www.nsw.gov.au/covid-19"
 	return response
 
