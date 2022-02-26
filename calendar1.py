@@ -12,7 +12,7 @@ from bot_functions import PrintException
 def getDay(message):
     current_day = datetime.now(TIMEZONE).weekday()
     x = datetime.now(TIMEZONE)
-    weekofterm = (int(x.strftime("%W"))-21) #ZERO WEEK HERE
+    weekofterm = (int(x.strftime("%W"))-6) #ZERO WEEK HERE
     
     day = "Today"
     column_value = int(current_day) + 2
