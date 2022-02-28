@@ -51,8 +51,19 @@ def get_vacuum(rs, args):
     time = time.strftime('%I:%M%p, %d %b')
     return f"Vacuum Logs: \nLast Used by: {person} \nTime: {time} \nLocation left: {location}"
 
+def well_being(rs):
+	response = Response(recipient_id)
+	button = UrlButton("Well-Being Form","https://docs.google.com/forms/d/e/1FAIpQLSeb6yKAvUcAjanoIiJbO6mL6wasrEFI4dCNHveL5bLUYWyD0Q/viewform").get_button()
+	response.addbutton(button)
+	button = UrlButton("UNSW Psychology and Well-Being","https://www.student.unsw.edu.au/counselling").get_button()
+	response.addbutton(button)
+	button = UrlButton("UNSW Health Clinic","https://www.student.unsw.edu.au/health/appointment").get_button()
+	response.addbutton(button)
+	response.text = "See the buttons below for all your well-being needs!"
+
 bot.set_subroutine("set_vacuum", set_vacuum)
 bot.set_subroutine("get_vacuum", get_vacuum)
+bot.set_subroutine("well_being", well_being)
 ## ----------------------------------------------------------------------- ##
 
 
