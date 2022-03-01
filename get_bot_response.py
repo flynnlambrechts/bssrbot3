@@ -151,6 +151,9 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 			link = "https://drive.google.com/file/d/1F80ABYpK3T2lNdOZQDvKAsXTzfWmgB_f/"
 			document.attachment = File(link).get_file()
 			document.send()
+			response.text = "Success"
+		except:
+			response.text = "Failed"
 	elif "hello" in message or "hey" in message or "help" in message or "hi" in message: #hi sometimes causes conflicts
 		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
 		#print(str(button) + " Button")
