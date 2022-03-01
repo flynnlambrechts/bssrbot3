@@ -138,7 +138,8 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		else:
 			response.text = "You shall not, PASS: \n" + str(recipient_id)
 	elif "wellbeing" in message or "well-being" in message or "well being" in message:
-		response = Response(recipient_id)
+		button = UrlButton("Well-Being Bible","https://drive.google.com/file/d/1F80ABYpK3T2lNdOZQDvKAsXTzfWmgB_f/view?usp=sharing").get_button()
+		response.addbutton(button)
 		button = UrlButton("Well-Being Form","https://docs.google.com/forms/d/e/1FAIpQLSeb6yKAvUcAjanoIiJbO6mL6wasrEFI4dCNHveL5bLUYWyD0Q/viewform").get_button()
 		response.addbutton(button)
 		button = UrlButton("UNSW Psychology and Well-Being","https://www.student.unsw.edu.au/counselling").get_button()

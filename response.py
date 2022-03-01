@@ -137,6 +137,18 @@ class Image:
 		}
 		return self.attachment
 
+class File:
+	def __init__(self,url):
+		self.fileurl = url
+
+	def get_file(self):
+		self.attachment = {
+		"type": "file",
+		"payload": {
+			"url": self.fileurl}
+		}
+		return self.attachment
+
 
 
 
