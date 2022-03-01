@@ -148,7 +148,7 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 	elif "document" in message:
 		try:
 			document = Response(recipient_id)
-			link = "https://drive.google.com/file/d/1F80ABYpK3T2lNdOZQDvKAsXTzfWmgB_f/"
+			link = "https://acrobat.adobe.com/link/review?uri=urn:aaid:scds:US:27ab8ea1-6fbc-316f-9433-b5b1956f55cb"
 			document.attachment = File(link).get_file()
 			document.send()
 			response.text = "Success"
