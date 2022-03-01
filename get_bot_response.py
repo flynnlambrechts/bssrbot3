@@ -4,7 +4,7 @@ import psycopg2
 import datetime
 #from pytz import timezone
 
-from response import (Response, UrlButton, QuickReply, Gif, Image)
+from response import (Response, UrlButton, QuickReply, Gif, Image, File)
 
 from bot_constants import *
 from bot_functions import *
@@ -138,8 +138,6 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		else:
 			response.text = "You shall not, PASS: \n" + str(recipient_id)
 	elif "wellbeing" in message or "well-being" in message or "well being" in message:
-		button = UrlButton("Well-Being Bible","https://drive.google.com/file/d/1F80ABYpK3T2lNdOZQDvKAsXTzfWmgB_f/view?usp=sharing").get_button()
-		response.addbutton(button)
 		button = UrlButton("Well-Being Form","https://docs.google.com/forms/d/e/1FAIpQLSeb6yKAvUcAjanoIiJbO6mL6wasrEFI4dCNHveL5bLUYWyD0Q/viewform").get_button()
 		response.addbutton(button)
 		button = UrlButton("UNSW Psychology and Well-Being","https://www.student.unsw.edu.au/counselling").get_button()
@@ -147,6 +145,12 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		button = UrlButton("UNSW Health Clinic","https://www.student.unsw.edu.au/health/appointment").get_button()
 		response.addbutton(button)
 		response.text = "See the buttons below for all your well-being needs!"
+	elif "document" in message:
+		try:
+			document = Response(recipient_id)
+			link = "https://drive.google.com/file/d/1F80ABYpK3T2lNdOZQDvKAsXTzfWmgB_f/"
+			document.attachment = File(link).get_file()
+			document.send()
 	elif "hello" in message or "hey" in message or "help" in message or "hi" in message: #hi sometimes causes conflicts
 		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
 		#print(str(button) + " Button")
