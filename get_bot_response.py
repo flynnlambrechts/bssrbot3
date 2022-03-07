@@ -103,7 +103,9 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 
 	elif "latemeal" in message or "late" in message or "inloop" in message:
 		response.text = "Order a late meal here:"
-		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
+		button = UrlButton("InLoop","https://user.resi.inloop.com.au/home").get_button()
+		response.addbutton(button)
+		button = UrlButton("Latemeal Form","https://l.facebook.com/l.php?u=https%3A%2F%2Fforms.office.com%2FPages%2FResponsePage.aspx%3Fid%3DpM_2PxXn20i44Qhnufn7o91DYUQ6lW9MsGLk8aV9AgNUQTY5WE1NTFBHUVJKWk5VSVBUUUtEODJYVy4u%26fbclid%3DIwAR1Cxk3EjqGY-rJdX57Ta5TB6DMKCyW88b4BXNatZ9g5XiTN6HPHDTCpQOk&h=AT1eW45JmLEkyitUHlUu4MIPHhyZ_UzvfD3oLXdxzjmARWxXXdBL13pHy1nvPG5j5E4STyqlk769cLoqzK0cB-YM3nVSj1QqqZqSvjz-lotCuSIHhC4zZ5zbUgEyd1kV0Ghwy-fd4Q&__tn__=H-R&c[0]=AT0qbf8l_pzcNogGI12hOWbzWuwMp7vcjR9WkJdXrRSRWtGDtFoNlGYRFwtC_90q_S_ZCvWdT4qtLuLC2XofxwHgNmX1xVrg1istncII_JeVECSBJpt_UT8LlhsFRK8MD609_u1-N244D3KeM07-uB3k22KMPZabYjA6-FlMc_ZJyyQZ5LbqtVf7x3qTjuY6v0jhueZbGITwnXfP1V8").get_button()
 		response.addbutton(button)
 
 	elif "washing" in message or "laundry" in message or "dryer" in message:
