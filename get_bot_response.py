@@ -147,13 +147,13 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		button = UrlButton("UNSW Health Clinic","https://www.student.unsw.edu.au/health/appointment").get_button()
 		response.addbutton(button)
 		response.text = "See the buttons below for all your well-being needs!"
-		try:
-			document = Response(recipient_id)
-			link = "https://qrcgcustomers.s3-eu-west-1.amazonaws.com/account17877453/24448522_1.pdf?0.08833496026208887"
-			document.attachment = File(link).get_file()
-			document.send()
-		except:
-			response.text = "Document Failed"
+		# try:
+		# 	document = Response(recipient_id)
+		# 	link = "https://qrcgcustomers.s3-eu-west-1.amazonaws.com/account17877453/24448522_1.pdf?0.08833496026208887"
+		# 	document.attachment = File(link).get_file()
+		# 	document.send()
+		# except:
+		# 	response.text = "Document Failed"
 		
 	elif "hello" in message or "hey" in message or "help" in message or "hi" in message: #hi sometimes causes conflicts
 		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
