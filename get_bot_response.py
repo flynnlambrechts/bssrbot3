@@ -150,7 +150,7 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 	elif "document" in message:
 		try:
 			document = Response(recipient_id)
-			link = "https://acrobat.adobe.com/link/review?uri=urn:aaid:scds:US:27ab8ea1-6fbc-316f-9433-b5b1956f55cb"
+			link = "https://qrcgcustomers.s3-eu-west-1.amazonaws.com/account17877453/24448522_1.pdf?0.08833496026208887"
 			document.attachment = File(link).get_file()
 			document.send()
 			response.text = "Success"
