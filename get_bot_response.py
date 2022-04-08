@@ -302,5 +302,5 @@ def handle_postback(recipient_id, postback):
 		response  = Response(recipient_id)
 		response.text = "Okay then..."
 		response.send()
-	elif postback['title'] == "Yes!"
+	elif postback['title'] == "Yes!":
 		print(postback['payload'])
