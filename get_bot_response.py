@@ -298,7 +298,7 @@ def checkForCalendar(message):
 	return response
 
 def handle_postback(recipient_id, postback):
-	if postback = "no":
+	if postback == "no":
 		response  = Response(recipient_id)
 		response.text = "Okay then..."
 		response.send()
