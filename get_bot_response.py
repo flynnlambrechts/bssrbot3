@@ -56,12 +56,17 @@ bot.set_subroutine("get_vacuum", get_vacuum)
 ## ----------------------------------------------------------------------- ##
 
 
-def get_bot_response(recipient_id, message_text="", attachment = ""):
+def get_bot_response(recipient_id, message_text="", attachment = None):
 	message = message_text.lower()
 	response  = Response(recipient_id)
 	picture = Response(recipient_id)
-	if attachment != "":
-		response.text = "Nice pic!"
+	if attachment:
+		response.text = "Nice pic! Add it to dino?"
+		quickreplies = [
+			{'content_type': 'text', 'title': 'Yes', 'payload': 'yes'},
+			{'content_type': 'text', 'title': 'No', 'payload': 'no'},
+		]
+		response.addquick_replies(quickreplies)
 	elif "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
 		con = getCon()
 		add_custom_message(message_text, con)
@@ -172,7 +177,8 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		except:
 			response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
 			PrintException()
-	response.addquick_replies(dino_quickreplies)
+	if not response.is_quickreply():
+		response.addquick_replies(dino_quickreplies)
 	response.send()
 	#--------------------------------------------------------------------------------------------------------------------------------------------------------
 	return "Response formulated"

@@ -18,7 +18,8 @@ class Response:
 
 	def addquick_replies(self,quick_replies): #requires a list of dictionaries
 		self.quick_replies = quick_replies
-
+	def is_quickreply(self):
+		return True if self.quick_replies != [] else False
 	def send(self):
 		recipient_id = self.recipient_id
 		params = {

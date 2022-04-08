@@ -55,7 +55,7 @@ def receive_message():
                             attachment_url = message['message']['attachments'][0]['payload']['url']
                             print(attachment_url)
                             attachment = "blank for now"
-                            get_bot_response(recipient_id, attachment)
+                            get_bot_response(recipient_id, attachment=attachment_url)
 
                         else:
                             print("No message?")
