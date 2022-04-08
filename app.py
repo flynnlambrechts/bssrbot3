@@ -52,7 +52,7 @@ def receive_message():
                             con.close()
 
                         elif message['message'].get('attachments'):
-                            attachment_url = message['message'].get('atachments')
+                            attachment_url = message['message']['attachments'][0]['payload']['url']
                             print(attachment_url)
                             attachment = "blank for now"
                             get_bot_response(recipient_id, attachment)
