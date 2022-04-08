@@ -2,6 +2,8 @@
 import os
 import psycopg2
 import datetime
+
+from requests import post
 #from pytz import timezone
 
 from response import (Response, UrlButton, QuickReply, Gif, Image, File)
@@ -73,7 +75,7 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 				{
 					"type": "postback",
 					"title": "Yes!",
-					"payload": "yes",
+					"payload": {"url": attachment},
 				},
 				{
 					"type": "postback",
@@ -295,3 +297,10 @@ def checkForCalendar(message):
 		con.close()
 	return response
 
+def handle_postback(recipient_id, postback):
+	if postback = "no":
+		response  = Response(recipient_id)
+		response.text = "Okay then..."
+		response.send()
+	elif postback['url']:
+		print(postback['url'])

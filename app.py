@@ -8,7 +8,7 @@ import json
 from flask import Flask, request  # flask
 
 from response import Response
-from get_bot_response import get_bot_response
+from get_bot_response import get_bot_response, handle_postback
 from models import Sender
 from bot_constants import (VERIFY_TOKEN, Admin_ID)
 from bot_functions import (PrintException, getCon)
@@ -56,10 +56,13 @@ def receive_message():
                             attachment_url = message['message']['attachments'][0]['payload']['url']
                             print(attachment_url)
                             get_bot_response(recipient_id, attachment=attachment_url)
-
                         else:
                             print("No message?")
                             log(output)
+                    elif message.get('postback'):
+                        recipient_id = str(message['sender']['id'])
+                        postback = message['postback']['payload']
+                        handle_postback(recipient_id, postback)
         else:
             print('PING!')
     except:
