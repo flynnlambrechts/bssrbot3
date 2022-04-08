@@ -70,9 +70,6 @@ def receive_message():
         # maybe add func to text admin when error occurs
     return "Message Processed"
 
-@app.route("/upload_dino_image", methods=['POST'])
-def upload_image():
-    return
 
 def log(message):
     print(message)
