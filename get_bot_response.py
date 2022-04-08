@@ -63,7 +63,7 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 	if attachment:
 		response.text = "Nice pic! Add it to dino?"
 		quickreplies = [
-			{'content_type': 'text', 'title': 'Yes', 'payload': 'yes'},
+			{'content_type': 'text', 'title': 'Yes', 'payload': attachment},
 			{'content_type': 'text', 'title': 'No', 'payload': 'no'},
 		]
 		response.addquick_replies(quickreplies)

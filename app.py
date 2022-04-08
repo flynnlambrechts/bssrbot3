@@ -21,7 +21,7 @@ app = Flask(__name__)
 # We will receive messages that Facebook sends our bot at this endpoint
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/webhook", methods=['GET', 'POST'])
 def receive_message():
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
@@ -41,7 +41,8 @@ def receive_message():
                 for message in messaging:
                     if message.get('message'):
                         recipient_id = str(message['sender']['id'])
-                        #print(str(recipient_id) + " PSID")
+                        #print(str(recipient_id) + " PSID"
+                            
                         if message['message'].get('text'):
                             message_text = message['message']['text']
                             print(message_text)
@@ -54,7 +55,6 @@ def receive_message():
                         elif message['message'].get('attachments'):
                             attachment_url = message['message']['attachments'][0]['payload']['url']
                             print(attachment_url)
-                            attachment = "blank for now"
                             get_bot_response(recipient_id, attachment=attachment_url)
 
                         else:
