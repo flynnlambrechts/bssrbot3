@@ -75,7 +75,7 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 				{
 					"type": "postback",
 					"title": "Yes!",
-					"payload": {"url": attachment},
+					"payload": attachment,
 				},
 				{
 					"type": "postback",
@@ -298,9 +298,9 @@ def checkForCalendar(message):
 	return response
 
 def handle_postback(recipient_id, postback):
-	if postback == "no":
+	if postback['payload'] == "No!":
 		response  = Response(recipient_id)
 		response.text = "Okay then..."
 		response.send()
-	elif postback['url']:
-		print(postback['url'])
+	elif postback['title'] == "Yes!"
+		print(postback['payload'])

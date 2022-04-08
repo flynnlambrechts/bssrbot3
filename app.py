@@ -62,7 +62,7 @@ def receive_message():
                     elif message.get('postback'):
                         recipient_id = str(message['sender']['id'])
                         postback = message['postback']['payload']
-                        handle_postback(recipient_id, postback)
+                        handle_postback(recipient_id, message['postback'])
         else:
             print('PING!')
     except:
