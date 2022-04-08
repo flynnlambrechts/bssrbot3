@@ -52,7 +52,8 @@ def receive_message():
                             con.close()
 
                         elif message['message'].get('attachments'):
-                            print("Picture")
+                            attachment_url = message['message'].get('atachments')
+                            print(attachment_url)
                             attachment = "blank for now"
                             get_bot_response(recipient_id, attachment)
 
@@ -63,11 +64,7 @@ def receive_message():
             print('PING!')
     except:
         PrintException()
-        for ID in Admin_ID:
-            response = Response(ID)
-            response.text = "Oh no something went wrong :("
-            response.send()
-        # maybe add func to text admin when error occurs
+        #alert_admin
     return "Message Processed"
 
 
@@ -75,6 +72,11 @@ def log(message):
     print(message)
     sys.stdout.flush()
 
+def alert_admin():
+    for ID in Admin_ID:
+            response = Response(ID)
+            response.text = "Oh no something went wrong :("
+            response.send()
 
 def verify_fb_token(token_sent):
     # take token sent by facebook and verify it matches the verify token you sent
