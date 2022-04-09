@@ -56,7 +56,7 @@ def add_dino_image(url, con):
 
 def get_dino_image(meal, con):
     date = get_date()
-
+    urls = None
     try:
         cur = con.cursor()
         cur.execute('''SELECT * FROM images WHERE day = %s''',(date,))
@@ -72,7 +72,7 @@ def get_dino_image(meal, con):
 
     except TypeError:
             #PrintException()
-            print("Type Error in read_custom_message: Probably no message.")
+            print("Type Error in get_dino_image: Probably no image.")
             pass
     except:
             PrintException()

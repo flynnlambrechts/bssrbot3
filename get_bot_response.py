@@ -2,9 +2,9 @@
 import os
 import psycopg2
 import datetime
+import random
 
-from requests import post
-#from pytz import timezone
+from requests import post 
 
 from response import (Response, UrlButton, QuickReply, Gif, Image, File)
 
@@ -63,6 +63,7 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 	message = message_text.lower()
 	response  = Response(recipient_id)
 	picture = Response(recipient_id)
+	response_sent = False
 	if attachment:
 		response.attachment = {
 			"type": "template",
@@ -100,8 +101,6 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 			picture.attachment = Image(image_url).get_image()
 			picture.send()
 			picture = Response(recipient_id)
-
-		response.text = "This you?"
 			
 		con.close()
 		response.text = "dino"
@@ -112,7 +111,8 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 		# response.text = "Sorry y'all Basser Bot doesnt have the menu atm."
 		value = checkForDino(message)
 		con = getCon()
-		response.text = getDino(message, value, recipient_id, con) #CURRENTLY CALLED checkForDino
+		dino = getDino(message, value, recipient_id, con)
+		response.text = dino['text']
 		con.close()
 
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
@@ -120,6 +120,24 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 		button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
 		response.addbutton(button)
 
+		response.addquick_replies(dino_quickreplies)
+		response.send()
+		response_sent = True
+
+		
+		if dino['day'] == 'Today':
+			image_urls = get_dino_image('dinner', con)
+			if image_urls != None:
+				con = getCon()
+				image_url = random.choice(image_urls)
+				picture.attachment = Image(image_url).get_image()
+				picture.addquick_replies(dino_quickreplies)
+				picture.send()
+				con.close()
+
+
+
+		
 	elif checkForShopen(message, recipient_id):
 		response.text = checkForShopen(message, recipient_id)
 
@@ -127,11 +145,11 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 		response.text = checkForCalendar(message)
 
 	elif checkForDay(message) or "tomorrow" in message or "today" in message:
-		response.text = getDino(message, "breakfast", recipient_id)
+		response.text = getDino(message, "breakfast", recipient_id)['text']
 		response.send()
-		response.text = getDino(message, "lunch", recipient_id)
+		response.text = getDino(message, "lunch", recipient_id)['text']
 		response.send()
-		response.text = getDino(message, "dinner", recipient_id)
+		response.text = getDino(message, "dinner", recipient_id)['text']
 
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.addbutton(button)
@@ -166,7 +184,6 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 		testy.get()
 
 	elif "show me users" in message:
-
 		if str(recipient_id) in Admin_ID: 
 			con = getCon()
 			response.text = "Check the logs."
@@ -174,6 +191,7 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 			con.close()
 		else:
 			response.text = "You shall not, PASS: \n" + str(recipient_id)
+
 	elif "wellbeing" in message or "well-being" in message or "well being" in message:
 		button = UrlButton("Well-Being Form","https://docs.google.com/forms/d/e/1FAIpQLSeb6yKAvUcAjanoIiJbO6mL6wasrEFI4dCNHveL5bLUYWyD0Q/viewform").get_button()
 		response.addbutton(button)
@@ -207,9 +225,11 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 		except:
 			response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
 			PrintException()
+
 	if not response.is_quickreply():
 		response.addquick_replies(dino_quickreplies)
-	response.send()
+	if not response_sent:
+		response.send()
 	#--------------------------------------------------------------------------------------------------------------------------------------------------------
 	return "Response formulated"
 

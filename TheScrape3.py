@@ -122,7 +122,7 @@ def getDino(message, value, recipient_id, con=None):
 		# 			#response = " ".join([response, str(daysuntil(future)), ""])
 			else:
 				print(False)
-		return response
+		return {'text' = response, 'day' = day}
 	except:
 		PrintException()
 	
