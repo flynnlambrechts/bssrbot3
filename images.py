@@ -9,7 +9,7 @@ from datetime import datetime
 from bot_constants import TIMEZONE
 from bot_functions import getCon
 
-def date():
+def get_date():
     return str(datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
 
 def pick_meal():
@@ -30,7 +30,7 @@ def add_dino_image(url, con):
 
     meal = pick_meal()
 
-    date = date()
+    date = get_date()
 
     cur = con.cursor()
     cur.execute('''SELECT EXISTS (SELECT day FROM images WHERE day = %s)''', (date,))
@@ -55,7 +55,7 @@ def add_dino_image(url, con):
 
 
 def get_dino_image(meal, con):
-    date = date()
+    date = get_date()
 
     try:
         cur = con.cursor()
