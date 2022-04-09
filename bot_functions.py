@@ -21,7 +21,8 @@ def PrintException():
 
 
 def getCon():  # gets the connection  to the database when required
-    if "HEROKU" in os.environ:
+    # if "HEROKU" in os.environ:
+    if True:
         DATABASE_URL = os.environ['DATABASE_URL']
         con = psycopg2.connect(DATABASE_URL, sslmode='require')
     else:

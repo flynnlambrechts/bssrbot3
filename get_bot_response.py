@@ -24,6 +24,7 @@ from TheScrape3 import checkForDay
 #from utils import wit_response
 
 from models import (Sender, GlobalVar)
+from images import add_dino_image
 
 
 ## RIVESCRIPT STUFF MOVE FUNCTIONS INTO SEPERATE FILE
@@ -298,9 +299,12 @@ def checkForCalendar(message):
 	return response
 
 def handle_postback(recipient_id, postback):
-	if postback['payload'] == "No!":
+	if postback['title'] == "No!":
 		response  = Response(recipient_id)
 		response.text = "Okay then..."
 		response.send()
 	elif postback['title'] == "Yes!":
-		print(postback['payload'])
+		print("Adding Image...")
+		con = getCon()
+		add_dino_image(postback['payload'], con)
+		con.close()
