@@ -8,6 +8,7 @@ dinner text[]
 from datetime import datetime
 from bot_constants import TIMEZONE
 from bot_functions import getCon, PrintException
+from data_base import con
 
 def get_date():
     return str(datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
@@ -23,7 +24,7 @@ def pick_meal():
         meal = "dinner"
     return meal
 
-def add_dino_image(url, con):
+def add_dino_image(url):
     breakfast = None
     lunch = None
     dinner = None

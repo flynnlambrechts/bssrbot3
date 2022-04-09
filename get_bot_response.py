@@ -342,6 +342,6 @@ def handle_postback(recipient_id, postback):
 		response.send()
 	elif postback['title'] == "Yes!":
 		print("Adding Image...")
-		con = getCon()
-		add_dino_image(postback['payload'], con)
-		con.close()
+		# con = getCon()
+		add_dino_image(postback['payload'])
+		# con.close()
