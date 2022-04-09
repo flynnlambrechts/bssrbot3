@@ -127,14 +127,15 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 		
 		# if dino['day'] == 'Today':
 		if True:
+			con = getCon()
 			image_urls = get_dino_image(dino['meal'], con)
 			if image_urls != None:
-				con = getCon()
+				
 				image_url = random.choice(image_urls)
 				picture.attachment = Image(image_url).get_image()
 				picture.addquick_replies(dino_quickreplies)
 				picture.send()
-				con.close()
+			con.close()
 
 
 
