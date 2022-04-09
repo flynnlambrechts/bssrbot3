@@ -52,7 +52,7 @@ def add_dino_image(url):
             (date, breakfast, lunch, dinner,))
         con.commit()
         print("row added successfully")
-        add_dino_image(url, con)
+        add_dino_image(url)
 
 
 def get_dino_image(meal, con):
