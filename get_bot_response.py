@@ -331,12 +331,12 @@ def checkForCalendar(message):
 	return response
 
 def handle_postback(recipient_id, postback):
+	response  = Response(recipient_id)
 	if postback['title'] == "No!":
-		response  = Response(recipient_id)
 		response.text = "Okay then..."
-		response.send()
+		
 	elif postback['title'] == "Yes!":
 		print("Adding Image...")
-		# con = getCon()
 		add_dino_image(postback['payload'])
-		# con.close()
+		response.text = "Adding image..."
+	response.send()
