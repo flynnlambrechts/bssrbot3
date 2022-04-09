@@ -339,4 +339,6 @@ def handle_postback(recipient_id, postback):
 		print("Adding Image...")
 		add_dino_image(postback['payload'])
 		response.text = "Adding image..."
+		
+	response.addquick_replies(dino_quickreplies)
 	response.send()
