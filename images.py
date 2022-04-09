@@ -37,7 +37,7 @@ def add_dino_image(url, con):
     if dummy != "(False,)":
         #make so only updates specific row instead of all rows
         cur.execute(f'''UPDATE images SET
-        {meal} = array_append({meal}, {url}),
+        {meal} = array_append({meal}, '{url}'),
         WHERE day = {date}''')
         con.commit()
         print("custom_message updated successfully")
