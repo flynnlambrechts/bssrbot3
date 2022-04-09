@@ -125,8 +125,9 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 		response_sent = True
 
 		
-		if dino['day'] == 'Today':
-			image_urls = get_dino_image('dinner', con)
+		# if dino['day'] == 'Today':
+		if True:
+			image_urls = get_dino_image(dino['meal'], con)
 			if image_urls != None:
 				con = getCon()
 				image_url = random.choice(image_urls)
