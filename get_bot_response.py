@@ -96,7 +96,7 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 		response.text = "Missing Dino? Too bad, BssrBot is on holidays";
 	elif 'images' in message:
 		con = getCon()
-		for image_url in get_dino_image('dinner', con)):
+		for image_url in get_dino_image('dinner', con):
 			attachment = {
 				"type":"image", 
 				"payload":{
