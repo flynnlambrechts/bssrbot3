@@ -97,8 +97,7 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 		response.text = "Missing Dino? Too bad, BssrBot is on holidays"
 
 	elif str(recipient_id) in Admin_ID and 'images' in message:
-		con = getCon()
-		for image_url in get_dino_image('dinner', con):
+		for image_url in get_dino_image('dinner'):
 			picture.attachment = Image(image_url).get_image()
 			picture.send()
 			picture = Response(recipient_id)
@@ -106,9 +105,7 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 		con.close()
 		response.text = "dino"
 	elif str(recipient_id) in Admin_ID and 'abort: clear' in message :
-		con = getCon()
 		remove_images_today(con)
-		con.close()
 	elif "time" in message:
 		response.text = getTime(message)
 
@@ -133,7 +130,7 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 		# if dino['day'] == 'Today':
 		if True:
 			con = getCon()
-			image_urls = get_dino_image(dino['meal'], con)
+			image_urls = get_dino_image(dino['meal'])
 			if image_urls != None:
 				
 				image_url = random.choice(image_urls)

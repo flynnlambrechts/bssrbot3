@@ -55,7 +55,7 @@ def add_dino_image(url):
         add_dino_image(url)
 
 
-def get_dino_image(meal, con):
+def get_dino_image(meal):
     date = get_date()
     urls = None
     try:
@@ -79,7 +79,7 @@ def get_dino_image(meal, con):
 
 
 #incase someone sends something naughty
-def remove_images_today(con):
+def remove_images_today():
     date = get_date()
     cur = con.cursor()
     cur.execute('''DELETE FROM images WHERE day = %s''',(date,))
