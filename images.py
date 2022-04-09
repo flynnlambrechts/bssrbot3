@@ -11,6 +11,7 @@ from bot_functions import getCon
 
 
 def pick_meal():
+    meal = ""
     time = datetime.now(TIMEZONE).time().hour
     if time < 10:
         meal  = "breakfast"
