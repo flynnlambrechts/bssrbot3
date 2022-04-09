@@ -82,4 +82,4 @@ def remove_images_today(con):
     date = get_date()
     cur = con.cursor()
     cur.execute('''DELETE FROM images WHERE day = %s''',(date,))
-    row = cur.fetchone()
+    # row = cur.fetchone()
