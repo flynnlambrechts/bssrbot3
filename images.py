@@ -61,7 +61,6 @@ def get_dino_image(meal, con):
         cur = con.cursor()
         cur.execute('''SELECT * FROM images WHERE day = %s''',(date,))
         row = cur.fetchone()
-        meal = pick_meal()
 
         if meal == 'breakfast' and row[1] is not None:
             urls = (row[1])
