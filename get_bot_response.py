@@ -103,6 +103,7 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 				"payload":{
 					"url":image_url, 
 					"is_reusable":true
+				}
 			}
 			response_image = Response(recipient_id, attachment=attachment)
 			response.send()
