@@ -56,7 +56,7 @@ def receive_message():
                             attachment_url = message['message']['attachments'][0]['payload']['url']
                             print(attachment_url)
                             for attachment in message['message']['attachments']:
-                                if attachment['type'] == 'image' and not attachment['sticker_id']:
+                                if attachment['type'] == 'image' and not attachment['payload']['sticker_id']:
                                     attachment_url = attachment['payload']['url']
                                     get_bot_response(recipient_id, attachment=attachment_url)
                                 else:
