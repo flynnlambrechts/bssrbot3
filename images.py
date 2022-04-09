@@ -58,22 +58,22 @@ def get_dino_image(meal, con):
     date = date()
 
     try:
-		cur = con.cursor()
-		cur.execute('''SELECT * FROM images WHERE day = %s''',(date,))
-		row = cur.fetchone()
+        cur = con.cursor()
+        cur.execute('''SELECT * FROM images WHERE day = %s''',(date,))
+        row = cur.fetchone()
         meal = pick_meal()
 
-		if meal == 'breakfast' and row[1] is not None:
-			urls = (row[1])
-		elif meal == 'lunch' and row[2] is not None:
-			urls = (row[2])
-		elif meal == 'dinner' and row[3] is not None:
-			urls = (row[3])
+        if meal == 'breakfast' and row[1] is not None:
+            urls = (row[1])
+        elif meal == 'lunch' and row[2] is not None:
+            urls = (row[2])
+        elif meal == 'dinner' and row[3] is not None:
+            urls = (row[3])
 
-	except TypeError:
-			#PrintException()
-			print("Type Error in read_custom_message: Probably no message.")
-			pass
-	except:
-			PrintException()
-	return urls
+    except TypeError:
+            #PrintException()
+            print("Type Error in read_custom_message: Probably no message.")
+            pass
+    except:
+            PrintException()
+    return urls
