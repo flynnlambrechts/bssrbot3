@@ -7,7 +7,7 @@ dinner text[]
 
 from datetime import datetime
 from bot_constants import TIMEZONE
-from bot_functions import getCon
+from bot_functions import getCon, PrintException
 
 def get_date():
     return str(datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
@@ -71,7 +71,6 @@ def get_dino_image(meal, con):
             urls = (row[3])
 
     except TypeError:
-            #PrintException()
             print("Type Error in get_dino_image: Probably no image.")
             pass
     except:
