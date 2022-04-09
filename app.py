@@ -55,7 +55,12 @@ def receive_message():
                         elif message['message'].get('attachments'):
                             attachment_url = message['message']['attachments'][0]['payload']['url']
                             print(attachment_url)
-                            get_bot_response(recipient_id, attachment=attachment_url)
+                            for attachment in message['message']['attachments']:
+                                if attachment['type'] == 'image' and not attachment['sticker_id']:
+                                    attachment_url = attachment['payload']['url']
+                                    get_bot_response(recipient_id, attachment=attachment_url)
+                                else:
+                                    get_bot_response(recipient_id, attachment='invalid_type')
                         else:
                             print("No message?")
                             log(output)

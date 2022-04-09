@@ -1,10 +1,6 @@
 #get_bot_response
-import os
-import psycopg2
 import datetime
 import random
-
-from requests import post 
 
 from response import (Response, UrlButton, QuickReply, Gif, Image, File)
 
@@ -65,29 +61,32 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 	picture = Response(recipient_id)
 	response_sent = False
 	if attachment:
-		response.attachment = {
-			"type": "template",
-			"payload": {
-			"template_type": "generic",
-			"elements": [{
-				"title": "Add this picture to Dino?",
-				"subtitle": "Tap a button to answer.",
-				"image_url": attachment,
-				"buttons": [
-				{
-					"type": "postback",
-					"title": "Yes!",
-					"payload": attachment,
-				},
-				{
-					"type": "postback",
-					"title": "No!",
-					"payload": "no",
+		if attachment != 'invalid_type':
+			response.attachment = {
+				"type": "template",
+				"payload": {
+				"template_type": "generic",
+				"elements": [{
+					"title": "Add this picture to Dino?",
+					"subtitle": "Tap a button to answer.",
+					"image_url": attachment,
+					"buttons": [
+					{
+						"type": "postback",
+						"title": "Yes!",
+						"payload": attachment,
+					},
+					{
+						"type": "postback",
+						"title": "No!",
+						"payload": "no",
+					}
+					],
+				}]
 				}
-				],
-			}]
 			}
-		}
+		else:
+			response.text = "Idk how to deal with whatever that is."
 	elif "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
 		con = getCon()
 		add_custom_message(message_text, con)
@@ -182,10 +181,10 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 	elif "joke" in message:
 		response.text = getjoke()
 
-	elif "test" == message:
-		testy = GlobalVar("test1")
-		testy.insert({'index':2,'date':'27-05-21','column1':'hello1','column2':'goodbye1'})
-		testy.get()
+	# elif "test" == message:
+	# 	testy = GlobalVar("test1")
+	# 	testy.insert({'index':2,'date':'27-05-21','column1':'hello1','column2':'goodbye1'})
+	# 	testy.get()
 
 	elif "show me users" in message:
 		if str(recipient_id) in Admin_ID: 
