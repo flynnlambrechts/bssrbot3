@@ -95,7 +95,9 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 	elif HOLIDAY_MODE:
 		response.text = "Missing Dino? Too bad, BssrBot is on holidays";
 	elif 'images' in message:
-		print(get_dino_image())
+		con = getCon()
+		print(get_dino_image('dinner', con))
+		con.close()
 	elif "time" in message:
 		response.text = getTime(message)
 
