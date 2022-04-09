@@ -17,7 +17,7 @@ def pick_meal():
         meal  = "breakfast"
     elif time < 14:
         meal = "lunch"
-    elif time < 19:
+    else:
         meal = "dinner"
     return meal
 
