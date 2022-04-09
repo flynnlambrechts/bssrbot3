@@ -6,11 +6,9 @@ from pytz import timezone
 from bs4 import BeautifulSoup # Importing BeautifulSoup class from the bs4 module
 
 from killswitch import read_custom_message
-from bot_constants import (week_days, Staff_ID)
+from bot_constants import (week_days, Staff_ID, TIMEZONE)
 from bot_functions import (PrintException, daysuntil)
 
-
-TIMEZONE = timezone('Australia/Sydney')
 
 #GLOSSARY:
 #current_day: day of week 0-6 inclusive

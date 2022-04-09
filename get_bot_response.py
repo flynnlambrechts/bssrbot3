@@ -24,7 +24,7 @@ from TheScrape3 import checkForDay
 #from utils import wit_response
 
 from models import (Sender, GlobalVar)
-from images import add_dino_image
+from images import add_dino_image, get_dino_image
 
 
 ## RIVESCRIPT STUFF MOVE FUNCTIONS INTO SEPERATE FILE
@@ -94,7 +94,8 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 		con.close()
 	elif HOLIDAY_MODE:
 		response.text = "Missing Dino? Too bad, BssrBot is on holidays";
-
+	elif 'images' in message:
+		print(get_dino_image())
 	elif "time" in message:
 		response.text = getTime(message)
 

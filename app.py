@@ -71,6 +71,7 @@ def receive_message():
     return "Message Processed"
 
 
+
 def log(message):
     print(message)
     sys.stdout.flush()

@@ -9,6 +9,8 @@ from datetime import datetime
 from bot_constants import TIMEZONE
 from bot_functions import getCon
 
+def date():
+    return str(datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
 
 def pick_meal():
     meal = ""
@@ -28,7 +30,7 @@ def add_dino_image(url, con):
 
     meal = pick_meal()
 
-    date = str(datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
+    date = date()
 
     cur = con.cursor()
     cur.execute('''SELECT EXISTS (SELECT day FROM images WHERE day = %s)''', (date,))
@@ -52,3 +54,26 @@ def add_dino_image(url, con):
         add_dino_image(url, con)
 
 
+def get_dino_image(meal, con):
+    date = date()
+
+    try:
+		cur = con.cursor()
+		cur.execute('''SELECT * FROM images WHERE day = %s''',(date,))
+		row = cur.fetchone()
+        meal = pick_meal()
+
+		if meal == 'breakfast' and row[1] is not None:
+			urls = (row[1])
+		elif meal == 'lunch' and row[2] is not None:
+			urls = (row[2])
+		elif meal == 'dinner' and row[3] is not None:
+			urls = (row[3])
+
+	except TypeError:
+			#PrintException()
+			print("Type Error in read_custom_message: Probably no message.")
+			pass
+	except:
+			PrintException()
+	return urls
