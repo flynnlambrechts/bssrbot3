@@ -97,16 +97,11 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 	elif 'images' in message:
 		con = getCon()
 		for image_url in get_dino_image('dinner', con):
+			picture.attachment = Image(image_url).get_image()
+			picture.send()
+			picture = Response(recipient_id)
 
-			attachment = {
-				"type":"image", 
-				"payload":{
-					"url":image_url, 
-					"is_reusable": True
-				}
-			}
-			response_image = Response(recipient_id, attachment=attachment)
-			response.send()
+		response.text = "This you?"
 			
 		con.close()
 		response.text = "dino"
