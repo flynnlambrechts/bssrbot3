@@ -25,6 +25,7 @@ def pick_meal():
     return meal
 
 def add_dino_image(url):
+    global con
     breakfast = None
     lunch = None
     dinner = None
@@ -56,6 +57,7 @@ def add_dino_image(url):
 
 
 def get_dino_image(meal):
+    global con
     date = get_date()
     urls = None
     try:
@@ -81,6 +83,7 @@ def get_dino_image(meal):
 #incase someone sends something naughty
 def remove_images_today():
     date = get_date()
+    global con
     cur = con.cursor()
     cur.execute('''DELETE FROM images WHERE day = %s''',(date,))
     con.commit()
