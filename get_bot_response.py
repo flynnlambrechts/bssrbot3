@@ -20,7 +20,7 @@ from TheScrape3 import checkForDay
 #from utils import wit_response
 
 from models import (Sender, GlobalVar)
-from images import add_dino_image, get_dino_image, remove_images_today
+from images import add_dino_image, get_dino_image, remove_images_today, pick_meal
 
 
 ## RIVESCRIPT STUFF MOVE FUNCTIONS INTO SEPERATE FILE
@@ -96,12 +96,11 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 		response.text = "Missing Dino? Too bad, BssrBot is on holidays"
 
 	elif str(recipient_id) in Admin_ID and 'images' in message:
-		for image_url in get_dino_image('dinner'):
+		for image_url in get_dino_image(pick_meal()):
 			picture.attachment = Image(image_url).get_image()
 			picture.send()
 			picture = Response(recipient_id)
 			
-		con.close()
 		response.text = "dino"
 	elif str(recipient_id) in Admin_ID and 'abort: clear' in message :
 		remove_images_today()
