@@ -104,7 +104,7 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 		con.close()
 		response.text = "dino"
 	elif str(recipient_id) in Admin_ID and 'abort: clear' in message :
-		remove_images_today(con)
+		remove_images_today()
 	elif "time" in message:
 		response.text = getTime(message)
 
