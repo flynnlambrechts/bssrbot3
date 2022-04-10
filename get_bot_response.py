@@ -1,8 +1,6 @@
 #get_bot_response
-import os
-import psycopg2
 import datetime
-#from pytz import timezone
+import random
 
 from response import (Response, UrlButton, QuickReply, Gif, Image, File)
 
@@ -22,6 +20,7 @@ from TheScrape3 import checkForDay
 #from utils import wit_response
 
 from models import (Sender, GlobalVar)
+from images import add_dino_image, get_dino_image, remove_images_today
 
 
 ## RIVESCRIPT STUFF MOVE FUNCTIONS INTO SEPERATE FILE
@@ -56,20 +55,56 @@ bot.set_subroutine("get_vacuum", get_vacuum)
 ## ----------------------------------------------------------------------- ##
 
 
-def get_bot_response(recipient_id, message_text="", attachment = ""):
+def get_bot_response(recipient_id, message_text="", attachment = None):
 	message = message_text.lower()
 	response  = Response(recipient_id)
 	picture = Response(recipient_id)
-	if attachment != "":
-		response.text = "Nice pic!"
+	response_sent = False
+	if attachment:
+		if attachment != 'invalid_type':
+			response.attachment = {
+				"type": "template",
+				"payload": {
+				"template_type": "generic",
+				"elements": [{
+					"title": "Add this picture to Dino?",
+					"subtitle": "Tap a button to answer.",
+					"image_url": attachment,
+					"buttons": [
+					{
+						"type": "postback",
+						"title": "Yes!",
+						"payload": attachment,
+					},
+					{
+						"type": "postback",
+						"title": "No!",
+						"payload": "no",
+					}
+					],
+				}]
+				}
+			}
+		else:
+			response.text = "Idk how to deal with whatever that is."
 	elif "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
 		con = getCon()
 		add_custom_message(message_text, con)
 		response.text = "Adding custom message..."
 		con.close()
 	elif HOLIDAY_MODE:
-		response.text = "Missing Dino? Too bad, BssrBot is on holidays";
+		response.text = "Missing Dino? Too bad, BssrBot is on holidays"
 
+	elif str(recipient_id) in Admin_ID and 'images' in message:
+		for image_url in get_dino_image('dinner'):
+			picture.attachment = Image(image_url).get_image()
+			picture.send()
+			picture = Response(recipient_id)
+			
+		con.close()
+		response.text = "dino"
+	elif str(recipient_id) in Admin_ID and 'abort: clear' in message :
+		remove_images_today(con)
 	elif "time" in message:
 		response.text = getTime(message)
 
@@ -77,7 +112,8 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		# response.text = "Sorry y'all Basser Bot doesnt have the menu atm."
 		value = checkForDino(message)
 		con = getCon()
-		response.text = getDino(message, value, recipient_id, con) #CURRENTLY CALLED checkForDino
+		dino = getDino(message, value, recipient_id, con)
+		response.text = dino['text']
 		con.close()
 
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
@@ -85,6 +121,25 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
 		response.addbutton(button)
 
+		response.addquick_replies(dino_quickreplies)
+		response.send()
+		response_sent = True
+
+		
+		if dino['day'] == 'Today':
+			con = getCon()
+			image_urls = get_dino_image(dino['meal'])
+			if image_urls != None:
+				
+				image_url = random.choice(image_urls)
+				picture.attachment = Image(image_url).get_image()
+				picture.addquick_replies(dino_quickreplies)
+				picture.send()
+			con.close()
+
+
+
+		
 	elif checkForShopen(message, recipient_id):
 		response.text = checkForShopen(message, recipient_id)
 
@@ -92,11 +147,11 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		response.text = checkForCalendar(message)
 
 	elif checkForDay(message) or "tomorrow" in message or "today" in message:
-		response.text = getDino(message, "breakfast", recipient_id)
+		response.text = getDino(message, "breakfast", recipient_id)['text']
 		response.send()
-		response.text = getDino(message, "lunch", recipient_id)
+		response.text = getDino(message, "lunch", recipient_id)['text']
 		response.send()
-		response.text = getDino(message, "dinner", recipient_id)
+		response.text = getDino(message, "dinner", recipient_id)['text']
 
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.addbutton(button)
@@ -125,13 +180,12 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 	elif "joke" in message:
 		response.text = getjoke()
 
-	elif "test" == message:
-		testy = GlobalVar("test1")
-		testy.insert({'index':2,'date':'27-05-21','column1':'hello1','column2':'goodbye1'})
-		testy.get()
+	# elif "test" == message:
+	# 	testy = GlobalVar("test1")
+	# 	testy.insert({'index':2,'date':'27-05-21','column1':'hello1','column2':'goodbye1'})
+	# 	testy.get()
 
 	elif "show me users" in message:
-
 		if str(recipient_id) in Admin_ID: 
 			con = getCon()
 			response.text = "Check the logs."
@@ -139,6 +193,7 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 			con.close()
 		else:
 			response.text = "You shall not, PASS: \n" + str(recipient_id)
+
 	elif "wellbeing" in message or "well-being" in message or "well being" in message:
 		button = UrlButton("Well-Being Form","https://docs.google.com/forms/d/e/1FAIpQLSeb6yKAvUcAjanoIiJbO6mL6wasrEFI4dCNHveL5bLUYWyD0Q/viewform").get_button()
 		response.addbutton(button)
@@ -172,8 +227,11 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		except:
 			response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
 			PrintException()
-	response.addquick_replies(dino_quickreplies)
-	response.send()
+
+	if not response.is_quickreply():
+		response.addquick_replies(dino_quickreplies)
+	if not response_sent:
+		response.send()
 	#--------------------------------------------------------------------------------------------------------------------------------------------------------
 	return "Response formulated"
 
@@ -272,3 +330,15 @@ def checkForCalendar(message):
 		con.close()
 	return response
 
+def handle_postback(recipient_id, postback):
+	response  = Response(recipient_id)
+	if postback['title'] == "No!":
+		response.text = "Okay then..."
+		
+	elif postback['title'] == "Yes!":
+		print("Adding Image...")
+		add_dino_image(postback['payload'])
+		response.text = "Adding image..."
+		
+	response.addquick_replies(dino_quickreplies)
+	response.send()

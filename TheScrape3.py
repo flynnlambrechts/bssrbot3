@@ -6,11 +6,9 @@ from pytz import timezone
 from bs4 import BeautifulSoup # Importing BeautifulSoup class from the bs4 module
 
 from killswitch import read_custom_message
-from bot_constants import (week_days, Staff_ID)
+from bot_constants import (week_days, Staff_ID, TIMEZONE)
 from bot_functions import (PrintException, daysuntil)
 
-
-TIMEZONE = timezone('Australia/Sydney')
 
 #GLOSSARY:
 #current_day: day of week 0-6 inclusive
@@ -70,6 +68,7 @@ class Dinner(Meal):
 		self.headers = [u"Main Course \U0001F37D", u"Vegetarian \U0001F331", u"Salad \U0001F957", "Vegetables", u"Additional Vegetables \U0001F966", u"The Dessert Station \U0001f370"]
 
 
+
 def getDino(message, value, recipient_id, con=None):
 	try:
 		time = datetime.now(TIMEZONE).time().hour
@@ -123,7 +122,7 @@ def getDino(message, value, recipient_id, con=None):
 		# 			#response = " ".join([response, str(daysuntil(future)), ""])
 			else:
 				print(False)
-		return response
+		return {'text': response, 'day': day, 'meal': type(meal).__name__.lower()}
 	except:
 		PrintException()
 	
