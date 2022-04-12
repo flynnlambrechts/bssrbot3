@@ -95,16 +95,16 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 	elif HOLIDAY_MODE:
 		response.text = "Missing Dino? Too bad, BssrBot is on holidays"
 
-	elif str(recipient_id) in Admin_ID and 'images' in message:
+	# elif str(recipient_id) in Admin_ID and 'images' in message:
 		
-		images = get_dino_image(pick_meal())
-		print(f"{len(images)} (IMAGES REQUESTED")
-		for image_url in images:
-			picture.attachment = Image(image_url).get_image()
-			picture.send()
-			picture = Response(recipient_id)
-		con.close()
-		response.text = "dino"
+	# 	images = get_dino_image(pick_meal())
+	# 	print(f"{len(images)} IMAGES REQUESTED")
+	# 	for image_url in images:
+	# 		picture.attachment = Image(image_url).get_image()
+	# 		picture.send()
+	# 		picture = Response(recipient_id)
+	# 	con.close()
+	# 	response.text = "dino"
 	elif str(recipient_id) in Admin_ID and 'abort: clear' in message :
 		remove_images_today()
 	elif "time" in message:
