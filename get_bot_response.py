@@ -21,7 +21,7 @@ from TheScrape3 import checkForDay
 
 from models import (Sender, GlobalVar)
 from images import add_dino_image, get_dino_image, remove_images_today, pick_meal
-
+from data_base import con
 
 ## RIVESCRIPT STUFF MOVE FUNCTIONS INTO SEPERATE FILE
 from rivescript import RiveScript
@@ -100,7 +100,7 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 			picture.attachment = Image(image_url).get_image()
 			picture.send()
 			picture = Response(recipient_id)
-			
+		con.close()
 		response.text = "dino"
 	elif str(recipient_id) in Admin_ID and 'abort: clear' in message :
 		remove_images_today()
