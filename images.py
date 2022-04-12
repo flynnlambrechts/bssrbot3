@@ -33,7 +33,12 @@ def add_dino_image(url):
 
     date = get_date()
 
-    cur = con.cursor()
+    try:
+        cur = con.cursor()
+    except:
+        con = getCon()
+        cur = con.cursor()
+
     cur.execute('''SELECT EXISTS (SELECT day FROM images WHERE day = %s)''', (date,))
     dummy = str(cur.fetchone())
 
@@ -53,13 +58,19 @@ def add_dino_image(url):
         con.commit()
         print("row added successfully")
         add_dino_image(url)
+    con.close()
 
 
 def get_dino_image(meal):
     date = get_date()
     urls = None
     try:
-        cur = con.cursor()
+        try:
+            cur = con.cursor()
+        except:
+            con = getCon()
+            cur = con.cursor()
+
         cur.execute('''SELECT * FROM images WHERE day = %s''',(date,))
         row = cur.fetchone()
 
@@ -81,8 +92,14 @@ def get_dino_image(meal):
 
 #incase someone sends something naughty
 def remove_images_today():
+    try:
+            cur = con.cursor()
+    except:
+            con = getCon()
+            cur = con.cursor()
     date = get_date()
     cur = con.cursor()
     cur.execute('''DELETE FROM images WHERE day = %s''',(date,))
     con.commit()
+    con.close()
     # row = cur.fetchone()

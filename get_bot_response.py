@@ -96,7 +96,8 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 		response.text = "Missing Dino? Too bad, BssrBot is on holidays"
 
 	elif str(recipient_id) in Admin_ID and 'images' in message:
-		for image_url in get_dino_image(pick_meal()):
+		images = get_dino_image(pick_meal())
+		for image_url in images:
 			picture.attachment = Image(image_url).get_image()
 			picture.send()
 			picture = Response(recipient_id)
@@ -126,7 +127,7 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 
 		
 		if dino['day'] == 'Today':
-			con = getCon()
+			# con = getCon()
 			image_urls = get_dino_image(dino['meal'])
 			if image_urls != None:
 				
@@ -134,7 +135,7 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 				picture.attachment = Image(image_url).get_image()
 				picture.addquick_replies(dino_quickreplies)
 				picture.send()
-			con.close()
+			# con.close()
 
 
 

@@ -47,7 +47,7 @@ def receive_message():
                             message_text = message['message']['text']
                             print(message_text)
                             get_bot_response(recipient_id, message_text)
-
+                            
                             con = getCon()
                             Sender(recipient_id).adduser(con)
                             con.close()
