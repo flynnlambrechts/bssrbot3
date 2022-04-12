@@ -75,6 +75,7 @@ def get_dino_image(meal):
             pass
     except:
             PrintException()
+    con.close()
     return urls
 
 
