@@ -12,8 +12,11 @@ Database: postgresql - stores information input by users
 - Dino - done
 - Shopen - done
 - Add shop catalogue -done
-- Calendar - working on it
+- Calendar - Done
 - Wildcat of the week nominations
+- Add images
+- Add quotes
+- Wildcat nominations
 - Ressies
 
 
@@ -58,4 +61,4 @@ Database: postgresql - stores information input by users
 - putting menu in db
 - getting dessert
 
-Github# bssrbot-dev
+Github# bssrbot3
