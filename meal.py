@@ -53,6 +53,8 @@ class Meal:
 		column_list = list(filter(lambda v: v == v, column_list[self.start:]))
 		
 		for idx, header in enumerate(self.headers):
+			if header == 'Vegetables':
+				continue
 			content = column_list[idx]
 			# Pandas duplicates across merged cells
 			# so we make sure not to add duplicates
