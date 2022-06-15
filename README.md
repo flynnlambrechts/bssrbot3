@@ -22,9 +22,11 @@ Database: postgresql - stores information input by users
 
 ## To Update menu
 1. Name menu "menu.pdf" and place and in menu folder (remove old menu items)
-2. Run camelot.py to generate menu htmls
-3. In the thescrape2 find what week of the year corresponds to current menu week and update subtract value
-4. (Optional) Reduce multiples of 4 in thescrape2 to only possible values
+1. Open menu pdf in Adobe Acrobat and export file
+to html named 'menu.html'
+2. Run menu_to_df.py to generate individual menu htmls
+3. In the get_dino find what week of the year corresponds to current menu week and update subtract value
+
 
 ## To Update calendar
 1. \copy data into db using heroku:
