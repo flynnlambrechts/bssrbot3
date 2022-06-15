@@ -8,7 +8,7 @@ Only when updating the menu
 '''
 
 from bs4 import BeautifulSoup
-from numpy import save # Importing BeautifulSoup class from the bs4 module
+# Importing BeautifulSoup class from the bs4 module
 
 import os
 import pandas as pd
