@@ -12,6 +12,7 @@ MarkupSafe==1.1.1
 pymessenger==0.0.7.0
 requests==2.25.1
 requests-toolbelt==0.9.1
+pandas==1.4.2
 six==1.15.0
 urllib3==1.26.4
 virtualenv==20.4.4
