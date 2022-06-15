@@ -1,8 +1,6 @@
 #users
 import psycopg2
 
-
-
 def insert_user(full_name, first_name, last_name, PSID, con):
     response = ""
     try:

@@ -8,7 +8,7 @@ from bot_constants import *
 from bot_functions import *
 
 #from TheScrape2 import checkForDino as getDino   #for scraping htmls
-from TheScrape3 import getDino
+from get_dino import getDino
 from shopen import *                    #for all shopen related
 from killswitch import add_custom_message
 from calendar1 import get_events
@@ -16,7 +16,7 @@ from jokes import getjoke               #for jokes
 
 
 from users import *                     #for viewing users
-from TheScrape3 import checkForDay
+from get_dino import checkForDay
 #from utils import wit_response
 
 from models import (Sender, GlobalVar)
