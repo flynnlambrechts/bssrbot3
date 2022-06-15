@@ -29,3 +29,4 @@ rivescript==1.15.0
 python-dateutil==2.8.1
 tabulate==0.8.9
 PyGithub==1.55
+html5lib==1.1
