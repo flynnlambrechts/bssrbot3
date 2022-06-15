@@ -47,7 +47,7 @@ class Meal:
 
 		self.response = f"{self.name} {day_name}: \n".title()
 
-		column_list = (get_df(self.name, week)[day_number])
+		column_list = (get_df(self.name, week)[day_number + 1])
 
 		# Below filters 'nan' from the list which is a float
 		column_list = list(filter(lambda v: v == v, column_list[self.start:]))
