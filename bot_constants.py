@@ -9,6 +9,7 @@ ACCESS_TOKEN_BACKUP = os.environ['ACCESS_TOKEN_BACKUP']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']  # used to verify fb
 DATABASE_URL = os.environ['DATABASE_URL']
 HOLIDAY_MODE = False
+MENU_DIRECTORY = './menu_weeks'
 
 Admin_ID = ["4409117335852974",  # Flynn-DEV
             "3760608700732342"  # Flynn-REAL
