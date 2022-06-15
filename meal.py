@@ -58,7 +58,7 @@ class Meal:
 			content = column_list[idx]
 			# Pandas duplicates across merged cells
 			# so we make sure not to add duplicates
-			content = addemojiscontent(content)
+			content = addemojiscontent(content.strip())
 			if content not in self.response:
 				self.response += f"{header}:\n {content}\n"
 		
