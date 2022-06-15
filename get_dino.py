@@ -69,7 +69,7 @@ def getDino(message, value, recipient_id, con=None):
 				day_name, day_number, week = isTomorrow(day_name, day_number, week)
 			meal = Meal('dinner')
 
-		response = meal.getresponse(day_name, day_number, week)
+		response = meal.getresponse(day_name, day_number, week.number)
 
 		if con is not None:
 			note = addnote(con, meal.name, day_name, recipient_id)
