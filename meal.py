@@ -56,12 +56,12 @@ class Meal:
 			if header == 'Vegetables':
 				continue
 			print(column_list[idx])
-			content = column_list[idx][1:]
+			content = column_list[idx].strip()
 			# Pandas duplicates across merged cells
 			# so we make sure not to add duplicates
 			content = addemojiscontent(content)
 			if content not in self.response:
-				self.response += f"{header}:\n {content}\n\n"
+				self.response += f"{header}:\n{content}\n\n"
 		
 		return self.response
 
