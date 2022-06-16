@@ -18,12 +18,14 @@ meals_attributes = {
 		'headers': [u"Residential Breakfast \U0001f95e", 
 					"Special"],
 		'start': 0,
+		'end': 3,
 	},
 	'lunch': {
 		'headers': [u"Hot Option \U0001F37D", 
 					u"Vegetarian Option \U0001F331"], 
 					#u"Soup \U0001f372"],
 		'start': 0,
+		'end': 3,
 
 	},
 	'dinner': {
@@ -34,6 +36,8 @@ meals_attributes = {
 					u"Additional Vegetables \U0001F966", 
 					u"The Dessert Station \U0001f370"],
 		'start': 2,
+		'end': None,
+
 	},
 }
 
@@ -41,7 +45,7 @@ class Meal:
 	def __init__(self, mealtype):
 		self.name = mealtype
 		self.attributes = meals_attributes[mealtype]
-		self.headers = self.attributes['headers']
+		self.end = self.attributes['end']
 		self.start = self.attributes['start']
 
 	def getresponse(self, day_name, day_number, week):
@@ -54,8 +58,8 @@ class Meal:
 		# with open('dataframe.html', 'w') as f:
 		# 	f.write(data_frame.to_html())
 			
-		headers = data_frame[0][self.start:]
-		content = data_frame[day_number+1][self.start:]
+		headers = data_frame[0][self.start:self.end]
+		content = data_frame[day_number+1][self.start:self.end]
 
 		content_dict = dict(zip(headers,content))
 
@@ -113,7 +117,7 @@ def addemojiscontent(content):
 if __name__ == '__main__':
 	# for i in range(1,8):
 	week = 2
-	print(Meal('breakfast').getresponse('Today', 2, week))
+	print(Meal('breakfast').getresponse('Today', 3, week))
 	print(Meal('lunch').getresponse('Tomorrow', 3, week))
-	print(Meal('dinner').getresponse('Today', 3, week))
+	print(Meal('dinner').getresponse('Today', 0, week))
 	print(Meal('dinner').getresponse('Tomorrow', 4, week))
