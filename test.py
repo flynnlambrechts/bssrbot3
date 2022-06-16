@@ -1,26 +1,12 @@
-import datetime
+from datetime import *
 from pytz import timezone
 TIMEZONE = timezone('Australia/Sydney')
 
-def daysuntil(day): #date provided in date(YYYY,M,D) format
-    today = date.today()
-    diff = day - today
-    return (diff.days)
+def getmenuweek(): #1-4 inclusive cycle
+	x = datetime.now(TIMEZONE)
+	week = (int(x.strftime("%W"))+1) #plus three changes the cycle to match the dino cycle
+	menuweek = (week)%4+1 #this cheeky +1 changes range from (0-3 to 1-4)
+	print(str(menuweek) + " Menu Week")
+	return menuweek
 
-# day = date(2021,9,13)
-# print(daysuntil(day))
-
-# day = date(2021, 9, 13)
-# if date.today() <= day:
-# 	print(True)
-# else:
-# 	print(False)
-
-
-# current_day = datetime.now(TIMEZONE).weekday()
-# print(current_day.date())
-
-row = "2021-07-17 07:57:57.759856"
-time = datetime.datetime.strptime(row, '%Y-%m-%d %H:%M:%S.%f')
-time = time.strftime('%I:%M%p %d %b')
-print(time)
+getmenuweek()
