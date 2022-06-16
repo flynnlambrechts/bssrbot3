@@ -60,7 +60,7 @@ class Meal:
 			# so we make sure not to add duplicates
 			content = addemojiscontent(content)
 			if content not in self.response:
-				self.response += f"{header}:\n {content}\n"
+				self.response += f"{header}:\n {content}\n\n"
 		
 		return self.response
 
