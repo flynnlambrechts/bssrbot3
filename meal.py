@@ -55,8 +55,7 @@ class Meal:
 		for idx, header in enumerate(self.headers):
 			if header == 'Vegetables':
 				continue
-			print(column_list[idx])
-			content = column_list[idx].strip()
+			content = column_list[idx].strip().capitalize()
 			# Pandas duplicates across merged cells
 			# so we make sure not to add duplicates
 			content = addemojiscontent(content)
