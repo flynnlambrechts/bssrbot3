@@ -55,10 +55,10 @@ class Meal:
 		for idx, header in enumerate(self.headers):
 			if header == 'Vegetables':
 				continue
-			content = column_list[idx]
+			content = column_list[idx].strip()
 			# Pandas duplicates across merged cells
 			# so we make sure not to add duplicates
-			content = addemojiscontent(content.strip())
+			content = addemojiscontent(content)
 			if content not in self.response:
 				self.response += f"{header}:\n {content}\n"
 		
