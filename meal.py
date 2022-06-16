@@ -5,6 +5,8 @@ meal, day name and day number parameters
 
 from datetime import *
 from pytz import timezone
+from string import printable
+
 
 from menu_to_df import get_df
 
@@ -47,37 +49,71 @@ class Meal:
 
 		self.response = f"{self.name} {day_name}: \n".title()
 
-		column_list = (get_df(self.name, week)[day_number + 1])
+		data_frame = get_df(self.name, week)
 
-		# Below filters 'nan' from the list which is a float
-		column_list = list(filter(lambda v: v == v, column_list[self.start:]))
-		
-		for idx, header in enumerate(self.headers):
-			if header == 'Vegetables':
-				continue
-			content = column_list[idx].strip().capitalize()
-			# Pandas duplicates across merged cells
-			# so we make sure not to add duplicates
-			content = addemojiscontent(content)
-			if content not in self.response:
-				self.response += f"{header}:\n{content}\n\n"
+		# with open('dataframe.html', 'w') as f:
+		# 	f.write(data_frame.to_html())
+			
+		headers = data_frame[0][self.start:]
+		content = data_frame[day_number+1][self.start:]
+
+		content_dict = dict(zip(headers,content))
+
+		temp_content = ""
+		temp_header = ""
+		for header in content_dict:
+			content = content_dict[header]
+
+			if temp_header != header and header == header:
+				if temp_content != "" and temp_header != 'vegetables':
+					temp_header = addemojiscontent(temp_header.lower())
+					temp_content = addemojiscontent(clean_content(temp_content.lower()))
+					self.response += f"{temp_header.title()}:\n{temp_content.capitalize()}\n"
+				temp_header = header
+				temp_content = ""
+
+			if header == header:
+				temp_header = header
+			if content == content and content not in temp_content:
+				temp_content += (content + '\n')
+			# print(header, temp_header)
+			# print(content, temp_content)
+
+
 		
 		return self.response
 
+def clean_content(content):
+	return ''.join(filter(lambda x: x in printable, content))
+
+
+emojis = {
+	"pancakes": u"\U0001f95e",
+	"sushi": u"\U0001f363",
+	"chicken": u"\U0001F357",
+	"salad": u"\U0001F957",
+	"main course": u'\U0001F37D',
+	'hot option': u'\U0001F37D',
+	'vegetarian': u'\U0001F331', 
+	'residential breakfast': u'\U0001f95e',
+	"vegetarian": u"\U0001F331",
+	"additional vegetables": u"\U0001F966",
+	"the dessert station": u"\U0001f370",
+
+	# "honey": u"\U0001F36F",
+	# "egg": u"\U0001F95A",
+}
 
 def addemojiscontent(content):
-	#content = content.replace("egg", u"egg \U0001F95A")
-	content = content.replace("pancakes", u"pancakes \U0001f95e")
-	content = content.replace("pizza", u"pizza \U0001f355")
-	content = content.replace("sushi", u"sushi \U0001f363")
-	content = content.replace("chicken", u"chicken \U0001F357")
-	#content = content.replace("honey", u"honey \U0001F36F")
+	for emoji in emojis:
+		content = content.replace(emoji, emoji + f' {emojis[emoji]}')
 	return content
 
 
 if __name__ == '__main__':
 	# for i in range(1,8):
-	week = 1
+	week = 2
 	print(Meal('breakfast').getresponse('Today', 2, week))
 	print(Meal('lunch').getresponse('Tomorrow', 3, week))
-	print(Meal('dinner').getresponse('Tomorrow', 3, week))
+	print(Meal('dinner').getresponse('Today', 3, week))
+	print(Meal('dinner').getresponse('Tomorrow', 4, week))
