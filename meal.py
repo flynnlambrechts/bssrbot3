@@ -69,7 +69,7 @@ class Meal:
 			content = content_dict[header]
 
 			if temp_header != header and header == header:
-				if temp_content != "" and temp_header != 'vegetables' and temp_content not in self.response:
+				if temp_content != "" and temp_header != 'vegetables' and addemojiscontent(clean_content(temp_content.lower())) not in self.response:
 					temp_header = addemojiscontent(temp_header.lower())
 					temp_content = addemojiscontent(clean_content(temp_content.lower()))
 					self.response += f"{temp_header.title()}:\n{temp_content.capitalize()}\n"
