@@ -120,6 +120,7 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 			con.close()
 		except:
 			PrintException()
+			print(response.text)
 			response.text = 'Something went wrong with the menu...'
 
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
