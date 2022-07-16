@@ -118,6 +118,7 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 			dino = getDino(message, value, recipient_id, con)
 			response.text = dino['text']
 			con.close()
+			print(response.text)
 		except:
 			PrintException()
 			print(response.text)
