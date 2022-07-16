@@ -118,12 +118,10 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 			dino = getDino(message, value, recipient_id, con)
 			response.text = dino['text']
 			con.close()
-			print(response.text)
 		except:
 			PrintException()
-			print(response.text)
 			response.text = 'Something went wrong with the menu...'
-
+		print(response.text)
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.addbutton(button)
 		button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
