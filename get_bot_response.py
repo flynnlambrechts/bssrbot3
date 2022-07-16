@@ -111,12 +111,16 @@ def get_bot_response(recipient_id, message_text="", attachment = None):
 		response.text = getTime(message)
 
 	elif checkForDino(message):
+        try:
 		# response.text = "Sorry y'all Basser Bot doesnt have the menu atm."
-		value = checkForDino(message)
-		con = getCon()
-		dino = getDino(message, value, recipient_id, con)
-		response.text = dino['text']
-		con.close()
+            value = checkForDino(message)
+            con = getCon()
+            dino = getDino(message, value, recipient_id, con)
+            response.text = dino['text']
+            con.close()
+        except:
+            PrintException()
+            response.text = 'Something went wrong with the menu...'
 
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.addbutton(button)
