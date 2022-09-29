@@ -23,6 +23,7 @@ app = Flask(__name__)
 
 @app.route("/webhook", methods=['GET', 'POST'])
 def receive_message():
+    # hello
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
         that confirms all requests that your bot receives came from Facebook."""
