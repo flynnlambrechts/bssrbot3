@@ -2,7 +2,7 @@
 from datetime import *
 
 from killswitch import read_custom_message
-from bot_constants import (week_days, Staff_ID, TIMEZONE)
+from bot_constants import (week_days, Staff_ID, TIMEZONE, WEEK_ADJUST_FACTOR)
 from bot_functions import (PrintException, daysuntil)
 from meal import Meal
 
@@ -11,7 +11,7 @@ from meal import Meal
 #day_name: name of the day e.g. monday, wednesday, tomorrow, today
 #week: week of cycle (1-4)
 
-WEEK_ADJUST_FACTOR = 3
+
 
 class Week:
 	def __init__(self):

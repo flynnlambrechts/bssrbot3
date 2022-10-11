@@ -4,6 +4,8 @@ from pytz import timezone
 
 TIMEZONE = timezone('Australia/Sydney')
 
+WEEK_ADJUST_FACTOR = 3
+
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']  # used for fb connection
 ACCESS_TOKEN_BACKUP = os.environ['ACCESS_TOKEN_BACKUP']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']  # used to verify fb
