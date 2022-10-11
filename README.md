@@ -21,6 +21,20 @@ Database: postgresql - stores information input by users
 
 
 ## To Update menu
+1. Convert menu to pdf and open in Adobe Acrobat.
+2. Select 'Edit PDF' and delete watermark from all pages (1-8)
+
+![Alt Text](./README/1.gif)
+
+3. Save the menu as 'menu.html' into bssrbot directory.
+
+![Alt Text](./README/2.gif)
+
+4. In the bssrbot directory run the command:
+```
+$ python3 menu_to_df.py
+```
+
 1. Name menu "menu.pdf" and place and in menu folder (remove old menu items)
 1. Open menu pdf in Adobe Acrobat and export file
 to html named 'menu.html'
@@ -29,6 +43,7 @@ to html named 'menu.html'
 
 
 ## To Update calendar
+
 1. \copy data into db using heroku:
 	\copy calendar FROM <path_to_calednar.csv> WITH (FORMAT CSV);
 2. Go to calendar1 and zero week in getaway function
